@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.9" href="../index.html"/>
         <link rel="up" title="Configuring Cassandra" href="index.html"/>
         <link rel="next" title="Operating Cassandra" href="../operating/index.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,16 +84,13 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cql/index.html">The Cassandra Query Language (CQL)</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Configuring Cassandra</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Cassandra Configuration File</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Cassandra Configuration File</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#cluster-name"><code class="docutils literal"><span class="pre">cluster_name</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#num-tokens"><code class="docutils literal"><span class="pre">num_tokens</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#allocate-tokens-for-keyspace"><code class="docutils literal"><span class="pre">allocate_tokens_for_keyspace</span></code></a></li>
@@ -270,10 +261,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -282,42 +271,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Configuring Cassandra</a> &raquo;</li>
-        
-      <li>Cassandra Configuration File</li>
-    
-    
+      
+    <li>Cassandra Configuration File</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/configuration/cassandra_config_file.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/configuration/cassandra_config_file.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -329,7 +301,7 @@
 <h2><code class="docutils literal"><span class="pre">cluster_name</span></code><a class="headerlink" href="#cluster-name" title="Permalink to this headline">¶</a></h2>
 <p>The name of the cluster. This is mainly used to prevent machines in
 one logical cluster from joining another.</p>
-<p><em>Default Value:</em> ‘Test Cluster’</p>
+<p><em>Default Value:</em> &#8216;Test Cluster&#8217;</p>
 </div>
 <div class="section" id="num-tokens">
 <h2><code class="docutils literal"><span class="pre">num_tokens</span></code><a class="headerlink" href="#num-tokens" title="Permalink to this headline">¶</a></h2>
@@ -339,7 +311,7 @@ that this node will store. You probably want all nodes to have the same number
 of tokens assuming they have equal hardware capability.</p>
 <p>If you leave this unspecified, Cassandra will use the default of 1 token for legacy compatibility,
 and will use the initial_token as described below.</p>
-<p>Specifying initial_token will override this setting on the node’s initial start,
+<p>Specifying initial_token will override this setting on the node&#8217;s initial start,
 on subsequent starts, this setting will apply even if initial token is set.</p>
 <p>If you already have a cluster with 1 token per node, and wish to migrate to
 multiple tokens per node, see <a class="reference external" href="http://wiki.apache.org/cassandra/Operations">http://wiki.apache.org/cassandra/Operations</a></p>
@@ -361,14 +333,14 @@ vnodes.</p>
 <h2><code class="docutils literal"><span class="pre">initial_token</span></code><a class="headerlink" href="#initial-token" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em></p>
 <p>initial_token allows you to specify tokens manually.  While you can use it with
-vnodes (num_tokens &gt; 1, above) – in which case you should provide a
-comma-separated list – it’s primarily used when adding nodes to legacy clusters
+vnodes (num_tokens &gt; 1, above) &#8211; in which case you should provide a
+comma-separated list &#8211; it&#8217;s primarily used when adding nodes to legacy clusters
 that do not have vnodes enabled.</p>
 </div>
 <div class="section" id="hinted-handoff-enabled">
 <h2><code class="docutils literal"><span class="pre">hinted_handoff_enabled</span></code><a class="headerlink" href="#hinted-handoff-enabled" title="Permalink to this headline">¶</a></h2>
 <p>See <a class="reference external" href="http://wiki.apache.org/cassandra/HintedHandoff">http://wiki.apache.org/cassandra/HintedHandoff</a>
-May either be “true” or “false” to enable globally</p>
+May either be &#8220;true&#8221; or &#8220;false&#8221; to enable globally</p>
 <p><em>Default Value:</em> true</p>
 </div>
 <div class="section" id="hinted-handoff-disabled-datacenters">
@@ -377,7 +349,7 @@ May either be “true” or “false” to enable globally</p>
 <p>When hinted_handoff_enabled is true, a black list of data centers that will not
 perform hinted handoff</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#    - DC1</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#    - DC1</span>
 <span class="c1">#    - DC2</span>
 </pre></div>
 </div>
@@ -430,7 +402,7 @@ Will <em>not</em> trigger fsync.</p>
 will be written uncompressed. LZ4, Snappy, and Deflate compressors
 are supported.</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#   - class_name: LZ4Compressor</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#   - class_name: LZ4Compressor</span>
 <span class="c1">#     parameters:</span>
 <span class="c1">#         -</span>
 </pre></div>
@@ -566,7 +538,7 @@ will spread data evenly across them, subject to the granularity of
 the configured compaction strategy.
 If not set, the default directory is $CASSANDRA_HOME/data/data.</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#     - /var/lib/cassandra/data</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#     - /var/lib/cassandra/data</span>
 </pre></div>
 </div>
 </div>
@@ -636,36 +608,36 @@ continuing to service reads, as in pre-2.0.5 Cassandra</dd>
 <div class="section" id="prepared-statements-cache-size-mb">
 <h2><code class="docutils literal"><span class="pre">prepared_statements_cache_size_mb</span></code><a class="headerlink" href="#prepared-statements-cache-size-mb" title="Permalink to this headline">¶</a></h2>
 <p>Maximum size of the native protocol prepared statement cache</p>
-<p>Valid values are either “auto” (omitting the value) or a value greater 0.</p>
+<p>Valid values are either &#8220;auto&#8221; (omitting the value) or a value greater 0.</p>
 <p>Note that specifying a too large value will result in long running GCs and possbily
 out-of-memory errors. Keep the value at a small fraction of the heap.</p>
-<p>If you constantly see “prepared statements discarded in the last minute because
-cache limit reached” messages, the first step is to investigate the root cause
+<p>If you constantly see &#8220;prepared statements discarded in the last minute because
+cache limit reached&#8221; messages, the first step is to investigate the root cause
 of these messages and check whether prepared statements are used correctly -
 i.e. use bind markers for variable parts.</p>
 <p>Do only change the default value, if you really have more prepared statements than
 fit in the cache. In most cases it is not neccessary to change this value.
 Constantly re-preparing statements is a performance penalty.</p>
-<p>Default value (“auto”) is 1/256th of the heap or 10MB, whichever is greater</p>
+<p>Default value (&#8220;auto&#8221;) is 1/256th of the heap or 10MB, whichever is greater</p>
 </div>
 <div class="section" id="thrift-prepared-statements-cache-size-mb">
 <h2><code class="docutils literal"><span class="pre">thrift_prepared_statements_cache_size_mb</span></code><a class="headerlink" href="#thrift-prepared-statements-cache-size-mb" title="Permalink to this headline">¶</a></h2>
 <p>Maximum size of the Thrift prepared statement cache</p>
-<p>If you do not use Thrift at all, it is safe to leave this value at “auto”.</p>
-<p>See description of ‘prepared_statements_cache_size_mb’ above for more information.</p>
-<p>Default value (“auto”) is 1/256th of the heap or 10MB, whichever is greater</p>
+<p>If you do not use Thrift at all, it is safe to leave this value at &#8220;auto&#8221;.</p>
+<p>See description of &#8216;prepared_statements_cache_size_mb&#8217; above for more information.</p>
+<p>Default value (&#8220;auto&#8221;) is 1/256th of the heap or 10MB, whichever is greater</p>
 </div>
 <div class="section" id="key-cache-size-in-mb">
 <h2><code class="docutils literal"><span class="pre">key_cache_size_in_mb</span></code><a class="headerlink" href="#key-cache-size-in-mb" title="Permalink to this headline">¶</a></h2>
 <p>Maximum size of the key cache in memory.</p>
 <p>Each key cache hit saves 1 seek and each row cache hit saves 2 seeks at the
 minimum, sometimes more. The key cache is fairly tiny for the amount of
-time it saves, so it’s worthwhile to use it at large numbers.
+time it saves, so it&#8217;s worthwhile to use it at large numbers.
 The row cache saves even more time, but must contain the entire row,
-so it is extremely space-intensive. It’s best to only use the
+so it is extremely space-intensive. It&#8217;s best to only use the
 row cache if you have hot rows or static rows.</p>
 <p>NOTE: if you reduce the size, you may not get you hottest keys loaded on startup.</p>
-<p>Default value is empty to make it “auto” (min(5% of Heap (in MB), 100MB)). Set to 0 to disable key cache.</p>
+<p>Default value is empty to make it &#8220;auto&#8221; (min(5% of Heap (in MB), 100MB)). Set to 0 to disable key cache.</p>
 </div>
 <div class="section" id="key-cache-save-period">
 <h2><code class="docutils literal"><span class="pre">key_cache_save_period</span></code><a class="headerlink" href="#key-cache-save-period" title="Permalink to this headline">¶</a></h2>
@@ -729,14 +701,14 @@ Specify 0 (which is the default), meaning all keys are going to be saved</p>
 <div class="section" id="counter-cache-size-in-mb">
 <h2><code class="docutils literal"><span class="pre">counter_cache_size_in_mb</span></code><a class="headerlink" href="#counter-cache-size-in-mb" title="Permalink to this headline">¶</a></h2>
 <p>Maximum size of the counter cache in memory.</p>
-<p>Counter cache helps to reduce counter locks’ contention for hot counter cells.
+<p>Counter cache helps to reduce counter locks&#8217; contention for hot counter cells.
 In case of RF = 1 a counter cache hit will cause Cassandra to skip the read before
 write entirely. With RF &gt; 1 a counter cache hit will still help to reduce the duration
 of the lock hold, helping with hot counter cell updates, but will not allow skipping
 the read entirely. Only the local (clock, count) tuple of a counter cell is kept
-in memory, not the whole counter, so it’s relatively cheap.</p>
+in memory, not the whole counter, so it&#8217;s relatively cheap.</p>
 <p>NOTE: if you reduce the size, you may not get you hottest keys loaded on startup.</p>
-<p>Default value is empty to make it “auto” (min(2.5% of Heap (in MB), 50MB)). Set to 0 to disable counter cache.
+<p>Default value is empty to make it &#8220;auto&#8221; (min(2.5% of Heap (in MB), 50MB)). Set to 0 to disable counter cache.
 NOTE: if you perform counter deletes and rely on low gcgs, you should disable the counter cache.</p>
 </div>
 <div class="section" id="counter-cache-save-period">
@@ -764,8 +736,8 @@ If not set, the default directory is $CASSANDRA_HOME/data/saved_caches.</p>
 <div class="section" id="commitlog-sync">
 <h2><code class="docutils literal"><span class="pre">commitlog_sync</span></code><a class="headerlink" href="#commitlog-sync" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em></p>
-<p>commitlog_sync may be either “periodic” or “batch.”</p>
-<p>When in batch mode, Cassandra won’t ack writes until the commit log
+<p>commitlog_sync may be either &#8220;periodic&#8221; or &#8220;batch.&#8221;</p>
+<p>When in batch mode, Cassandra won&#8217;t ack writes until the commit log
 has been fsynced to disk.  It will wait
 commitlog_sync_batch_window_in_ms milliseconds between fsyncs.
 This window should be kept short because the writer threads will
@@ -780,7 +752,7 @@ concurrent_writes for the same reason.)</p>
 </div>
 <div class="section" id="id1">
 <h2><code class="docutils literal"><span class="pre">commitlog_sync</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>the other option is “periodic” where writes may be acked immediately
+<p>the other option is &#8220;periodic&#8221; where writes may be acked immediately
 and the CommitLog is simply synced every commitlog_sync_period_in_ms
 milliseconds.</p>
 <p><em>Default Value:</em> periodic</p>
@@ -812,7 +784,7 @@ be set to at least twice the size of max_mutation_size_in_kb / 1024</p>
 will be written uncompressed.  LZ4, Snappy, and Deflate compressors
 are supported.</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#   - class_name: LZ4Compressor</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#   - class_name: LZ4Compressor</span>
 <span class="c1">#     parameters:</span>
 <span class="c1">#         -</span>
 </pre></div>
@@ -823,29 +795,29 @@ are supported.</p>
 <p>any class that implements the SeedProvider interface and has a
 constructor that takes a Map&lt;String, String&gt; of parameters will do.</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1"># Addresses of hosts that are deemed contact points.</span>
-<span class="c1"># Cassandra nodes use this list of hosts to find each other and learn</span>
-<span class="c1"># the topology of the ring.  You must change this if you are running</span>
-<span class="c1"># multiple nodes!</span>
-<span class="o">-</span> <span class="n">class_name</span><span class="p">:</span> <span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">cassandra</span><span class="o">.</span><span class="n">locator</span><span class="o">.</span><span class="n">SimpleSeedProvider</span>
-  <span class="n">parameters</span><span class="p">:</span>
-      <span class="c1"># seeds is actually a comma-delimited list of addresses.</span>
-      <span class="c1"># Ex: &quot;&lt;ip1&gt;,&lt;ip2&gt;,&lt;ip3&gt;&quot;</span>
-      <span class="o">-</span> <span class="n">seeds</span><span class="p">:</span> <span class="s2">&quot;127.0.0.1&quot;</span>
+<div class="highlight-python"><div class="highlight"><pre># Addresses of hosts that are deemed contact points.
+# Cassandra nodes use this list of hosts to find each other and learn
+# the topology of the ring.  You must change this if you are running
+# multiple nodes!
+- class_name: org.apache.cassandra.locator.SimpleSeedProvider
+  parameters:
+      # seeds is actually a comma-delimited list of addresses.
+      # Ex: &quot;&lt;ip1&gt;,&lt;ip2&gt;,&lt;ip3&gt;&quot;
+      - seeds: &quot;127.0.0.1&quot;
 </pre></div>
 </div>
 </div>
 <div class="section" id="concurrent-reads">
 <h2><code class="docutils literal"><span class="pre">concurrent_reads</span></code><a class="headerlink" href="#concurrent-reads" title="Permalink to this headline">¶</a></h2>
-<p>For workloads with more data than can fit in memory, Cassandra’s
+<p>For workloads with more data than can fit in memory, Cassandra&#8217;s
 bottleneck will be reads that need to fetch data from
-disk. “concurrent_reads” should be set to (16 * number_of_drives) in
+disk. &#8220;concurrent_reads&#8221; should be set to (16 * number_of_drives) in
 order to allow the operations to enqueue low enough in the stack
 that the OS and drives can reorder them. Same applies to
-“concurrent_counter_writes”, since counter writes read the current
+&#8220;concurrent_counter_writes&#8221;, since counter writes read the current
 values before incrementing and writing them back.</p>
 <p>On the other hand, since writes are almost never IO bound, the ideal
-number of “concurrent_writes” is dependent on the number of cores in
+number of &#8220;concurrent_writes&#8221; is dependent on the number of cores in
 your system; (8 * number_of_cores) is a good rule of thumb.</p>
 <p><em>Default Value:</em> 32</p>
 </div>
@@ -1107,7 +1079,7 @@ after 30 seconds).</p>
 <h2><code class="docutils literal"><span class="pre">native_transport_max_frame_size_in_mb</span></code><a class="headerlink" href="#native-transport-max-frame-size-in-mb" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em></p>
 <p>The maximum size of allowed frame. Frame (requests) larger than this will
-be rejected as invalid. The default is 256MB. If you’re changing this parameter,
+be rejected as invalid. The default is 256MB. If you&#8217;re changing this parameter,
 you may want to adjust max_value_size_in_mb accordingly.</p>
 <p><em>Default Value:</em> 256</p>
 </div>
@@ -1187,7 +1159,7 @@ will be your limiting factor. On a 64 bit JVM, 180KB is the minimum stack size
 per thread, and that will correspond to your use of virtual memory (but physical memory
 may be limited depending on use of stack space).</dd>
 <dt>hsha</dt>
-<dd>Stands for “half synchronous, half asynchronous.” All thrift clients are handled
+<dd>Stands for &#8220;half synchronous, half asynchronous.&#8221; All thrift clients are handled
 asynchronously using a small number of threads that does not vary with the amount
 of thrift clients (and thus scales well to many clients). The rpc requests are still
 synchronous (one thread per active request). If hsha is selected then it is essential
@@ -1236,7 +1208,7 @@ See also:
 /proc/sys/net/core/rmem_max
 /proc/sys/net/ipv4/tcp_wmem
 /proc/sys/net/ipv4/tcp_wmem
-and ‘man tcp’</p>
+and &#8216;man tcp&#8217;</p>
 </div>
 <div class="section" id="internode-recv-buff-size-in-bytes">
 <h2><code class="docutils literal"><span class="pre">internode_recv_buff_size_in_bytes</span></code><a class="headerlink" href="#internode-recv-buff-size-in-bytes" title="Permalink to this headline">¶</a></h2>
@@ -1254,15 +1226,15 @@ and when not setting it it is defined by net.ipv4.tcp_wmem</p>
 <h2><code class="docutils literal"><span class="pre">incremental_backups</span></code><a class="headerlink" href="#incremental-backups" title="Permalink to this headline">¶</a></h2>
 <p>Set to true to have Cassandra create a hard link to each sstable
 flushed or streamed locally in a backups/ subdirectory of the
-keyspace data.  Removing these links is the operator’s
+keyspace data.  Removing these links is the operator&#8217;s
 responsibility.</p>
 <p><em>Default Value:</em> false</p>
 </div>
 <div class="section" id="snapshot-before-compaction">
 <h2><code class="docutils literal"><span class="pre">snapshot_before_compaction</span></code><a class="headerlink" href="#snapshot-before-compaction" title="Permalink to this headline">¶</a></h2>
 <p>Whether or not to take a snapshot before each compaction.  Be
-careful using this option, since Cassandra won’t clean up the
-snapshots for you.  Mostly useful if you’re paranoid when there
+careful using this option, since Cassandra won&#8217;t clean up the
+snapshots for you.  Mostly useful if you&#8217;re paranoid when there
 is a data format change.</p>
 <p><em>Default Value:</em> false</p>
 </div>
@@ -1303,7 +1275,7 @@ serialized index information and not the size of the partition.</p>
 <h2><code class="docutils literal"><span class="pre">concurrent_compactors</span></code><a class="headerlink" href="#concurrent-compactors" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em></p>
 <p>Number of simultaneous compactions to allow, NOT including
-validation “compactions” for anti-entropy repair.  Simultaneous
+validation &#8220;compactions&#8221; for anti-entropy repair.  Simultaneous
 compactions can help preserve read performance in a mixed read/write
 workload, by mitigating the tendency of small sstables to accumulate
 during a single long running compactions. The default is usually
@@ -1423,25 +1395,25 @@ most users should never need to adjust this.</p>
 </div>
 <div class="section" id="endpoint-snitch">
 <h2><code class="docutils literal"><span class="pre">endpoint_snitch</span></code><a class="headerlink" href="#endpoint-snitch" title="Permalink to this headline">¶</a></h2>
-<p>endpoint_snitch – Set this to a class that implements
+<p>endpoint_snitch &#8211; Set this to a class that implements
 IEndpointSnitch.  The snitch has two functions:</p>
 <ul class="simple">
 <li>it teaches Cassandra enough about your network topology to route
 requests efficiently</li>
 <li>it allows Cassandra to spread replicas around your cluster to avoid
 correlated failures. It does this by grouping machines into
-“datacenters” and “racks.”  Cassandra will do its best not to have
-more than one replica on the same “rack” (which may not actually
+&#8220;datacenters&#8221; and &#8220;racks.&#8221;  Cassandra will do its best not to have
+more than one replica on the same &#8220;rack&#8221; (which may not actually
 be a physical location)</li>
 </ul>
 <p>CASSANDRA WILL NOT ALLOW YOU TO SWITCH TO AN INCOMPATIBLE SNITCH
 ONCE DATA IS INSERTED INTO THE CLUSTER.  This would cause data loss.
 This means that if you start with the default SimpleSnitch, which
-locates every node on “rack1” in “datacenter1”, your only options
+locates every node on &#8220;rack1&#8221; in &#8220;datacenter1&#8221;, your only options
 if you need to add another datacenter are GossipingPropertyFileSnitch
 (and the older PFS).  From there, if you want to migrate to an
 incompatible snitch like Ec2Snitch you can do it by adding new nodes
-under Ec2Snitch (which will locate them in a new “datacenter”) and
+under Ec2Snitch (which will locate them in a new &#8220;datacenter&#8221;) and
 decommissioning the old ones.</p>
 <p>Out of the box, Cassandra provides:</p>
 <dl class="docutils">
@@ -1473,7 +1445,7 @@ traffic, Cassandra will switch to the private IP after
 establishing a connection.)</dd>
 <dt>RackInferringSnitch:</dt>
 <dd>Proximity is determined by rack and data center, which are
-assumed to correspond to the 3rd and 2nd octet of each node’s IP
+assumed to correspond to the 3rd and 2nd octet of each node&#8217;s IP
 address, respectively.  Unless this happens to match your
 deployment conventions, this is best used as an example of
 writing a custom Snitch class and is provided in that spirit.</dd>
@@ -1497,7 +1469,7 @@ possibly recover</p>
 <div class="section" id="dynamic-snitch-badness-threshold">
 <h2><code class="docutils literal"><span class="pre">dynamic_snitch_badness_threshold</span></code><a class="headerlink" href="#dynamic-snitch-badness-threshold" title="Permalink to this headline">¶</a></h2>
 <p>if set greater than zero and read_repair_chance is &lt; 1.0, this will allow
-‘pinning’ of replicas to hosts in order to increase cache capacity.
+&#8216;pinning&#8217; of replicas to hosts in order to increase cache capacity.
 The badness threshold will control how much worse the pinned host has to be
 before the dynamic snitch will prefer other replicas over it.  This is
 expressed as a double which represents a percentage.  Thus, a value of
@@ -1507,7 +1479,7 @@ until the pinned host was 20% worse than the fastest.</p>
 </div>
 <div class="section" id="request-scheduler">
 <h2><code class="docutils literal"><span class="pre">request_scheduler</span></code><a class="headerlink" href="#request-scheduler" title="Permalink to this headline">¶</a></h2>
-<p>request_scheduler – Set this to a class that implements
+<p>request_scheduler &#8211; Set this to a class that implements
 RequestScheduler, which will schedule incoming client requests
 according to the specific policy. This is useful for multi-tenancy
 with a single Cassandra cluster.
@@ -1548,7 +1520,7 @@ RoundRobin, based on the scheduler id.</dd>
 </dd>
 </dl>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="c1">#    throttle_limit: 80</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="c1">#    throttle_limit: 80</span>
 <span class="c1">#    default_weight: 5</span>
 <span class="c1">#    weights:</span>
 <span class="c1">#      Keyspace1: 1</span>
@@ -1559,7 +1531,7 @@ RoundRobin, based on the scheduler id.</dd>
 <div class="section" id="request-scheduler-id">
 <h2><code class="docutils literal"><span class="pre">request_scheduler_id</span></code><a class="headerlink" href="#request-scheduler-id" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em>
-request_scheduler_id – An identifier based on which to perform
+request_scheduler_id &#8211; An identifier based on which to perform
 the request scheduling. Currently the only valid option is keyspace.</p>
 <p><em>Default Value:</em> keyspace</p>
 </div>
@@ -1582,18 +1554,18 @@ If set to rack cassandra will encrypt the traffic between the racks</p>
 the keystore and truststore.  For instructions on generating these files, see:
 <a class="reference external" href="http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore">http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore</a></p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">internode_encryption</span><span class="p">:</span> <span class="n">none</span>
-<span class="n">keystore</span><span class="p">:</span> <span class="n">conf</span><span class="o">/.</span><span class="n">keystore</span>
-<span class="n">keystore_password</span><span class="p">:</span> <span class="n">cassandra</span>
-<span class="n">truststore</span><span class="p">:</span> <span class="n">conf</span><span class="o">/.</span><span class="n">truststore</span>
-<span class="n">truststore_password</span><span class="p">:</span> <span class="n">cassandra</span>
-<span class="c1"># More advanced defaults below:</span>
-<span class="c1"># protocol: TLS</span>
-<span class="c1"># algorithm: SunX509</span>
-<span class="c1"># store_type: JKS</span>
-<span class="c1"># cipher_suites: [TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA]</span>
-<span class="c1"># require_client_auth: false</span>
-<span class="c1"># require_endpoint_verification: false</span>
+<div class="highlight-python"><div class="highlight"><pre>internode_encryption: none
+keystore: conf/.keystore
+keystore_password: cassandra
+truststore: conf/.truststore
+truststore_password: cassandra
+# More advanced defaults below:
+# protocol: TLS
+# algorithm: SunX509
+# store_type: JKS
+# cipher_suites: [TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA]
+# require_client_auth: false
+# require_endpoint_verification: false
 </pre></div>
 </div>
 </div>
@@ -1601,20 +1573,20 @@ the keystore and truststore.  For instructions on generating these files, see:
 <h2><code class="docutils literal"><span class="pre">client_encryption_options</span></code><a class="headerlink" href="#client-encryption-options" title="Permalink to this headline">¶</a></h2>
 <p>enable or disable client/server encryption.</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">enabled</span><span class="p">:</span> <span class="n">false</span>
-<span class="c1"># If enabled and optional is set to true encrypted and unencrypted connections are handled.</span>
-<span class="n">optional</span><span class="p">:</span> <span class="n">false</span>
-<span class="n">keystore</span><span class="p">:</span> <span class="n">conf</span><span class="o">/.</span><span class="n">keystore</span>
-<span class="n">keystore_password</span><span class="p">:</span> <span class="n">cassandra</span>
-<span class="c1"># require_client_auth: false</span>
-<span class="c1"># Set trustore and truststore_password if require_client_auth is true</span>
-<span class="c1"># truststore: conf/.truststore</span>
-<span class="c1"># truststore_password: cassandra</span>
-<span class="c1"># More advanced defaults below:</span>
-<span class="c1"># protocol: TLS</span>
-<span class="c1"># algorithm: SunX509</span>
-<span class="c1"># store_type: JKS</span>
-<span class="c1"># cipher_suites: [TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA]</span>
+<div class="highlight-python"><div class="highlight"><pre>enabled: false
+# If enabled and optional is set to true encrypted and unencrypted connections are handled.
+optional: false
+keystore: conf/.keystore
+keystore_password: cassandra
+# require_client_auth: false
+# Set trustore and truststore_password if require_client_auth is true
+# truststore: conf/.truststore
+# truststore_password: cassandra
+# More advanced defaults below:
+# protocol: TLS
+# algorithm: SunX509
+# store_type: JKS
+# cipher_suites: [TLS_RSA_WITH_AES_128_CBC_SHA,TLS_RSA_WITH_AES_256_CBC_SHA,TLS_DHE_RSA_WITH_AES_128_CBC_SHA,TLS_DHE_RSA_WITH_AES_256_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA]
 </pre></div>
 </div>
 </div>
@@ -1669,7 +1641,7 @@ As of Cassandra 3.0 there is a sandbox in place that should prevent execution of
 <h2><code class="docutils literal"><span class="pre">enable_scripted_user_defined_functions</span></code><a class="headerlink" href="#enable-scripted-user-defined-functions" title="Permalink to this headline">¶</a></h2>
 <p>Enables scripted UDFs (JavaScript UDFs).
 Java UDFs are always enabled, if enable_user_defined_functions is true.
-Enable this option to be able to use UDFs with “language javascript” or any custom JSR-223 provider.
+Enable this option to be able to use UDFs with &#8220;language javascript&#8221; or any custom JSR-223 provider.
 This option has no effect, if enable_user_defined_functions is false.</p>
 <p><em>Default Value:</em> false</p>
 </div>
@@ -1678,7 +1650,7 @@ This option has no effect, if enable_user_defined_functions is false.</p>
 <p>The default Windows kernel timer and scheduling resolution is 15.6ms for power conservation.
 Lowering this value on Windows can provide much tighter latency and better throughput, however
 some virtualized environments may see a negative performance impact from changing this setting
-below their system default. The sysinternals ‘clockres’ tool can confirm your system’s default
+below their system default. The sysinternals &#8216;clockres&#8217; tool can confirm your system&#8217;s default
 setting.</p>
 <p><em>Default Value:</em> 1</p>
 </div>
@@ -1686,7 +1658,7 @@ setting.</p>
 <h2><code class="docutils literal"><span class="pre">transparent_data_encryption_options</span></code><a class="headerlink" href="#transparent-data-encryption-options" title="Permalink to this headline">¶</a></h2>
 <p>Enables encrypting data at-rest (on disk). Different key providers can be plugged in, but the default reads from
 a JCE-style keystore. A single keystore can hold multiple keys, but the one referenced by
-the “key_alias” is the only key that will be used for encrypt opertaions; previously used keys
+the &#8220;key_alias&#8221; is the only key that will be used for encrypt opertaions; previously used keys
 can still (and should!) be in the keystore and will be used on decrypt operations
 (to handle the case of key rotation).</p>
 <p>It is strongly recommended to download and install Java Cryptography Extension (JCE)
@@ -1695,19 +1667,19 @@ Unlimited Strength Jurisdiction Policy Files for your version of the JDK.
 <p>Currently, only the following file types are supported for transparent data encryption, although
 more are coming in future cassandra releases: commitlog, hints</p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">enabled</span><span class="p">:</span> <span class="n">false</span>
-<span class="n">chunk_length_kb</span><span class="p">:</span> <span class="mi">64</span>
-<span class="n">cipher</span><span class="p">:</span> <span class="n">AES</span><span class="o">/</span><span class="n">CBC</span><span class="o">/</span><span class="n">PKCS5Padding</span>
-<span class="n">key_alias</span><span class="p">:</span> <span class="n">testing</span><span class="p">:</span><span class="mi">1</span>
-<span class="c1"># CBC IV length for AES needs to be 16 bytes (which is also the default size)</span>
-<span class="c1"># iv_length: 16</span>
-<span class="n">key_provider</span><span class="p">:</span>
-  <span class="o">-</span> <span class="n">class_name</span><span class="p">:</span> <span class="n">org</span><span class="o">.</span><span class="n">apache</span><span class="o">.</span><span class="n">cassandra</span><span class="o">.</span><span class="n">security</span><span class="o">.</span><span class="n">JKSKeyProvider</span>
-    <span class="n">parameters</span><span class="p">:</span>
-      <span class="o">-</span> <span class="n">keystore</span><span class="p">:</span> <span class="n">conf</span><span class="o">/.</span><span class="n">keystore</span>
-        <span class="n">keystore_password</span><span class="p">:</span> <span class="n">cassandra</span>
-        <span class="n">store_type</span><span class="p">:</span> <span class="n">JCEKS</span>
-        <span class="n">key_password</span><span class="p">:</span> <span class="n">cassandra</span>
+<div class="highlight-python"><div class="highlight"><pre>enabled: false
+chunk_length_kb: 64
+cipher: AES/CBC/PKCS5Padding
+key_alias: testing:1
+# CBC IV length for AES needs to be 16 bytes (which is also the default size)
+# iv_length: 16
+key_provider:
+  - class_name: org.apache.cassandra.security.JKSKeyProvider
+    parameters:
+      - keystore: conf/.keystore
+        keystore_password: cassandra
+        store_type: JCEKS
+        key_password: cassandra
 </pre></div>
 </div>
 </div>
@@ -1771,18 +1743,15 @@ as corrupted.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../operating/index.html" class="btn btn-neutral float-right" title="Operating Cassandra" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="../operating/index.html" class="btn btn-neutral float-right" title="Operating Cassandra" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Configuring Cassandra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Configuring Cassandra" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -1792,12 +1761,21 @@ as corrupted.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option selected='selected' value="3.9">3.9</option>
-    <option value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option selected='selected' value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option selected='selected' selected='selected' value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -1823,14 +1801,13 @@ as corrupted.</p>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

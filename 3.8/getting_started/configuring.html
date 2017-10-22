@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.8" href="../index.html"/>
         <link rel="up" title="Getting Started" href="index.html"/>
         <link rel="next" title="Inserting and querying" href="querying.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,13 +84,10 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Getting Started</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="installing.html">Installing Cassandra</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Configuring Cassandra</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Configuring Cassandra</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#main-runtime-properties">Main runtime properties</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#changing-the-location-of-directories">Changing the location of directories</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#environment-variables">Environment variables</a></li>
@@ -129,10 +120,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -141,42 +130,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Getting Started</a> &raquo;</li>
-        
-      <li>Configuring Cassandra</li>
-    
-    
+      
+    <li>Configuring Cassandra</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/getting_started/configuring.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/getting_started/configuring.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -184,7 +156,7 @@
             
   <div class="section" id="configuring-cassandra">
 <h1>Configuring Cassandra<a class="headerlink" href="#configuring-cassandra" title="Permalink to this headline">¶</a></h1>
-<p>For running Cassandra on a single node, the steps above are enough, you don’t really need to change any configuration.
+<p>For running Cassandra on a single node, the steps above are enough, you don&#8217;t really need to change any configuration.
 However, when you deploy a cluster of nodes, or use clients that are not on the same host, then there are some
 parameters that must be changed.</p>
 <p>The Cassandra configuration files can be found in the <code class="docutils literal"><span class="pre">conf</span></code> directory of tarballs. For packages, the configuration
@@ -196,7 +168,7 @@ should consider setting the following properties:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">cluster_name</span></code>: the name of your cluster.</li>
 <li><code class="docutils literal"><span class="pre">seeds</span></code>: a comma separated list of the IP addresses of your cluster seeds.</li>
-<li><code class="docutils literal"><span class="pre">storage_port</span></code>: you don’t necessarily need to change this but make sure that there are no firewalls blocking this
+<li><code class="docutils literal"><span class="pre">storage_port</span></code>: you don&#8217;t necessarily need to change this but make sure that there are no firewalls blocking this
 port.</li>
 <li><code class="docutils literal"><span class="pre">listen_address</span></code>: the IP address of your node, this is what allows other nodes to communicate with this node so it
 is important that you change it. Alternatively, you can set <code class="docutils literal"><span class="pre">listen_interface</span></code> to tell Cassandra which interface to
@@ -231,18 +203,15 @@ foreground, it will also log at INFO level to the console.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="querying.html" class="btn btn-neutral float-right" title="Inserting and querying" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="querying.html" class="btn btn-neutral float-right" title="Inserting and querying" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="installing.html" class="btn btn-neutral" title="Installing Cassandra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="installing.html" class="btn btn-neutral" title="Installing Cassandra" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -252,12 +221,21 @@ foreground, it will also log at INFO level to the console.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option selected='selected' value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' selected='selected' value="3.8">3.8</option>
 </select>
 
     </p>
@@ -283,14 +261,13 @@ foreground, it will also log at INFO level to the console.</p>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

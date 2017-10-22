@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="Operating Cassandra" href="index.html"/>
         <link rel="next" title="Backups" href="backups.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,10 +84,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
@@ -108,7 +99,7 @@
 <li class="toctree-l2"><a class="reference internal" href="compaction.html">Compaction</a></li>
 <li class="toctree-l2"><a class="reference internal" href="bloom_filters.html">Bloom Filters</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compression.html">Compression</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Change Data Capture</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Change Data Capture</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#enabling-or-disable-cdc-on-a-table">Enabling or disable CDC on a table</a></li>
@@ -145,10 +136,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -157,42 +146,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Operating Cassandra</a> &raquo;</li>
-        
-      <li>Change Data Capture</li>
-    
-    
+      
+    <li>Change Data Capture</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/operating/cdc.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/operating/cdc.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -204,7 +176,7 @@
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Change data capture (CDC) provides a mechanism to flag specific tables for archival as well as rejecting writes to those
 tables once a configurable size-on-disk for the combined flushed and unflushed CDC-log is reached. An operator can
-enable CDC on a table by setting the table property <code class="docutils literal"><span class="pre">cdc=true</span></code> (either when <a class="reference internal" href="../cql/ddl.html#create-table-statement"><span class="std std-ref">creating the table</span></a> or <a class="reference internal" href="../cql/ddl.html#alter-table-statement"><span class="std std-ref">altering it</span></a>), after which any CommitLogSegments containing
+enable CDC on a table by setting the table property <code class="docutils literal"><span class="pre">cdc=true</span></code> (either when <a class="reference internal" href="../cql/ddl.html#create-table-statement"><span>creating the table</span></a> or <a class="reference internal" href="../cql/ddl.html#alter-table-statement"><span>altering it</span></a>), after which any CommitLogSegments containing
 data for a CDC-enabled table are moved to the directory specified in <code class="docutils literal"><span class="pre">cassandra.yaml</span></code> on segment discard. A threshold
 of total disk space allowed is specified in the yaml at which time newly allocated CommitLogSegments will not allow CDC
 data until a consumer parses and removes data from the destination archival directory.</p>
@@ -214,7 +186,7 @@ data until a consumer parses and removes data from the destination archival dire
 <div class="section" id="enabling-or-disable-cdc-on-a-table">
 <h3>Enabling or disable CDC on a table<a class="headerlink" href="#enabling-or-disable-cdc-on-a-table" title="Permalink to this headline">¶</a></h3>
 <p>CDC is enable or disable through the <cite>cdc</cite> table property, for instance:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>CREATE TABLE foo (a int, b text, PRIMARY KEY(a)) WITH cdc=true;
+<div class="highlight-none"><div class="highlight"><pre>CREATE TABLE foo (a int, b text, PRIMARY KEY(a)) WITH cdc=true;
 
 ALTER TABLE foo WITH cdc=true;
 
@@ -249,7 +221,7 @@ available for use. In order to handle mutations read from disk, implement <a cla
 <div class="section" id="warnings">
 <h2>Warnings<a class="headerlink" href="#warnings" title="Permalink to this headline">¶</a></h2>
 <p><strong>Do not enable CDC without some kind of consumption process in-place.</strong></p>
-<p>The initial implementation of Change Data Capture does not include a parser (see <a class="reference internal" href="#reading-commitlogsegments"><span class="std std-ref">Reading CommitLogSegments</span></a> above)
+<p>The initial implementation of Change Data Capture does not include a parser (see <a class="reference internal" href="#reading-commitlogsegments"><span>Reading CommitLogSegments</span></a> above)
 so, if CDC is enabled on a node and then on a table, the <code class="docutils literal"><span class="pre">cdc_free_space_in_mb</span></code> will fill up and then writes to
 CDC-enabled tables will be rejected unless some consumption process is in place.</p>
 </div>
@@ -264,18 +236,15 @@ CDC-enabled tables will be rejected unless some consumption process is in place.
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="backups.html" class="btn btn-neutral float-right" title="Backups" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="backups.html" class="btn btn-neutral float-right" title="Backups" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="compression.html" class="btn btn-neutral" title="Compression" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="compression.html" class="btn btn-neutral" title="Compression" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -285,12 +254,21 @@ CDC-enabled tables will be rejected unless some consumption process is in place.
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -316,14 +294,13 @@ CDC-enabled tables will be rejected unless some consumption process is in place.
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

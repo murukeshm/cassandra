@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.8" href="../index.html"/>
         <link rel="up" title="Operating Cassandra" href="index.html"/>
         <link rel="next" title="Compression" href="compression.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,10 +84,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
@@ -106,7 +97,7 @@
 <li class="toctree-l2"><a class="reference internal" href="read_repair.html">Read repair</a></li>
 <li class="toctree-l2"><a class="reference internal" href="hints.html">Hints</a></li>
 <li class="toctree-l2"><a class="reference internal" href="compaction.html">Compaction</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Bloom Filters</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Bloom Filters</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#changing">Changing</a></li>
 </ul>
 </li>
@@ -135,10 +126,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -147,42 +136,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Operating Cassandra</a> &raquo;</li>
-        
-      <li>Bloom Filters</li>
-    
-    
+      
+    <li>Bloom Filters</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/operating/bloom_filters.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/operating/bloom_filters.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -218,7 +190,7 @@ workloads), setting the <code class="docutils literal"><span class="pre">bloom_f
 <h2>Changing<a class="headerlink" href="#changing" title="Permalink to this headline">¶</a></h2>
 <p>The bloom filter false positive chance is visible in the <code class="docutils literal"><span class="pre">DESCRIBE</span> <span class="pre">TABLE</span></code> output as the field
 <code class="docutils literal"><span class="pre">bloom_filter_fp_chance</span></code>. Operators can change the value with an <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> statement:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>ALTER TABLE keyspace.table WITH bloom_filter_fp_chance=0.01
+<div class="highlight-none"><div class="highlight"><pre>ALTER TABLE keyspace.table WITH bloom_filter_fp_chance=0.01
 </pre></div>
 </div>
 <p>Operators should be aware, however, that this change is not immediate: the bloom filter is calculated when the file is
@@ -232,18 +204,15 @@ disk, regenerating the bloom filters in the progress.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="compression.html" class="btn btn-neutral float-right" title="Compression" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="compression.html" class="btn btn-neutral float-right" title="Compression" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="compaction.html" class="btn btn-neutral" title="Compaction" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="compaction.html" class="btn btn-neutral" title="Compaction" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -253,12 +222,21 @@ disk, regenerating the bloom filters in the progress.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option selected='selected' value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' selected='selected' value="3.8">3.8</option>
 </select>
 
     </p>
@@ -284,14 +262,13 @@ disk, regenerating the bloom filters in the progress.</p>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

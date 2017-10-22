@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.8" href="../index.html"/>
         <link rel="up" title="Operating Cassandra" href="index.html"/>
         <link rel="next" title="Repair" href="repair.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,10 +84,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
@@ -101,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../configuration/index.html">Configuring Cassandra</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Operating Cassandra</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="snitch.html">Snitch</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Adding, replacing, moving and removing nodes</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Adding, replacing, moving and removing nodes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#bootstrap">Bootstrap</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#token-allocation">Token allocation</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#range-streaming">Range streaming</a></li>
@@ -146,10 +137,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -158,42 +147,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Operating Cassandra</a> &raquo;</li>
-        
-      <li>Adding, replacing, moving and removing nodes</li>
-    
-    
+      
+    <li>Adding, replacing, moving and removing nodes</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/operating/topo_changes.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/operating/topo_changes.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -203,7 +175,7 @@
 <h1>Adding, replacing, moving and removing nodes<a class="headerlink" href="#adding-replacing-moving-and-removing-nodes" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="bootstrap">
 <h2>Bootstrap<a class="headerlink" href="#bootstrap" title="Permalink to this headline">¶</a></h2>
-<p>Adding new nodes is called “bootstrapping”. The <code class="docutils literal"><span class="pre">num_tokens</span></code> parameter will define the amount of virtual nodes
+<p>Adding new nodes is called &#8220;bootstrapping&#8221;. The <code class="docutils literal"><span class="pre">num_tokens</span></code> parameter will define the amount of virtual nodes
 (tokens) the joining node will be assigned during bootstrap. The tokens define the sections of the ring (token ranges)
 the node will become responsible for.</p>
 <div class="section" id="token-allocation">
@@ -233,7 +205,7 @@ potentially miss data from an unavailable replica, set the JVM flag <code class=
 </div>
 <div class="section" id="resuming-failed-hanged-bootstrap">
 <h3>Resuming failed/hanged bootstrap<a class="headerlink" href="#resuming-failed-hanged-bootstrap" title="Permalink to this headline">¶</a></h3>
-<p>On 2.2+, if the bootstrap process fails, it’s possible to resume bootstrap from the previous saved state by calling
+<p>On 2.2+, if the bootstrap process fails, it&#8217;s possible to resume bootstrap from the previous saved state by calling
 <code class="docutils literal"><span class="pre">nodetool</span> <span class="pre">bootstrap</span> <span class="pre">resume</span></code>. If for some reason the bootstrap hangs or stalls, it may also be resumed by simply
 restarting the node. In order to cleanup bootstrap state and start fresh, you may set the JVM startup flag
 <code class="docutils literal"><span class="pre">-Dcassandra.reset_bootstrap_progress=true</span></code>.</p>
@@ -242,7 +214,7 @@ the bootstrap process again.</p>
 </div>
 <div class="section" id="manual-bootstrapping">
 <h3>Manual bootstrapping<a class="headerlink" href="#manual-bootstrapping" title="Permalink to this headline">¶</a></h3>
-<p>It’s possible to skip the bootstrapping process entirely and join the ring straight away by setting the hidden parameter
+<p>It&#8217;s possible to skip the bootstrapping process entirely and join the ring straight away by setting the hidden parameter
 <code class="docutils literal"><span class="pre">auto_bootstrap:</span> <span class="pre">false</span></code>. This may be useful when restoring a node from a backup or creating a new data-center.</p>
 </div>
 </div>
@@ -257,7 +229,7 @@ a different token on the ring, it should be removed manually.</p>
 </div>
 <div class="section" id="moving-nodes">
 <h2>Moving nodes<a class="headerlink" href="#moving-nodes" title="Permalink to this headline">¶</a></h2>
-<p>When <code class="docutils literal"><span class="pre">num_tokens:</span> <span class="pre">1</span></code> it’s possible to move the node position in the ring with <code class="docutils literal"><span class="pre">nodetool</span> <span class="pre">move</span></code>. Moving is both a
+<p>When <code class="docutils literal"><span class="pre">num_tokens:</span> <span class="pre">1</span></code> it&#8217;s possible to move the node position in the ring with <code class="docutils literal"><span class="pre">nodetool</span> <span class="pre">move</span></code>. Moving is both a
 convenience over and more efficient than decommission + bootstrap. After moving a node, <code class="docutils literal"><span class="pre">nodetool</span> <span class="pre">cleanup</span></code> should be
 run to remove any unnecessary data.</p>
 </div>
@@ -268,8 +240,8 @@ run to remove any unnecessary data.</p>
 state, during which all the other nodes will see this node to be down.</p>
 <p>The replacing node will now start to bootstrap the data from the rest of the nodes in the cluster. The main difference
 between normal bootstrapping of a new node is that this new node will not accept any writes during this phase.</p>
-<p>Once the bootstrapping is complete the node will be marked “UP”, we rely on the hinted handoff’s for making this node
-consistent (since we don’t accept writes since the start of the bootstrap).</p>
+<p>Once the bootstrapping is complete the node will be marked &#8220;UP&#8221;, we rely on the hinted handoff&#8217;s for making this node
+consistent (since we don&#8217;t accept writes since the start of the bootstrap).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">If the replacement process takes longer than <code class="docutils literal"><span class="pre">max_hint_window_in_ms</span></code> you <strong>MUST</strong> run repair to make the
@@ -283,7 +255,7 @@ of the streaming operations.</p>
 </div>
 <div class="section" id="cleanup-data-after-range-movements">
 <h2>Cleanup data after range movements<a class="headerlink" href="#cleanup-data-after-range-movements" title="Permalink to this headline">¶</a></h2>
-<p>As a safety measure, Cassandra does not automatically remove data from nodes that “lose” part of their token range due
+<p>As a safety measure, Cassandra does not automatically remove data from nodes that &#8220;lose&#8221; part of their token range due
 to a range movement operation (bootstrap, move, replace). Run <code class="docutils literal"><span class="pre">nodetool</span> <span class="pre">cleanup</span></code> on the nodes that lost ranges to the
 joining node when you are satisfied the new node is up and working. If you do not do this the old data will still be
 counted against the load on that node.</p>
@@ -292,18 +264,15 @@ counted against the load on that node.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="repair.html" class="btn btn-neutral float-right" title="Repair" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="repair.html" class="btn btn-neutral float-right" title="Repair" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="snitch.html" class="btn btn-neutral" title="Snitch" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="snitch.html" class="btn btn-neutral" title="Snitch" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -313,12 +282,21 @@ counted against the load on that node.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option selected='selected' value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' selected='selected' value="3.8">3.8</option>
 </select>
 
     </p>
@@ -344,14 +322,13 @@ counted against the load on that node.</p>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

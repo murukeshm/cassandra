@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="Architecture" href="index.html"/>
         <link rel="next" title="Storage Engine" href="storage_engine.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,14 +84,11 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Architecture</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="overview.html">Overview</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Dynamo</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Dynamo</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#gossip">Gossip</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#failure-detection">Failure Detection</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#token-ring-ranges">Token Ring/Ranges</a></li>
@@ -138,10 +129,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -150,42 +139,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Architecture</a> &raquo;</li>
-        
-      <li>Dynamo</li>
-    
-    
+      
+    <li>Dynamo</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/architecture/dynamo.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/architecture/dynamo.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -217,7 +189,7 @@
 <div class="section" id="replication">
 <span id="replication-strategy"></span><h2>Replication<a class="headerlink" href="#replication" title="Permalink to this headline">¶</a></h2>
 <p>The replication strategy of a keyspace determines which nodes are replicas for a given token range. The two main
-replication strategies are <a class="reference internal" href="#simple-strategy"><span class="std std-ref">SimpleStrategy</span></a> and <a class="reference internal" href="#network-topology-strategy"><span class="std std-ref">NetworkTopologyStrategy</span></a>.</p>
+replication strategies are <a class="reference internal" href="#simple-strategy"><span>SimpleStrategy</span></a> and <a class="reference internal" href="#network-topology-strategy"><span>NetworkTopologyStrategy</span></a>.</p>
 <div class="section" id="simplestrategy">
 <span id="simple-strategy"></span><h3>SimpleStrategy<a class="headerlink" href="#simplestrategy" title="Permalink to this headline">¶</a></h3>
 <p>SimpleStrategy allows a single integer <code class="docutils literal"><span class="pre">replication_factor</span></code> to be defined. This determines the number of nodes that
@@ -240,13 +212,13 @@ replica, but some racks may hold more than one. Note that this rack-aware behavi
 implications</a>.  For example, if there are not an even number of
 nodes in each rack, the data load on the smallest rack may be much higher.  Similarly, if a single node is bootstrapped
 into a new rack, it will be considered a replica for the entire ring.  For this reason, many operators choose to
-configure all nodes on a single “rack”.</p>
+configure all nodes on a single &#8220;rack&#8221;.</p>
 </div>
 </div>
 <div class="section" id="tunable-consistency">
 <h2>Tunable Consistency<a class="headerlink" href="#tunable-consistency" title="Permalink to this headline">¶</a></h2>
 <p>Cassandra supports a per-operation tradeoff between consistency and availability through <em>Consistency Levels</em>.
-Essentially, an operation’s consistency level specifies how many of the replicas need to respond to the coordinator in
+Essentially, an operation&#8217;s consistency level specifies how many of the replicas need to respond to the coordinator in
 order to consider the operation a success.</p>
 <p>The following consistency levels are available:</p>
 <dl class="docutils">
@@ -279,19 +251,19 @@ level. There are a couple of exceptions to this:</p>
 <ul class="simple">
 <li>Speculative retry may issue a redundant read request to an extra replica if the other replicas have not responded
 within a specified time window.</li>
-<li>Based on <code class="docutils literal"><span class="pre">read_repair_chance</span></code> and <code class="docutils literal"><span class="pre">dclocal_read_repair_chance</span></code> (part of a table’s schema), read requests may be
+<li>Based on <code class="docutils literal"><span class="pre">read_repair_chance</span></code> and <code class="docutils literal"><span class="pre">dclocal_read_repair_chance</span></code> (part of a table&#8217;s schema), read requests may be
 randomly sent to all replicas in order to repair potentially inconsistent data.</li>
 </ul>
 <div class="section" id="picking-consistency-levels">
 <h3>Picking Consistency Levels<a class="headerlink" href="#picking-consistency-levels" title="Permalink to this headline">¶</a></h3>
-<p>It is common to pick read and write consistency levels that are high enough to overlap, resulting in “strong”
+<p>It is common to pick read and write consistency levels that are high enough to overlap, resulting in &#8220;strong&#8221;
 consistency.  This is typically expressed as <code class="docutils literal"><span class="pre">W</span> <span class="pre">+</span> <span class="pre">R</span> <span class="pre">&gt;</span> <span class="pre">RF</span></code>, where <code class="docutils literal"><span class="pre">W</span></code> is the write consistency level, <code class="docutils literal"><span class="pre">R</span></code> is the
 read consistency level, and <code class="docutils literal"><span class="pre">RF</span></code> is the replication factor.  For example, if <code class="docutils literal"><span class="pre">RF</span> <span class="pre">=</span> <span class="pre">3</span></code>, a <code class="docutils literal"><span class="pre">QUORUM</span></code> request will
 require responses from at least two of the three replicas.  If <code class="docutils literal"><span class="pre">QUORUM</span></code> is used for both writes and reads, at least
 one of the replicas is guaranteed to participate in <em>both</em> the write and the read request, which in turn guarantees that
 the latest write will be read. In a multi-datacenter environment, <code class="docutils literal"><span class="pre">LOCAL_QUORUM</span></code> can be used to provide a weaker but
 still useful guarantee: reads are guaranteed to see the latest write from within the same datacenter.</p>
-<p>If this type of strong consistency isn’t required, lower consistency levels like <code class="docutils literal"><span class="pre">ONE</span></code> may be used to improve
+<p>If this type of strong consistency isn&#8217;t required, lower consistency levels like <code class="docutils literal"><span class="pre">ONE</span></code> may be used to improve
 throughput, latency, and availability.</p>
 </div>
 </div>
@@ -299,18 +271,15 @@ throughput, latency, and availability.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="storage_engine.html" class="btn btn-neutral float-right" title="Storage Engine" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="storage_engine.html" class="btn btn-neutral float-right" title="Storage Engine" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="overview.html" class="btn btn-neutral" title="Overview" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="overview.html" class="btn btn-neutral" title="Overview" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -320,12 +289,21 @@ throughput, latency, and availability.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -351,14 +329,13 @@ throughput, latency, and availability.</p>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="The Cassandra Query Language (CQL)" href="index.html"/>
         <link rel="next" title="Materialized Views" href="mvs.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,10 +84,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
@@ -102,7 +93,7 @@
 <li class="toctree-l2"><a class="reference internal" href="types.html">Data Types</a></li>
 <li class="toctree-l2"><a class="reference internal" href="ddl.html">Data Definition</a></li>
 <li class="toctree-l2"><a class="reference internal" href="dml.html">Data Manipulation</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Secondary Indexes</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Secondary Indexes</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#create-index">CREATE INDEX</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#indexes-on-map-keys">Indexes on Map Keys</a></li>
 </ul>
@@ -139,10 +130,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -151,42 +140,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">The Cassandra Query Language (CQL)</a> &raquo;</li>
-        
-      <li>Secondary Indexes</li>
-    
-    
+      
+    <li>Secondary Indexes</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/cql/indexes.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/cql/indexes.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -210,7 +182,7 @@ is identified by a name defined by:</p>
                            | ( KEYS | VALUES | ENTRIES | FULL ) '(' <a class="reference internal" href="ddl.html#grammar-token-column_name"><code class="xref docutils literal"><span class="pre">column_name</span></code></a> ')'
 </pre>
 <p>For instance:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">userIndex</span> <span class="k">ON</span> <span class="n">NerdMovies</span> <span class="p">(</span><span class="k">user</span><span class="p">);</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">INDEX</span> <span class="n">userIndex</span> <span class="k">ON</span> <span class="n">NerdMovies</span> <span class="p">(</span><span class="k">user</span><span class="p">);</span>
 <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="k">ON</span> <span class="n">Mutants</span> <span class="p">(</span><span class="n">abilityId</span><span class="p">);</span>
 <span class="k">CREATE</span> <span class="k">INDEX</span> <span class="k">ON</span> <span class="k">users</span> <span class="p">(</span><span class="k">keys</span><span class="p">(</span><span class="n">favs</span><span class="p">));</span>
 <span class="k">CREATE</span> <span class="k">CUSTOM</span> <span class="k">INDEX</span> <span class="k">ON</span> <span class="k">users</span> <span class="p">(</span><span class="n">email</span><span class="p">)</span> <span class="k">USING</span> <span class="s1">&#39;path.to.the.IndexClass&#39;</span><span class="p">;</span>
@@ -225,7 +197,7 @@ automatically at insertion time.</p>
 is used, the statement will be a no-op if the index already exists.</p>
 <div class="section" id="indexes-on-map-keys">
 <h3>Indexes on Map Keys<a class="headerlink" href="#indexes-on-map-keys" title="Permalink to this headline">¶</a></h3>
-<p>When creating an index on a <a class="reference internal" href="types.html#maps"><span class="std std-ref">maps</span></a>, you may index either the keys or the values. If the column identifier is
+<p>When creating an index on a <a class="reference internal" href="types.html#maps"><span>maps</span></a>, you may index either the keys or the values. If the column identifier is
 placed within the <code class="docutils literal"><span class="pre">keys()</span></code> function, the index will be on the map keys, allowing you to use <code class="docutils literal"><span class="pre">CONTAINS</span> <span class="pre">KEY</span></code> in
 <code class="docutils literal"><span class="pre">WHERE</span></code> clauses. Otherwise, the index will be on the map values.</p>
 </div>
@@ -245,18 +217,15 @@ operation is a no-op.</p>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="mvs.html" class="btn btn-neutral float-right" title="Materialized Views" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="mvs.html" class="btn btn-neutral float-right" title="Materialized Views" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="dml.html" class="btn btn-neutral" title="Data Manipulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="dml.html" class="btn btn-neutral" title="Data Manipulation" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -266,12 +235,21 @@ operation is a no-op.</p>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -297,14 +275,13 @@ operation is a no-op.</p>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

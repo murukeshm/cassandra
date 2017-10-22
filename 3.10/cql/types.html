@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="The Cassandra Query Language (CQL)" href="index.html"/>
         <link rel="next" title="Data Definition" href="ddl.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,16 +84,13 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">The Cassandra Query Language (CQL)</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="definitions.html">Definitions</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Data Types</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Data Types</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#native-types">Native Types</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#counters">Counters</a></li>
 </ul>
@@ -158,10 +149,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -170,42 +159,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">The Cassandra Query Language (CQL)</a> &raquo;</li>
-        
-      <li>Data Types</li>
-    
-    
+      
+    <li>Data Types</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/cql/types.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/cql/types.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -213,8 +185,8 @@
             
   <div class="section" id="data-types">
 <span id="id1"></span><h1>Data Types<a class="headerlink" href="#data-types" title="Permalink to this headline">¶</a></h1>
-<p>CQL is a typed language and supports a rich set of data types, including <a class="reference internal" href="#native-types"><span class="std std-ref">native types</span></a>,
-<a class="reference internal" href="#collections"><span class="std std-ref">collection types</span></a>, <a class="reference internal" href="#udts"><span class="std std-ref">user-defined types</span></a>, <a class="reference internal" href="#tuples"><span class="std std-ref">tuple types</span></a> and <a class="reference internal" href="#custom-types"><span class="std std-ref">custom
+<p>CQL is a typed language and supports a rich set of data types, including <a class="reference internal" href="#native-types"><span>native types</span></a>,
+<a class="reference internal" href="#collections"><span>collection types</span></a>, <a class="reference internal" href="#udts"><span>user-defined types</span></a>, <a class="reference internal" href="#tuples"><span>tuple types</span></a> and <a class="reference internal" href="#custom-types"><span>custom
 types</span></a>:</p>
 <pre>
 <strong id="grammar-token-cql_type">cql_type</strong> ::=  <a class="reference internal" href="#grammar-token-native_type"><code class="xref docutils literal"><span class="pre">native_type</span></code></a> | <a class="reference internal" href="#grammar-token-collection_type"><code class="xref docutils literal"><span class="pre">collection_type</span></code></a> | <a class="reference internal" href="#grammar-token-user_defined_type"><code class="xref docutils literal"><span class="pre">user_defined_type</span></code></a> | <a class="reference internal" href="#grammar-token-tuple_type"><code class="xref docutils literal"><span class="pre">tuple_type</span></code></a> | <a class="reference internal" href="#grammar-token-custom_type"><code class="xref docutils literal"><span class="pre">custom_type</span></code></a>
@@ -245,7 +217,7 @@ types</span></a>:</p>
                  | VARCHAR
                  | VARINT
 </pre>
-<p>The following table gives additional informations on the native data types, and on which kind of <a class="reference internal" href="definitions.html#constants"><span class="std std-ref">constants</span></a> each type supports:</p>
+<p>The following table gives additional informations on the native data types, and on which kind of <a class="reference internal" href="definitions.html#constants"><span>constants</span></a> each type supports:</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="13%" />
@@ -277,12 +249,12 @@ types</span></a>:</p>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">counter</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a></td>
-<td>Counter column (64-bit signed value). See <a class="reference internal" href="#counters"><span class="std std-ref">Counters</span></a> for details</td>
+<td>Counter column (64-bit signed value). See <a class="reference internal" href="#counters"><span>Counters</span></a> for details</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">date</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a>,
 <a class="reference internal" href="definitions.html#grammar-token-string"><code class="xref std std-token docutils literal"><span class="pre">string</span></code></a></td>
-<td>A date (with no corresponding time value). See <a class="reference internal" href="#dates"><span class="std std-ref">Working with dates</span></a> below for details</td>
+<td>A date (with no corresponding time value). See <a class="reference internal" href="#dates"><span>Working with dates</span></a> below for details</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">decimal</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a>,
@@ -296,7 +268,7 @@ types</span></a>:</p>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">duration</span></code></td>
 <td><code class="xref std std-token docutils literal"><span class="pre">duration</span></code>,</td>
-<td>A duration with nanosecond precision. See <a class="reference internal" href="#durations"><span class="std std-ref">Working with durations</span></a> below for details</td>
+<td>A duration with nanosecond precision. See <a class="reference internal" href="#durations"><span>Working with durations</span></a> below for details</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">float</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a>,
@@ -324,18 +296,18 @@ there is no <code class="docutils literal"><span class="pre">inet</span></code> 
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a>,
 <a class="reference internal" href="definitions.html#grammar-token-string"><code class="xref std std-token docutils literal"><span class="pre">string</span></code></a></td>
 <td>A time (with no corresponding date value) with nanosecond precision. See
-<a class="reference internal" href="#times"><span class="std std-ref">Working with times</span></a> below for details</td>
+<a class="reference internal" href="#times"><span>Working with times</span></a> below for details</td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">timestamp</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a>,
 <a class="reference internal" href="definitions.html#grammar-token-string"><code class="xref std std-token docutils literal"><span class="pre">string</span></code></a></td>
-<td>A timestamp (date and time) with millisecond precision. See <a class="reference internal" href="#timestamps"><span class="std std-ref">Working with timestamps</span></a>
+<td>A timestamp (date and time) with millisecond precision. See <a class="reference internal" href="#timestamps"><span>Working with timestamps</span></a>
 below for details</td>
 </tr>
 <tr class="row-even"><td><code class="docutils literal"><span class="pre">timeuuid</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-uuid"><code class="xref std std-token docutils literal"><span class="pre">uuid</span></code></a></td>
 <td>Version 1 <a class="reference external" href="https://en.wikipedia.org/wiki/Universally_unique_identifier">UUID</a>, generally used as a “conflict-free” timestamp. Also see
-<a class="reference internal" href="functions.html#timeuuid-functions"><span class="std std-ref">Timeuuid functions</span></a></td>
+<a class="reference internal" href="functions.html#timeuuid-functions"><span>Timeuuid functions</span></a></td>
 </tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">tinyint</span></code></td>
 <td><a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a></td>
@@ -358,7 +330,7 @@ below for details</td>
 <div class="section" id="counters">
 <span id="id3"></span><h3>Counters<a class="headerlink" href="#counters" title="Permalink to this headline">¶</a></h3>
 <p>The <code class="docutils literal"><span class="pre">counter</span></code> type is used to define <em>counter columns</em>. A counter column is a column whose value is a 64-bit signed
-integer and on which 2 operations are supported: incrementing and decrementing (see the <a class="reference internal" href="dml.html#update-statement"><span class="std std-ref">UPDATE statement</span></a> for syntax). Note that the value of a counter cannot be set: a counter does not exist until first
+integer and on which 2 operations are supported: incrementing and decrementing (see the <a class="reference internal" href="dml.html#update-statement"><span>UPDATE statement</span></a> for syntax). Note that the value of a counter cannot be set: a counter does not exist until first
 incremented/decremented, and that first increment/decrement is made as if the prior value was 0.</p>
 <p id="counter-limitations">Counters have a number of important limitations:</p>
 <ul class="simple">
@@ -398,19 +370,19 @@ inherent in relying on the time zone configuration being as expected, so it is r
 specified for timestamps when feasible.</p>
 <p>The time of day may also be omitted (<code class="docutils literal"><span class="pre">'2011-02-03'</span></code> or <code class="docutils literal"><span class="pre">'2011-02-03+0000'</span></code>), in which case the time of day will
 default to 00:00:00 in the specified or default time zone. However, if only the date part is relevant, consider using
-the <a class="reference internal" href="#dates"><span class="std std-ref">date</span></a> type.</p>
+the <a class="reference internal" href="#dates"><span>date</span></a> type.</p>
 </div>
 <div class="section" id="working-with-dates">
 <span id="dates"></span><h2>Working with dates<a class="headerlink" href="#working-with-dates" title="Permalink to this headline">¶</a></h2>
 <p>Values of the <code class="docutils literal"><span class="pre">date</span></code> type are encoded as 32-bit unsigned integers representing a number of days with “the epoch” at
 the center of the range (2^31). Epoch is January 1st, 1970</p>
-<p>As for <a class="reference internal" href="#timestamps"><span class="std std-ref">timestamp</span></a>, a date can be input either as an <a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a> or using a date
+<p>As for <a class="reference internal" href="#timestamps"><span>timestamp</span></a>, a date can be input either as an <a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a> or using a date
 <a class="reference internal" href="definitions.html#grammar-token-string"><code class="xref std std-token docutils literal"><span class="pre">string</span></code></a>. In the later case, the format should be <code class="docutils literal"><span class="pre">yyyy-mm-dd</span></code> (so <code class="docutils literal"><span class="pre">'2011-02-03'</span></code> for instance).</p>
 </div>
 <div class="section" id="working-with-times">
 <span id="times"></span><h2>Working with times<a class="headerlink" href="#working-with-times" title="Permalink to this headline">¶</a></h2>
 <p>Values of the <code class="docutils literal"><span class="pre">time</span></code> type are encoded as 64-bit signed integers representing the number of nanoseconds since midnight.</p>
-<p>As for <a class="reference internal" href="#timestamps"><span class="std std-ref">timestamp</span></a>, a time can be input either as an <a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a> or using a <a class="reference internal" href="definitions.html#grammar-token-string"><code class="xref std std-token docutils literal"><span class="pre">string</span></code></a>
+<p>As for <a class="reference internal" href="#timestamps"><span>timestamp</span></a>, a time can be input either as an <a class="reference internal" href="definitions.html#grammar-token-integer"><code class="xref std std-token docutils literal"><span class="pre">integer</span></code></a> or using a <a class="reference internal" href="definitions.html#grammar-token-string"><code class="xref std std-token docutils literal"><span class="pre">string</span></code></a>
 representing the time. In the later case, the format should be <code class="docutils literal"><span class="pre">hh:mm:ss[.fffffffff]</span></code> (where the sub-second precision
 is optional and if provided, can be less than the nanosecond). So for instance, the following are valid inputs for a
 time:</p>
@@ -452,12 +424,12 @@ the number of days in a month can change, and a day can have 23 or 25 hours depe
 </ol>
 </div></blockquote>
 <p>For example:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">RiderResults</span> <span class="p">(</span><span class="n">rider</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Christopher Froome&#39;</span><span class="p">,</span> <span class="s1">&#39;Tour de France&#39;</span><span class="p">,</span> <span class="mf">89</span><span class="n">h4m48s</span><span class="p">);</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">RiderResults</span> <span class="p">(</span><span class="n">rider</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;Christopher Froome&#39;</span><span class="p">,</span> <span class="s1">&#39;Tour de France&#39;</span><span class="p">,</span> <span class="mf">89</span><span class="n">h4m48s</span><span class="p">);</span>
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">RiderResults</span> <span class="p">(</span><span class="n">rider</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;BARDET Romain&#39;</span><span class="p">,</span> <span class="s1">&#39;Tour de France&#39;</span><span class="p">,</span> <span class="n">PT89H8M53S</span><span class="p">);</span>
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">RiderResults</span> <span class="p">(</span><span class="n">rider</span><span class="p">,</span> <span class="n">race</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;QUINTANA Nairo&#39;</span><span class="p">,</span> <span class="s1">&#39;Tour de France&#39;</span><span class="p">,</span> <span class="n">P0000</span><span class="o">-</span><span class="mf">00</span><span class="o">-</span><span class="mf">00</span><span class="n">T89</span><span class="p">:</span><span class="mf">09</span><span class="p">:</span><span class="mf">09</span><span class="p">);</span>
 </pre></div>
 </div>
-<p id="duration-limitation">Duration columns cannot be used in a table’s <code class="docutils literal"><span class="pre">PRIMARY</span> <span class="pre">KEY</span></code>. This limitation is due to the fact that
+<p id="duration-limitation">Duration columns cannot be used in a table&#8217;s <code class="docutils literal"><span class="pre">PRIMARY</span> <span class="pre">KEY</span></code>. This limitation is due to the fact that
 durations cannot be ordered. It is effectively not possible to know if <code class="docutils literal"><span class="pre">1mo</span></code> is greater than <code class="docutils literal"><span class="pre">29d</span></code> without a date
 context.</p>
 <p>A <code class="docutils literal"><span class="pre">1d</span></code> duration is not equals to a <code class="docutils literal"><span class="pre">24h</span></code> one as the duration type has been created to be able to support daylight
@@ -465,7 +437,7 @@ saving.</p>
 </div>
 <div class="section" id="collections">
 <span id="id4"></span><h2>Collections<a class="headerlink" href="#collections" title="Permalink to this headline">¶</a></h2>
-<p>CQL supports 3 kind of collections: <a class="reference internal" href="#maps"><span class="std std-ref">Maps</span></a>, <a class="reference internal" href="#sets"><span class="std std-ref">Sets</span></a> and <a class="reference internal" href="#lists"><span class="std std-ref">Lists</span></a>. The types of those collections is defined
+<p>CQL supports 3 kind of collections: <a class="reference internal" href="#maps"><span>Maps</span></a>, <a class="reference internal" href="#sets"><span>Sets</span></a> and <a class="reference internal" href="#lists"><span>Lists</span></a>. The types of those collections is defined
 by:</p>
 <pre>
 <strong id="grammar-token-collection_type">collection_type</strong> ::=  MAP '&lt;' <a class="reference internal" href="#grammar-token-cql_type"><code class="xref docutils literal"><span class="pre">cql_type</span></code></a> ',' <a class="reference internal" href="#grammar-token-cql_type"><code class="xref docutils literal"><span class="pre">cql_type</span></code></a> '&gt;'
@@ -484,14 +456,14 @@ by:</p>
 <h3>Noteworthy characteristics<a class="headerlink" href="#noteworthy-characteristics" title="Permalink to this headline">¶</a></h3>
 <p>Collections are meant for storing/denormalizing relatively small amount of data. They work well for things like “the
 phone numbers of a given user”, “labels applied to an email”, etc. But when items are expected to grow unbounded (“all
-messages sent by a user”, “events registered by a sensor”…), then collections are not appropriate and a specific table
+messages sent by a user”, “events registered by a sensor”...), then collections are not appropriate and a specific table
 (with clustering columns) should be used. Concretely, (non-frozen) collections have the following noteworthy
 characteristics and limitations:</p>
 <ul class="simple">
 <li>Individual collections are not indexed internally. Which means that even to access a single element of a collection,
 the while collection has to be read (and reading one is not paged internally).</li>
 <li>While insertion operations on sets and maps never incur a read-before-write internally, some operations on lists do.
-Further, some lists operations are not idempotent by nature (see the section on <a class="reference internal" href="#lists"><span class="std std-ref">lists</span></a> below for
+Further, some lists operations are not idempotent by nature (see the section on <a class="reference internal" href="#lists"><span>lists</span></a> below for
 details), making their retry in case of timeout problematic. It is thus advised to prefer sets over lists when
 possible.</li>
 </ul>
@@ -502,7 +474,7 @@ anti-pattern to use a (single) collection to store large amounts of data.</p>
 <span id="id5"></span><h3>Maps<a class="headerlink" href="#maps" title="Permalink to this headline">¶</a></h3>
 <p>A <code class="docutils literal"><span class="pre">map</span></code> is a (sorted) set of key-value pairs, where keys are unique and the map is sorted by its keys. You can define
 and insert a map with:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">users</span> <span class="p">(</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="k">users</span> <span class="p">(</span>
     <span class="n">id</span> <span class="nb">text</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
     <span class="n">name</span> <span class="nb">text</span><span class="p">,</span>
     <span class="n">favs</span> <span class="k">map</span><span class="o">&lt;</span><span class="nb">text</span><span class="p">,</span> <span class="nb">text</span><span class="o">&gt;</span> <span class="c1">// A map of text keys, and text values</span>
@@ -518,13 +490,13 @@ and insert a map with:</p>
 <p>Further, maps support:</p>
 <ul>
 <li><p class="first">Updating or inserting one or more elements:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="k">users</span> <span class="k">SET</span> <span class="n">favs</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Ed Poe&#39;</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="k">users</span> <span class="k">SET</span> <span class="n">favs</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Ed Poe&#39;</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
 <span class="k">UPDATE</span> <span class="k">users</span> <span class="k">SET</span> <span class="n">favs</span> <span class="o">=</span> <span class="n">favs</span> <span class="o">+</span> <span class="p">{</span> <span class="s1">&#39;movie&#39;</span> <span class="p">:</span> <span class="s1">&#39;Cassablanca&#39;</span><span class="p">,</span> <span class="s1">&#39;band&#39;</span> <span class="p">:</span> <span class="s1">&#39;ZZ Top&#39;</span> <span class="p">}</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Removing one or more element (if an element doesn’t exist, removing it is a no-op but no error is thrown):</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="n">favs</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span> <span class="k">FROM</span> <span class="k">users</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
+<li><p class="first">Removing one or more element (if an element doesn&#8217;t exist, removing it is a no-op but no error is thrown):</p>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">DELETE</span> <span class="n">favs</span><span class="p">[</span><span class="s1">&#39;author&#39;</span><span class="p">]</span> <span class="k">FROM</span> <span class="k">users</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
 <span class="k">UPDATE</span> <span class="k">users</span> <span class="k">SET</span> <span class="n">favs</span> <span class="o">=</span> <span class="n">favs</span> <span class="o">-</span> <span class="p">{</span> <span class="s1">&#39;movie&#39;</span><span class="p">,</span> <span class="s1">&#39;band&#39;</span><span class="p">}</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
@@ -533,7 +505,7 @@ and insert a map with:</p>
 </ul>
 <p>Lastly, TTLs are allowed for both <code class="docutils literal"><span class="pre">INSERT</span></code> and <code class="docutils literal"><span class="pre">UPDATE</span></code>, but in both case the TTL set only apply to the newly
 inserted/updated elements. In other words:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="k">users</span> <span class="k">USING</span> <span class="k">TTL</span> <span class="mf">10</span> <span class="k">SET</span> <span class="n">favs</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="k">users</span> <span class="k">USING</span> <span class="k">TTL</span> <span class="mf">10</span> <span class="k">SET</span> <span class="n">favs</span><span class="p">[</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;green&#39;</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;jsmith&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>will only apply the TTL to the <code class="docutils literal"><span class="pre">{</span> <span class="pre">'color'</span> <span class="pre">:</span> <span class="pre">'green'</span> <span class="pre">}</span></code> record, the rest of the map remaining unaffected.</p>
@@ -541,7 +513,7 @@ inserted/updated elements. In other words:</p>
 <div class="section" id="sets">
 <span id="id6"></span><h3>Sets<a class="headerlink" href="#sets" title="Permalink to this headline">¶</a></h3>
 <p>A <code class="docutils literal"><span class="pre">set</span></code> is a (sorted) collection of unique values. You can define and insert a map with:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">images</span> <span class="p">(</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">images</span> <span class="p">(</span>
     <span class="n">name</span> <span class="nb">text</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
     <span class="n">owner</span> <span class="nb">text</span><span class="p">,</span>
     <span class="n">tags</span> <span class="k">set</span><span class="o">&lt;</span><span class="nb">text</span><span class="o">&gt;</span> <span class="c1">// A set of text values</span>
@@ -557,17 +529,17 @@ inserted/updated elements. In other words:</p>
 <p>Further, sets support:</p>
 <ul>
 <li><p class="first">Adding one or multiple elements (as this is a set, inserting an already existing element is a no-op):</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">images</span> <span class="k">SET</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="o">+</span> <span class="p">{</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;cuddly&#39;</span> <span class="p">}</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cat.jpg&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">images</span> <span class="k">SET</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="o">+</span> <span class="p">{</span> <span class="s1">&#39;gray&#39;</span><span class="p">,</span> <span class="s1">&#39;cuddly&#39;</span> <span class="p">}</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cat.jpg&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Removing one or multiple elements (if an element doesn’t exist, removing it is a no-op but no error is thrown):</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">images</span> <span class="k">SET</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="o">-</span> <span class="p">{</span> <span class="s1">&#39;cat&#39;</span> <span class="p">}</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cat.jpg&#39;</span><span class="p">;</span>
+<li><p class="first">Removing one or multiple elements (if an element doesn&#8217;t exist, removing it is a no-op but no error is thrown):</p>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">images</span> <span class="k">SET</span> <span class="n">tags</span> <span class="o">=</span> <span class="n">tags</span> <span class="o">-</span> <span class="p">{</span> <span class="s1">&#39;cat&#39;</span> <span class="p">}</span> <span class="k">WHERE</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;cat.jpg&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
 </ul>
-<p>Lastly, as for <a class="reference internal" href="#maps"><span class="std std-ref">maps</span></a>, TTLs if used only apply to the newly inserted values.</p>
+<p>Lastly, as for <a class="reference internal" href="#maps"><span>maps</span></a>, TTLs if used only apply to the newly inserted values.</p>
 </div>
 <div class="section" id="lists">
 <span id="id7"></span><h3>Lists<a class="headerlink" href="#lists" title="Permalink to this headline">¶</a></h3>
@@ -575,11 +547,11 @@ inserted/updated elements. In other words:</p>
 <p class="first admonition-title">Note</p>
 <p class="last">As mentioned above and further discussed at the end of this section, lists have limitations and specific
 performance considerations that you should take into account before using them. In general, if you can use a
-<a class="reference internal" href="#sets"><span class="std std-ref">set</span></a> instead of list, always prefer a set.</p>
+<a class="reference internal" href="#sets"><span>set</span></a> instead of list, always prefer a set.</p>
 </div>
 <p>A <code class="docutils literal"><span class="pre">list</span></code> is a (sorted) collection of non-unique values where elements are ordered by there position in the list. You
 can define and insert a list with:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">plays</span> <span class="p">(</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">plays</span> <span class="p">(</span>
     <span class="n">id</span> <span class="nb">text</span> <span class="k">PRIMARY</span> <span class="k">KEY</span><span class="p">,</span>
     <span class="n">game</span> <span class="nb">text</span><span class="p">,</span>
     <span class="n">players</span> <span class="nb">int</span><span class="p">,</span>
@@ -596,27 +568,27 @@ can define and insert a list with:</p>
 <p>Further, lists support:</p>
 <ul>
 <li><p class="first">Appending and prepending values to a list:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">players</span> <span class="o">=</span> <span class="mf">5</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">+</span> <span class="p">[</span> <span class="mf">14</span><span class="p">,</span> <span class="mf">21</span> <span class="p">]</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">players</span> <span class="o">=</span> <span class="mf">5</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">+</span> <span class="p">[</span> <span class="mf">14</span><span class="p">,</span> <span class="mf">21</span> <span class="p">]</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
 <span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">players</span> <span class="o">=</span> <span class="mf">6</span><span class="p">,</span> <span class="n">scores</span> <span class="o">=</span> <span class="p">[</span> <span class="mf">3</span> <span class="p">]</span> <span class="o">+</span> <span class="n">scores</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Setting the value at a particular position in the list. This imply that the list has a pre-existing element for that
 position or an error will be thrown that the list is too small:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">scores</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">7</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">scores</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">7</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
 <li><p class="first">Removing an element by its position in the list. This imply that the list has a pre-existing element for that position
 or an error will be thrown that the list is too small. Further, as the operation removes an element from the list, the
 list size will be diminished by 1, shifting the position of all the elements following the one deleted:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">DELETE</span> <span class="n">scores</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span> <span class="k">FROM</span> <span class="n">plays</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">DELETE</span> <span class="n">scores</span><span class="p">[</span><span class="mf">1</span><span class="p">]</span> <span class="k">FROM</span> <span class="n">plays</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
-<li><p class="first">Deleting <em>all</em> the occurrences of particular values in the list (if a particular element doesn’t occur at all in the
+<li><p class="first">Deleting <em>all</em> the occurrences of particular values in the list (if a particular element doesn&#8217;t occur at all in the
 list, it is simply ignored and no error is thrown):</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">-</span> <span class="p">[</span> <span class="mf">12</span><span class="p">,</span> <span class="mf">21</span> <span class="p">]</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">UPDATE</span> <span class="n">plays</span> <span class="k">SET</span> <span class="n">scores</span> <span class="o">=</span> <span class="n">scores</span> <span class="o">-</span> <span class="p">[</span> <span class="mf">12</span><span class="p">,</span> <span class="mf">21</span> <span class="p">]</span> <span class="k">WHERE</span> <span class="n">id</span> <span class="o">=</span> <span class="s1">&#39;123-afde&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 </li>
@@ -633,7 +605,7 @@ twice.</p>
 <em>read-before-write</em>. They will thus run more slowly and take more ressources than usual updates (with the exclusion
 of conditional write that have their own cost).</p>
 </div>
-<p>Lastly, as for <a class="reference internal" href="#maps"><span class="std std-ref">maps</span></a>, TTLs when used only apply to the newly inserted values.</p>
+<p>Lastly, as for <a class="reference internal" href="#maps"><span>maps</span></a>, TTLs when used only apply to the newly inserted values.</p>
 </div>
 </div>
 <div class="section" id="user-defined-types">
@@ -655,7 +627,7 @@ once created, a UDT is simply referred to by its name:</p>
 </pre>
 <p>A UDT has a name (used to declared columns of that type) and is a set of named and typed fields. Fields name can be any
 type, including collections or other UDT. For instance:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">phone</span> <span class="p">(</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TYPE</span> <span class="n">phone</span> <span class="p">(</span>
     <span class="n">country_code</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">number</span> <span class="nb">text</span><span class="p">,</span>
 <span class="p">)</span>
@@ -690,9 +662,9 @@ above. Please see the section on <span class="xref std std-ref">frozen</span> fo
 <pre>
 <strong id="grammar-token-udt_literal">udt_literal</strong> ::=  '{' <a class="reference internal" href="definitions.html#grammar-token-identifier"><code class="xref docutils literal"><span class="pre">identifier</span></code></a> ':' <a class="reference internal" href="definitions.html#grammar-token-term"><code class="xref docutils literal"><span class="pre">term</span></code></a> ( ',' <a class="reference internal" href="definitions.html#grammar-token-identifier"><code class="xref docutils literal"><span class="pre">identifier</span></code></a> ':' <a class="reference internal" href="definitions.html#grammar-token-term"><code class="xref docutils literal"><span class="pre">term</span></code></a> )* '}'
 </pre>
-<p>In other words, a UDT literal is like a <a class="reference internal" href="#maps"><span class="std std-ref">map</span></a> literal but its keys are the names of the fields of the type.
+<p>In other words, a UDT literal is like a <a class="reference internal" href="#maps"><span>map</span></a> literal but its keys are the names of the fields of the type.
 For instance, one could insert into the table define in the previous section using:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">user</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">addresses</span><span class="p">)</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">INSERT</span> <span class="k">INTO</span> <span class="k">user</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">addresses</span><span class="p">)</span>
           <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;z3 Pr3z1den7&#39;</span><span class="p">,</span> <span class="p">{</span>
               <span class="s1">&#39;home&#39;</span> <span class="p">:</span> <span class="p">{</span>
                   <span class="n">street</span><span class="p">:</span> <span class="s1">&#39;1600 Pennsylvania Ave NW&#39;</span><span class="p">,</span>
@@ -749,7 +721,7 @@ though as anonymous UDT with anonymous fields. Tuple types and tuple literals ar
 <strong id="grammar-token-tuple_literal">tuple_literal</strong> ::=  '(' <a class="reference internal" href="definitions.html#grammar-token-term"><code class="xref docutils literal"><span class="pre">term</span></code></a> ( ',' <a class="reference internal" href="definitions.html#grammar-token-term"><code class="xref docutils literal"><span class="pre">term</span></code></a> )* ')'
 </pre>
 <p>and can be used thusly:</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">durations</span> <span class="p">(</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">durations</span> <span class="p">(</span>
     <span class="n">event</span> <span class="nb">text</span><span class="p">,</span>
     <span class="n">duration</span> <span class="k">tuple</span><span class="o">&lt;</span><span class="nb">int</span><span class="p">,</span> <span class="nb">text</span><span class="o">&gt;</span><span class="p">,</span>
 <span class="p">)</span>
@@ -757,7 +729,7 @@ though as anonymous UDT with anonymous fields. Tuple types and tuple literals ar
 <span class="k">INSERT</span> <span class="k">INTO</span> <span class="n">durations</span> <span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="n">duration</span><span class="p">)</span> <span class="k">VALUES</span> <span class="p">(</span><span class="s1">&#39;ev1&#39;</span><span class="p">,</span> <span class="p">(</span><span class="mf">3</span><span class="p">,</span> <span class="s1">&#39;hours&#39;</span><span class="p">));</span>
 </pre></div>
 </div>
-<p>Unlike other “composed” types (collections and UDT), a tuple is always <span class="xref std std-ref">frozen</span> (without the need of the
+<p>Unlike other &#8220;composed&#8221; types (collections and UDT), a tuple is always <span class="xref std std-ref">frozen</span> (without the need of the
 <cite>frozen</cite> keyword) and it is not possible to update only some elements of a tuple (without updating the whole tuple).
 Also, a tuple literal should always have the same number of value than declared in the type it is a tuple of (some of
 those values can be null but they need to be explicitly declared as so).</p>
@@ -767,7 +739,7 @@ those values can be null but they need to be explicitly declared as so).</p>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
 <p class="last">Custom types exists mostly for backward compatiliby purposes and their usage is discouraged. Their usage is
-complex, not user friendly and the other provided types, particularly <a class="reference internal" href="#udts"><span class="std std-ref">user-defined types</span></a>, should almost
+complex, not user friendly and the other provided types, particularly <a class="reference internal" href="#udts"><span>user-defined types</span></a>, should almost
 always be enough.</p>
 </div>
 <p>A custom type is defined by:</p>
@@ -784,18 +756,15 @@ other purpose, a value of a custom type is the same than that of a <code class="
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="ddl.html" class="btn btn-neutral float-right" title="Data Definition" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="ddl.html" class="btn btn-neutral float-right" title="Data Definition" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="definitions.html" class="btn btn-neutral" title="Definitions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="definitions.html" class="btn btn-neutral" title="Definitions" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -805,12 +774,21 @@ other purpose, a value of a custom type is the same than that of a <code class="
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -836,14 +814,13 @@ other purpose, a value of a custom type is the same than that of a <code class="
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

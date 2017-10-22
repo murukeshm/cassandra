@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="Cassandra Tools" href="index.html"/>
         <link rel="next" title="Nodetool" href="nodetool.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,10 +84,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
@@ -101,7 +92,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../configuration/index.html">Configuring Cassandra</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../operating/index.html">Operating Cassandra</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Cassandra Tools</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">cqlsh: the CQL shell</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">cqlsh: the CQL shell</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#compatibility">Compatibility</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#optional-dependencies">Optional Dependencies</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#pytz">pytz</a></li>
@@ -152,10 +143,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -164,42 +153,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Cassandra Tools</a> &raquo;</li>
-        
-      <li>cqlsh: the CQL shell</li>
-    
-    
+      
+    <li>cqlsh: the CQL shell</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/tools/cqlsh.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/tools/cqlsh.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -228,13 +200,13 @@ specifying a timezone to use.</p>
 </div>
 <div class="section" id="cython">
 <h3>cython<a class="headerlink" href="#cython" title="Permalink to this headline">¶</a></h3>
-<p>The performance of cqlsh’s <code class="docutils literal"><span class="pre">COPY</span></code> operations can be improved by installing <a class="reference external" href="http://cython.org/">cython</a>.  This will
+<p>The performance of cqlsh&#8217;s <code class="docutils literal"><span class="pre">COPY</span></code> operations can be improved by installing <a class="reference external" href="http://cython.org/">cython</a>.  This will
 compile the python modules that are central to the performance of <code class="docutils literal"><span class="pre">COPY</span></code>.</p>
 </div>
 </div>
 <div class="section" id="cqlshrc">
 <h2>cqlshrc<a class="headerlink" href="#cqlshrc" title="Permalink to this headline">¶</a></h2>
-<p>The <code class="docutils literal"><span class="pre">cqlshrc</span></code> file holds configuration options for cqlsh.  By default this is in the user’s home directory at
+<p>The <code class="docutils literal"><span class="pre">cqlshrc</span></code> file holds configuration options for cqlsh.  By default this is in the user&#8217;s home directory at
 <code class="docutils literal"><span class="pre">~/.cassandra/cqlsh</span></code>, but a custom location can be specified with the <code class="docutils literal"><span class="pre">--cqlshrc</span></code> option.</p>
 <p>Example config values and documentation can be found in the <code class="docutils literal"><span class="pre">conf/cqlshrc.sample</span></code> file of a tarball installation.  You
 can also view the latest version of <a class="reference external" href="https://github.com/apache/cassandra/blob/trunk/conf/cqlshrc.sample">cqlshrc online</a>.</p>
@@ -320,7 +292,7 @@ consistency <code class="docutils literal"><span class="pre">ALL</span></code> i
 <div class="section" id="show-version">
 <h3><code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">VERSION</span></code><a class="headerlink" href="#show-version" title="Permalink to this headline">¶</a></h3>
 <p>Prints the cqlsh, Cassandra, CQL, and native protocol versions in use.  Example:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>cqlsh&gt; SHOW VERSION
+<div class="highlight-none"><div class="highlight"><pre>cqlsh&gt; SHOW VERSION
 [cqlsh 5.0.1 | Cassandra 3.8 | CQL spec 3.4.2 | Native protocol v4]
 </pre></div>
 </div>
@@ -329,7 +301,7 @@ consistency <code class="docutils literal"><span class="pre">ALL</span></code> i
 <h3><code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">HOST</span></code><a class="headerlink" href="#show-host" title="Permalink to this headline">¶</a></h3>
 <p>Prints the IP address and port of the Cassandra node that cqlsh is connected to in addition to the cluster name.
 Example:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>cqlsh&gt; SHOW HOST
+<div class="highlight-none"><div class="highlight"><pre>cqlsh&gt; SHOW HOST
 Connected to Prod_Cluster at 192.0.0.1:9042.
 </pre></div>
 </div>
@@ -339,7 +311,7 @@ Connected to Prod_Cluster at 192.0.0.1:9042.
 <p>Pretty prints a specific tracing session.</p>
 <p><cite>Usage</cite>: <code class="docutils literal"><span class="pre">SHOW</span> <span class="pre">SESSION</span> <span class="pre">&lt;session</span> <span class="pre">id&gt;</span></code></p>
 <p>Example usage:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>cqlsh&gt; SHOW SESSION 95ac6470-327e-11e6-beca-dfb660d92ad8
+<div class="highlight-none"><div class="highlight"><pre>cqlsh&gt; SHOW SESSION 95ac6470-327e-11e6-beca-dfb660d92ad8
 
 Tracing session: 95ac6470-327e-11e6-beca-dfb660d92ad8
 
@@ -356,7 +328,7 @@ Tracing session: 95ac6470-327e-11e6-beca-dfb660d92ad8
 <p>Reads the contents of a file and executes each line as a CQL statement or special cqlsh command.</p>
 <p><cite>Usage</cite>: <code class="docutils literal"><span class="pre">SOURCE</span> <span class="pre">&lt;string</span> <span class="pre">filename&gt;</span></code></p>
 <p>Example usage:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>cqlsh&gt; SOURCE &#39;/home/thobbs/commands.cql&#39;
+<div class="highlight-none"><div class="highlight"><pre>cqlsh&gt; SOURCE &#39;/home/thobbs/commands.cql&#39;
 </pre></div>
 </div>
 </div>
@@ -365,7 +337,7 @@ Tracing session: 95ac6470-327e-11e6-beca-dfb660d92ad8
 <p>Begins capturing command output and appending it to a specified file.  Output will not be shown at the console while it
 is captured.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>CAPTURE &#39;&lt;file&gt;&#39;;
+<div class="highlight-none"><div class="highlight"><pre>CAPTURE &#39;&lt;file&gt;&#39;;
 CAPTURE OFF;
 CAPTURE;
 </pre></div>
@@ -387,7 +359,7 @@ topic, use <code class="docutils literal"><span class="pre">HELP</span> <span cl
 <p>Enables or disables tracing for queries.  When tracing is enabled, once a query completes, a trace of the events during
 the query will be printed.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>TRACING ON
+<div class="highlight-none"><div class="highlight"><pre>TRACING ON
 TRACING OFF
 </pre></div>
 </div>
@@ -395,10 +367,10 @@ TRACING OFF
 <div class="section" id="paging">
 <h3><code class="docutils literal"><span class="pre">PAGING</span></code><a class="headerlink" href="#paging" title="Permalink to this headline">¶</a></h3>
 <p>Enables paging, disables paging, or sets the page size for read queries.  When paging is enabled, only one page of data
-will be fetched at a time and a prompt will appear to fetch the next page.  Generally, it’s a good idea to leave paging
+will be fetched at a time and a prompt will appear to fetch the next page.  Generally, it&#8217;s a good idea to leave paging
 enabled in an interactive session to avoid fetching and printing large amounts of data at once.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>PAGING ON
+<div class="highlight-none"><div class="highlight"><pre>PAGING ON
 PAGING OFF
 PAGING &lt;page size in rows&gt;
 </pre></div>
@@ -409,7 +381,7 @@ PAGING &lt;page size in rows&gt;
 <p>Enables or disables vertical printing of rows.  Enabling <code class="docutils literal"><span class="pre">EXPAND</span></code> is useful when many columns are fetched, or the
 contents of a single column are large.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>EXPAND ON
+<div class="highlight-none"><div class="highlight"><pre>EXPAND ON
 EXPAND OFF
 </pre></div>
 </div>
@@ -418,7 +390,7 @@ EXPAND OFF
 <h3><code class="docutils literal"><span class="pre">LOGIN</span></code><a class="headerlink" href="#login" title="Permalink to this headline">¶</a></h3>
 <p>Authenticate as a specified Cassandra user for the current session.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>LOGIN &lt;username&gt; [&lt;password&gt;]
+<div class="highlight-none"><div class="highlight"><pre>LOGIN &lt;username&gt; [&lt;password&gt;]
 </pre></div>
 </div>
 </div>
@@ -426,7 +398,7 @@ EXPAND OFF
 <h3><code class="docutils literal"><span class="pre">EXIT</span></code><a class="headerlink" href="#exit" title="Permalink to this headline">¶</a></h3>
 <p>Ends the current session and terminates the cqlsh process.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>EXIT
+<div class="highlight-none"><div class="highlight"><pre>EXIT
 QUIT
 </pre></div>
 </div>
@@ -435,7 +407,7 @@ QUIT
 <h3><code class="docutils literal"><span class="pre">CLEAR</span></code><a class="headerlink" href="#clear" title="Permalink to this headline">¶</a></h3>
 <p>Clears the console.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>CLEAR
+<div class="highlight-none"><div class="highlight"><pre>CLEAR
 CLS
 </pre></div>
 </div>
@@ -445,7 +417,7 @@ CLS
 <p>Prints a description (typically a series of DDL statements) of a schema element or the cluster.  This is useful for
 dumping all or portions of the schema.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>DESCRIBE CLUSTER
+<div class="highlight-none"><div class="highlight"><pre>DESCRIBE CLUSTER
 DESCRIBE SCHEMA
 DESCRIBE KEYSPACES
 DESCRIBE KEYSPACE &lt;keyspace name&gt;
@@ -463,7 +435,7 @@ DESCRIBE AGGREGATE &lt;aggregate function name&gt;
 </div>
 <p>In any of the commands, <code class="docutils literal"><span class="pre">DESC</span></code> may be used in place of <code class="docutils literal"><span class="pre">DESCRIBE</span></code>.</p>
 <p>The <code class="docutils literal"><span class="pre">DESCRIBE</span> <span class="pre">CLUSTER</span></code> command prints the cluster name and partitioner:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>cqlsh&gt; DESCRIBE CLUSTER
+<div class="highlight-none"><div class="highlight"><pre>cqlsh&gt; DESCRIBE CLUSTER
 
 Cluster: Test Cluster
 Partitioner: Murmur3Partitioner
@@ -476,14 +448,14 @@ useful for dumping the schema in order to clone a cluster or restore from a back
 <h3><code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code><a class="headerlink" href="#copy-to" title="Permalink to this headline">¶</a></h3>
 <p>Copies data from a table to a CSV file.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>COPY &lt;table name&gt; [(&lt;column&gt;, ...)] TO &lt;file name&gt; WITH &lt;copy option&gt; [AND &lt;copy option&gt; ...]
+<div class="highlight-none"><div class="highlight"><pre>COPY &lt;table name&gt; [(&lt;column&gt;, ...)] TO &lt;file name&gt; WITH &lt;copy option&gt; [AND &lt;copy option&gt; ...]
 </pre></div>
 </div>
 <p>If no columns are specified, all columns from the table will be copied to the CSV file.  A subset of columns to copy may
 be specified by adding a comma-separated list of column names surrounded by parenthesis after the table name.</p>
 <p>The <code class="docutils literal"><span class="pre">&lt;file</span> <span class="pre">name&gt;</span></code> should be a string literal (with single quotes) representing a path to the destination file.  This
 can also the special value <code class="docutils literal"><span class="pre">STDOUT</span></code> (without single quotes) to print the CSV to stdout.</p>
-<p>See <a class="reference internal" href="#shared-copy-options"><span class="std std-ref">Shared COPY Options</span></a> for options that apply to both <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code> and <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">FROM</span></code>.</p>
+<p>See <a class="reference internal" href="#shared-copy-options"><span>Shared COPY Options</span></a> for options that apply to both <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code> and <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">FROM</span></code>.</p>
 <div class="section" id="options-for-copy-to">
 <h4>Options for <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code><a class="headerlink" href="#options-for-copy-to" title="Permalink to this headline">¶</a></h4>
 <dl class="docutils">
@@ -509,7 +481,7 @@ beyond this maximum the output file will be split into segments.
 <h3><code class="docutils literal"><span class="pre">COPY</span> <span class="pre">FROM</span></code><a class="headerlink" href="#copy-from" title="Permalink to this headline">¶</a></h3>
 <p>Copies data from a CSV file to table.</p>
 <p><cite>Usage</cite>:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>COPY &lt;table name&gt; [(&lt;column&gt;, ...)] FROM &lt;file name&gt; WITH &lt;copy option&gt; [AND &lt;copy option&gt; ...]
+<div class="highlight-none"><div class="highlight"><pre>COPY &lt;table name&gt; [(&lt;column&gt;, ...)] FROM &lt;file name&gt; WITH &lt;copy option&gt; [AND &lt;copy option&gt; ...]
 </pre></div>
 </div>
 <p>If no columns are specified, all columns from the CSV file will be copied to the table.  A subset
@@ -518,7 +490,7 @@ by parenthesis after the table name.</p>
 <p>The <code class="docutils literal"><span class="pre">&lt;file</span> <span class="pre">name&gt;</span></code> should be a string literal (with single quotes) representing a path to the
 source file.  This can also the special value <code class="docutils literal"><span class="pre">STDIN</span></code> (without single quotes) to read the
 CSV data from stdin.</p>
-<p>See <a class="reference internal" href="#shared-copy-options"><span class="std std-ref">Shared COPY Options</span></a> for options that apply to both <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code> and <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">FROM</span></code>.</p>
+<p>See <a class="reference internal" href="#shared-copy-options"><span>Shared COPY Options</span></a> for options that apply to both <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code> and <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">FROM</span></code>.</p>
 <div class="section" id="id1">
 <h4>Options for <code class="docutils literal"><span class="pre">COPY</span> <span class="pre">TO</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h4>
 <dl class="docutils">
@@ -578,18 +550,15 @@ for <code class="docutils literal"><span class="pre">COPY</span> <span class="pr
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="nodetool.html" class="btn btn-neutral float-right" title="Nodetool" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="nodetool.html" class="btn btn-neutral float-right" title="Nodetool" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Cassandra Tools" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Cassandra Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -599,12 +568,21 @@ for <code class="docutils literal"><span class="pre">COPY</span> <span class="pr
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -630,14 +608,13 @@ for <code class="docutils literal"><span class="pre">COPY</span> <span class="pr
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

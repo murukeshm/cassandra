@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="Cassandra Development" href="index.html"/>
         <link rel="next" title="Contributing Code Changes" href="patches.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,10 +84,7 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
@@ -104,7 +95,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../troubleshooting/index.html">Troubleshooting</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Cassandra Development</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="ide.html">Building and IDE Integration</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Testing</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Testing</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#unit-testing">Unit Testing</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#long-running-tests">Long running tests</a></li>
 </ul>
@@ -138,10 +129,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -150,42 +139,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Cassandra Development</a> &raquo;</li>
-        
-      <li>Testing</li>
-    
-    
+      
+    <li>Testing</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/development/testing.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/development/testing.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -193,11 +165,11 @@
             
   <div class="section" id="testing">
 <h1>Testing<a class="headerlink" href="#testing" title="Permalink to this headline">¶</a></h1>
-<p>Creating tests is one of the most important and also most difficult parts of developing Cassandra. There are different ways to test your code depending on what you’re working on.</p>
+<p>Creating tests is one of the most important and also most difficult parts of developing Cassandra. There are different ways to test your code depending on what you&#8217;re working on.</p>
 <div class="section" id="unit-testing">
 <h2>Unit Testing<a class="headerlink" href="#unit-testing" title="Permalink to this headline">¶</a></h2>
 <p>The most simple way to test code in Cassandra is probably by writing a unit test. Cassandra uses JUnit as a testing framework and test cases can be found in the <code class="docutils literal"><span class="pre">test/unit</span></code> directory. Ideally you’d be able to create a unit test for your implementation that would exclusively cover the class you created (the unit under test). Unfortunately this is not always possible and Cassandra doesn’t have a very mock friendly code base. Often you’ll find yourself in a situation where you have to make use of an embedded Cassandra instance that you’ll be able to interact with in your test. If you want to make use of CQL in your test, you can simply extend CQLTester and use some of the convenient helper methods such as in the following example.</p>
-<div class="highlight-java"><div class="highlight"><pre><span></span><span class="nd">@Test</span>
+<div class="highlight-java"><div class="highlight"><pre><span class="nd">@Test</span>
 <span class="kd">public</span> <span class="kt">void</span> <span class="nf">testBatchAndList</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Throwable</span>
 <span class="o">{</span>
    <span class="n">createTable</span><span class="o">(</span><span class="s">&quot;CREATE TABLE %s (k int PRIMARY KEY, l list&lt;int&gt;)&quot;</span><span class="o">);</span>
@@ -213,11 +185,11 @@
 </pre></div>
 </div>
 <p>Unit tests can be run from the command line using the <code class="docutils literal"><span class="pre">ant</span> <span class="pre">test</span></code> command, <code class="docutils literal"><span class="pre">ant</span> <span class="pre">test</span> <span class="pre">-Dtest.name=&lt;simple_classname&gt;</span></code> to execute a test suite or <code class="docutils literal"><span class="pre">ant</span> <span class="pre">testsome</span> <span class="pre">-Dtest.name=&lt;FQCN&gt;</span> <span class="pre">-Dtest.methods=&lt;testmethod1&gt;[,testmethod2]</span></code> for individual tests.  For example, to run all test methods in the <code class="docutils literal"><span class="pre">org.apache.cassandra.cql3.SimpleQueryTest</span></code> class, you would run:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>ant test -Dtest.name=SimpleQueryTest
+<div class="highlight-none"><div class="highlight"><pre>ant test -Dtest.name=SimpleQueryTest
 </pre></div>
 </div>
 <p>To run only the <code class="docutils literal"><span class="pre">testStaticCompactTables()</span></code> test method from that class, you would run:</p>
-<div class="highlight-none"><div class="highlight"><pre><span></span>ant testsome -Dtest.name=org.apache.cassandra.cql3.SimpleQueryTest -Dtest.methods=testStaticCompactTables
+<div class="highlight-none"><div class="highlight"><pre>ant testsome -Dtest.name=org.apache.cassandra.cql3.SimpleQueryTest -Dtest.methods=testStaticCompactTables
 </pre></div>
 </div>
 <div class="section" id="long-running-tests">
@@ -229,7 +201,7 @@
 <h2>DTests<a class="headerlink" href="#dtests" title="Permalink to this headline">¶</a></h2>
 <p>One way of doing integration or system testing at larger scale is by using <a class="reference external" href="https://github.com/riptano/cassandra-dtest">dtest</a>, which stands for “Cassandra Distributed Tests”. The idea is to automatically setup Cassandra clusters using various configurations and simulate certain use cases you want to test. This is done using Python scripts and <code class="docutils literal"><span class="pre">ccmlib</span></code> from the <a class="reference external" href="https://github.com/pcmanus/ccm">ccm</a> project. Dtests will setup clusters using this library just as you do running ad-hoc <code class="docutils literal"><span class="pre">ccm</span></code> commands on your local machine. Afterwards dtests will use the <a class="reference external" href="http://datastax.github.io/python-driver/installation.html">Python driver</a> to interact with the nodes, manipulate the file system, analyze logs or mess with individual nodes.</p>
 <p>Using dtests helps us to prevent regression bugs by continually executing tests on the <a class="reference external" href="http://cassci.datastax.com/">CI server</a> against new patches. For frequent contributors, this Jenkins is set up to build branches from their GitHub repositories. It is likely that your reviewer will use this Jenkins instance to run tests for your patch. Read more on the motivation behind the CI server <a class="reference external" href="http://www.datastax.com/dev/blog/cassandra-testing-improvements-for-developer-convenience-and-confidence">here</a>.</p>
-<p>The best way to learn how to write dtests is probably by reading the introduction “<a class="reference external" href="http://www.datastax.com/dev/blog/how-to-write-a-dtest">How to Write a Dtest</a>” and by looking at existing, recently updated tests in the project. New tests must follow certain <a class="reference external" href="https://github.com/riptano/cassandra-dtest/blob/master/CONTRIBUTING.md">style conventions</a> that are being checked before accepting contributions. In contrast to Cassandra, dtest issues and pull-requests are managed on github, therefor you should make sure to link any created dtests in your Cassandra ticket and also refer to the ticket number in your dtest PR.</p>
+<p>The best way to learn how to write dtests is probably by reading the introduction &#8220;<a class="reference external" href="http://www.datastax.com/dev/blog/how-to-write-a-dtest">How to Write a Dtest</a>&#8221; and by looking at existing, recently updated tests in the project. New tests must follow certain <a class="reference external" href="https://github.com/riptano/cassandra-dtest/blob/master/CONTRIBUTING.md">style conventions</a> that are being checked before accepting contributions. In contrast to Cassandra, dtest issues and pull-requests are managed on github, therefor you should make sure to link any created dtests in your Cassandra ticket and also refer to the ticket number in your dtest PR.</p>
 <p>Creating a good dtest can be tough, but it should not prevent you from submitting patches! Please ask in the corresponding JIRA ticket how to write a good dtest for the patch. In most cases a reviewer or committer will able to support you, and in some cases they may offer to write a dtest for you.</p>
 </div>
 <div class="section" id="performance-testing">
@@ -248,18 +220,15 @@
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="patches.html" class="btn btn-neutral float-right" title="Contributing Code Changes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="patches.html" class="btn btn-neutral float-right" title="Contributing Code Changes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="ide.html" class="btn btn-neutral" title="Building and IDE Integration" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="ide.html" class="btn btn-neutral" title="Building and IDE Integration" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -269,12 +238,21 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -300,14 +278,13 @@
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

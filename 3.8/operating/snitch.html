@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.8" href="../index.html"/>
         <link rel="up" title="Operating Cassandra" href="index.html"/>
         <link rel="next" title="Adding, replacing, moving and removing nodes" href="topo_changes.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,17 +84,14 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cql/index.html">The Cassandra Query Language (CQL)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../configuration/index.html">Configuring Cassandra</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">Operating Cassandra</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Snitch</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Snitch</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#dynamic-snitching">Dynamic snitching</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#snitch-classes">Snitch classes</a></li>
 </ul>
@@ -136,10 +127,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -148,42 +137,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">Operating Cassandra</a> &raquo;</li>
-        
-      <li>Snitch</li>
-    
-    
+      
+    <li>Snitch</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/operating/snitch.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/operating/snitch.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -195,8 +167,8 @@
 <ul class="simple">
 <li>it teaches Cassandra enough about your network topology to route requests efficiently.</li>
 <li>it allows Cassandra to spread replicas around your cluster to avoid correlated failures. It does this by grouping
-machines into “datacenters” and “racks.”  Cassandra will do its best not to have more than one replica on the same
-“rack” (which may not actually be a physical location).</li>
+machines into &#8220;datacenters&#8221; and &#8220;racks.&#8221;  Cassandra will do its best not to have more than one replica on the same
+&#8220;rack&#8221; (which may not actually be a physical location).</li>
 </ul>
 <div class="section" id="dynamic-snitching">
 <h2>Dynamic snitching<a class="headerlink" href="#dynamic-snitching" title="Permalink to this headline">¶</a></h2>
@@ -207,7 +179,7 @@ configured with the following properties on <code class="docutils literal"><span
 <li><code class="docutils literal"><span class="pre">dynamic_snitch_update_interval_in_ms</span></code>: controls how often to perform the more expensive part of host score
 calculation.</li>
 <li><code class="docutils literal"><span class="pre">dynamic_snitch_reset_interval_in_ms</span></code>: if set greater than zero and read_repair_chance is &lt; 1.0, this will allow
-‘pinning’ of replicas to hosts in order to increase cache capacity.</li>
+&#8216;pinning&#8217; of replicas to hosts in order to increase cache capacity.</li>
 <li><code class="docutils literal"><span class="pre">dynamic_snitch_badness_threshold:</span></code>: The badness threshold will control how much worse the pinned host has to be
 before the dynamic snitch will prefer other replicas over it.  This is expressed as a double which represents a
 percentage.  Thus, a value of 0.2 means Cassandra would continue to prefer the static snitch values until the pinned
@@ -240,7 +212,7 @@ public IP as well). You will need to open the <code class="docutils literal"><sp
 (For intra-Region traffic, Cassandra will switch to the private IP after establishing a connection).</dd>
 <dt>RackInferringSnitch</dt>
 <dd>Proximity is determined by rack and data center, which are assumed to correspond to the 3rd and 2nd octet of each
-node’s IP address, respectively.  Unless this happens to match your deployment conventions, this is best used as an
+node&#8217;s IP address, respectively.  Unless this happens to match your deployment conventions, this is best used as an
 example of writing a custom Snitch class and is provided in that spirit.</dd>
 </dl>
 </div>
@@ -248,18 +220,15 @@ example of writing a custom Snitch class and is provided in that spirit.</dd>
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="topo_changes.html" class="btn btn-neutral float-right" title="Adding, replacing, moving and removing nodes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="topo_changes.html" class="btn btn-neutral float-right" title="Adding, replacing, moving and removing nodes" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="Operating Cassandra" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="Operating Cassandra" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -269,12 +238,21 @@ example of writing a custom Snitch class and is provided in that spirit.</dd>
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option selected='selected' value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option selected='selected' selected='selected' value="3.8">3.8</option>
 </select>
 
     </p>
@@ -300,14 +278,13 @@ example of writing a custom Snitch class and is provided in that spirit.</dd>
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 

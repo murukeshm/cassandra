@@ -13,8 +13,6 @@
 
   
   
-  
-  
 
   
 
@@ -34,9 +32,6 @@
   
     <link rel="stylesheet" href="../_static/extra.css" type="text/css" />
   
-        <link rel="index" title="Index"
-              href="../genindex.html"/>
-        <link rel="search" title="Search" href="../search.html"/>
     <link rel="top" title="Apache Cassandra Documentation v3.10" href="../index.html"/>
         <link rel="up" title="The Cassandra Query Language (CQL)" href="index.html"/>
         <link rel="next" title="Data Types" href="types.html"/>
@@ -49,7 +44,6 @@
 
 <body class="wy-body-for-nav" role="document">
 
-   
   <div class="wy-grid-for-nav">
 
     
@@ -90,15 +84,12 @@
           
             
             
-              
-            
-            
-              <ul class="current">
+                <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../getting_started/index.html">Getting Started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../architecture/index.html">Architecture</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../data_modeling/index.html">Data Modeling</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">The Cassandra Query Language (CQL)</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Definitions</a><ul>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Definitions</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#conventions">Conventions</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#identifiers">Identifiers and keywords</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#constants">Constants</a></li>
@@ -141,10 +132,8 @@
 
       
       <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        
-          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-          <a href="../index.html">Apache Cassandra</a>
-        
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">Apache Cassandra</a>
       </nav>
 
 
@@ -153,42 +142,25 @@
         <div class="rst-content">
           
 
-
-
-
-
-
-
-
-
-
-
-
+ 
 
 
 
 <div role="navigation" aria-label="breadcrumbs navigation">
-
   <ul class="wy-breadcrumbs">
-    
-      <li><a href="../index.html">Docs</a> &raquo;</li>
-        
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
           <li><a href="index.html">The Cassandra Query Language (CQL)</a> &raquo;</li>
-        
-      <li>Definitions</li>
-    
-    
+      
+    <li>Definitions</li>
       <li class="wy-breadcrumbs-aside">
         
-            
-            <a href="../_sources/cql/definitions.rst.txt" rel="nofollow"> View page source</a>
+          
+            <a href="../_sources/cql/definitions.txt" rel="nofollow"> View page source</a>
           
         
       </li>
-    
   </ul>
-
-  
   <hr/>
 </div>
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
@@ -200,12 +172,12 @@
 <span id="id1"></span><h2>Conventions<a class="headerlink" href="#conventions" title="Permalink to this headline">¶</a></h2>
 <p>To aid in specifying the CQL syntax, we will use the following conventions in this document:</p>
 <ul class="simple">
-<li>Language rules will be given in an informal <a class="reference external" href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form#Variants">BNF variant</a> notation. In particular, we’ll use square brakets
+<li>Language rules will be given in an informal <a class="reference external" href="http://en.wikipedia.org/wiki/Backus%E2%80%93Naur_Form#Variants">BNF variant</a> notation. In particular, we&#8217;ll use square brakets
 (<code class="docutils literal"><span class="pre">[</span> <span class="pre">item</span> <span class="pre">]</span></code>) for optional items, <code class="docutils literal"><span class="pre">*</span></code> and <code class="docutils literal"><span class="pre">+</span></code> for repeated items (where <code class="docutils literal"><span class="pre">+</span></code> imply at least one).</li>
 <li>The grammar will also use the following convention for convenience: non-terminal term will be lowercase (and link to
-their definition) while terminal keywords will be provided “all caps”. Note however that keywords are
-<a class="reference internal" href="#identifiers"><span class="std std-ref">Identifiers and keywords</span></a> and are thus case insensitive in practice. We will also define some early construction using
-regexp, which we’ll indicate with <code class="docutils literal"><span class="pre">re(&lt;some</span> <span class="pre">regular</span> <span class="pre">expression&gt;)</span></code>.</li>
+their definition) while terminal keywords will be provided &#8220;all caps&#8221;. Note however that keywords are
+<a class="reference internal" href="#identifiers"><span>Identifiers and keywords</span></a> and are thus case insensitive in practice. We will also define some early construction using
+regexp, which we&#8217;ll indicate with <code class="docutils literal"><span class="pre">re(&lt;some</span> <span class="pre">regular</span> <span class="pre">expression&gt;)</span></code>.</li>
 <li>The grammar is provided for documentation purposes and leave some minor details out.  For instance, the comma on the
 last column definition in a <code class="docutils literal"><span class="pre">CREATE</span> <span class="pre">TABLE</span></code> statement is optional but supported if present even though the grammar in
 this document suggests otherwise. Also, not everything accepted by the grammar is necessarily valid CQL.</li>
@@ -217,7 +189,7 @@ this document suggests otherwise. Also, not everything accepted by the grammar i
 <p>The CQL language uses <em>identifiers</em> (or <em>names</em>) to identify tables, columns and other objects. An identifier is a token
 matching the regular expression <code class="docutils literal"><span class="pre">[a-zA-Z][a-zA-Z0-9_]*</span></code>.</p>
 <p>A number of such identifiers, like <code class="docutils literal"><span class="pre">SELECT</span></code> or <code class="docutils literal"><span class="pre">WITH</span></code>, are <em>keywords</em>. They have a fixed meaning for the language
-and most are reserved. The list of those keywords can be found in <a class="reference internal" href="appendices.html#appendix-a"><span class="std std-ref">Appendix A: CQL Keywords</span></a>.</p>
+and most are reserved. The list of those keywords can be found in <a class="reference internal" href="appendices.html#appendix-a"><span>Appendix A: CQL Keywords</span></a>.</p>
 <p>Identifiers and (unquoted) keywords are case insensitive. Thus <code class="docutils literal"><span class="pre">SELECT</span></code> is the same than <code class="docutils literal"><span class="pre">select</span></code> or <code class="docutils literal"><span class="pre">sElEcT</span></code>, and
 <code class="docutils literal"><span class="pre">myId</span></code> is the same than <code class="docutils literal"><span class="pre">myid</span></code> or <code class="docutils literal"><span class="pre">MYID</span></code>. A convention often used (in particular by the samples of this
 documentation) is to use upper case for keywords and lower case for other identifiers.</p>
@@ -263,9 +235,9 @@ if you use quoted identifiers, it is strongly advised to avoid any name enclosed
 <ul class="simple">
 <li>A string constant is an arbitrary sequence of characters enclosed by single-quote(<code class="docutils literal"><span class="pre">'</span></code>). A single-quote
 can be included by repeating it, e.g. <code class="docutils literal"><span class="pre">'It''s</span> <span class="pre">raining</span> <span class="pre">today'</span></code>. Those are not to be confused with quoted
-<a class="reference internal" href="#identifiers"><span class="std std-ref">Identifiers and keywords</span></a> that use double-quotes. Alternatively, a string can be defined by enclosing the arbitrary sequence
+<a class="reference internal" href="#identifiers"><span>Identifiers and keywords</span></a> that use double-quotes. Alternatively, a string can be defined by enclosing the arbitrary sequence
 of characters by two dollar characters, in which case single-quote can be use without escaping (<code class="docutils literal"><span class="pre">$$It's</span> <span class="pre">raining</span>
-<span class="pre">today$$</span></code>). That latter form is often used when defining <a class="reference internal" href="functions.html#udfs"><span class="std std-ref">user-defined functions</span></a> to avoid having to
+<span class="pre">today$$</span></code>). That latter form is often used when defining <a class="reference internal" href="functions.html#udfs"><span>user-defined functions</span></a> to avoid having to
 escape single-quote characters in function body (as they are more likely to occur than <code class="docutils literal"><span class="pre">$$</span></code>).</li>
 <li>Integer, float and boolean constant are defined as expected. Note however than float allows the special <code class="docutils literal"><span class="pre">NaN</span></code> and
 <code class="docutils literal"><span class="pre">Infinity</span></code> constants.</li>
@@ -273,7 +245,7 @@ escape single-quote characters in function body (as they are more likely to occu
 <li>Blobs content are provided in hexadecimal and prefixed by <code class="docutils literal"><span class="pre">0x</span></code>.</li>
 <li>The special <code class="docutils literal"><span class="pre">NULL</span></code> constant denotes the absence of value.</li>
 </ul>
-<p>For how these constants are typed, see the <a class="reference internal" href="types.html#data-types"><span class="std std-ref">Data Types</span></a> section.</p>
+<p>For how these constants are typed, see the <a class="reference internal" href="types.html#data-types"><span>Data Types</span></a> section.</p>
 </div>
 <div class="section" id="terms">
 <h2>Terms<a class="headerlink" href="#terms" title="Permalink to this headline">¶</a></h2>
@@ -287,12 +259,12 @@ escape single-quote characters in function body (as they are more likely to occu
 </pre>
 <p>A term is thus one of:</p>
 <ul class="simple">
-<li>A <a class="reference internal" href="#constants"><span class="std std-ref">constant</span></a>.</li>
-<li>A literal for either <a class="reference internal" href="types.html#collections"><span class="std std-ref">a collection</span></a>, <a class="reference internal" href="types.html#udts"><span class="std std-ref">a user-defined type</span></a> or <a class="reference internal" href="types.html#tuples"><span class="std std-ref">a tuple</span></a>
+<li>A <a class="reference internal" href="#constants"><span>constant</span></a>.</li>
+<li>A literal for either <a class="reference internal" href="types.html#collections"><span>a collection</span></a>, <a class="reference internal" href="types.html#udts"><span>a user-defined type</span></a> or <a class="reference internal" href="types.html#tuples"><span>a tuple</span></a>
 (see the linked sections for details).</li>
-<li>A function call: see <a class="reference internal" href="functions.html#cql-functions"><span class="std std-ref">the section on functions</span></a> for details on which <a class="reference internal" href="functions.html#native-functions"><span class="std std-ref">native function</span></a> exists and how to define your own <a class="reference internal" href="functions.html#udfs"><span class="std std-ref">user-defined ones</span></a>.</li>
+<li>A function call: see <a class="reference internal" href="functions.html#cql-functions"><span>the section on functions</span></a> for details on which <a class="reference internal" href="functions.html#native-functions"><span>native function</span></a> exists and how to define your own <a class="reference internal" href="functions.html#udfs"><span>user-defined ones</span></a>.</li>
 <li>A <em>type hint</em>: see the <span class="xref std std-ref">related section</span> for details.</li>
-<li>A bind marker, which denotes a variable to be bound at execution time. See the section on <a class="reference internal" href="#prepared-statements"><span class="std std-ref">Prepared Statements</span></a>
+<li>A bind marker, which denotes a variable to be bound at execution time. See the section on <a class="reference internal" href="#prepared-statements"><span>Prepared Statements</span></a>
 for details. A bind marker can be either anonymous (<code class="docutils literal"><span class="pre">?</span></code>) or named (<code class="docutils literal"><span class="pre">:some_name</span></code>). The latter form provides a more
 convenient way to refer to the variable for binding it and should generally be preferred.</li>
 </ul>
@@ -301,7 +273,7 @@ convenient way to refer to the variable for binding it and should generally be p
 <h2>Comments<a class="headerlink" href="#comments" title="Permalink to this headline">¶</a></h2>
 <p>A comment in CQL is a line beginning by either double dashes (<code class="docutils literal"><span class="pre">--</span></code>) or double slash (<code class="docutils literal"><span class="pre">//</span></code>).</p>
 <p>Multi-line comments are also supported through enclosure within <code class="docutils literal"><span class="pre">/*</span></code> and <code class="docutils literal"><span class="pre">*/</span></code> (but nesting is not supported).</p>
-<div class="highlight-cql"><div class="highlight"><pre><span></span><span class="c1">-- This is a comment</span>
+<div class="highlight-cql"><div class="highlight"><pre><span class="c1">-- This is a comment</span>
 <span class="c1">// This is a comment too</span>
 <span class="cm">/* This is</span>
 <span class="cm">   a multi-line comment */</span>
@@ -312,15 +284,15 @@ convenient way to refer to the variable for binding it and should generally be p
 <h2>Statements<a class="headerlink" href="#statements" title="Permalink to this headline">¶</a></h2>
 <p>CQL consists of statements that can be divided in the following categories:</p>
 <ul class="simple">
-<li><a class="reference internal" href="ddl.html#data-definition"><span class="std std-ref">Data Definition</span></a> statements, to define and change how the data is stored (keyspaces and tables).</li>
-<li><a class="reference internal" href="dml.html#data-manipulation"><span class="std std-ref">Data Manipulation</span></a> statements, for selecting, inserting and deleting data.</li>
-<li><a class="reference internal" href="indexes.html#secondary-indexes"><span class="std std-ref">Secondary Indexes</span></a> statements.</li>
-<li><a class="reference internal" href="mvs.html#materialized-views"><span class="std std-ref">Materialized Views</span></a> statements.</li>
-<li><a class="reference internal" href="security.html#cql-roles"><span class="std std-ref">Database Roles</span></a> statements.</li>
-<li><a class="reference internal" href="security.html#cql-permissions"><span class="std std-ref">Permissions</span></a> statements.</li>
-<li><a class="reference internal" href="functions.html#udfs"><span class="std std-ref">User-Defined Functions</span></a> statements.</li>
-<li><a class="reference internal" href="types.html#udts"><span class="std std-ref">User-Defined Types</span></a> statements.</li>
-<li><a class="reference internal" href="triggers.html#cql-triggers"><span class="std std-ref">Triggers</span></a> statements.</li>
+<li><a class="reference internal" href="ddl.html#data-definition"><span>Data Definition</span></a> statements, to define and change how the data is stored (keyspaces and tables).</li>
+<li><a class="reference internal" href="dml.html#data-manipulation"><span>Data Manipulation</span></a> statements, for selecting, inserting and deleting data.</li>
+<li><a class="reference internal" href="indexes.html#secondary-indexes"><span>Secondary Indexes</span></a> statements.</li>
+<li><a class="reference internal" href="mvs.html#materialized-views"><span>Materialized Views</span></a> statements.</li>
+<li><a class="reference internal" href="security.html#cql-roles"><span>Database Roles</span></a> statements.</li>
+<li><a class="reference internal" href="security.html#cql-permissions"><span>Permissions</span></a> statements.</li>
+<li><a class="reference internal" href="functions.html#udfs"><span>User-Defined Functions</span></a> statements.</li>
+<li><a class="reference internal" href="types.html#udts"><span>User-Defined Types</span></a> statements.</li>
+<li><a class="reference internal" href="triggers.html#cql-triggers"><span>Triggers</span></a> statements.</li>
 </ul>
 <p>All the statements are listed below and are described in the rest of this documentation (see links above):</p>
 <pre>
@@ -386,18 +358,15 @@ and then executed depends on the CQL driver used and you should refer to your dr
 
 
            </div>
-           <div class="articleComments">
-            
-           </div>
           </div>
           <footer>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="types.html" class="btn btn-neutral float-right" title="Data Types" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="types.html" class="btn btn-neutral float-right" title="Data Types" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="index.html" class="btn btn-neutral" title="The Cassandra Query Language (CQL)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="index.html" class="btn btn-neutral" title="The Cassandra Query Language (CQL)" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -407,12 +376,21 @@ and then executed depends on the CQL driver used and you should refer to your dr
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, The Apache Cassandra team.
-<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+/,this.value)">
-    <option value="3.8">3.8</option>
-    <option value="3.9">3.9</option>
-    <option selected='selected' value="3.10">3.10</option>
-    <option value="3.11.0">3.11.0</option>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
     <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option value="trunk">trunk</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option selected='selected' selected='selected' value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
 </select>
 
     </p>
@@ -438,14 +416,13 @@ and then executed depends on the CQL driver used and you should refer to your dr
             VERSION:'',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true,
-            SOURCELINK_SUFFIX: '.txt'
+            HAS_SOURCE:  true
         };
     </script>
       <script type="text/javascript" src="../_static/jquery.js"></script>
       <script type="text/javascript" src="../_static/underscore.js"></script>
       <script type="text/javascript" src="../_static/doctools.js"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
   
 
