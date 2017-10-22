@@ -41,4 +41,4 @@ do
 	)
 done
 rm -r doc versions.html
-git commit -a --amend --no-edit
+git commit -a --amend --no-edit --alow-empty
