@@ -1,6 +1,16 @@
 #! /bin/bash
-trap 'git checkout gh-pages; git commit -a --amend --no-edit' EXIT
 git commit --allow-empty -m "Update docs ($(date))"
+commit_changes () {
+	git checkout gh-pages
+	git add trunk [0-9].*
+	git commit -a --amend --no-edit --allow-empty
+	if git diff --quiet HEAD 'HEAD^'
+	then
+		git reset 'HEAD^'
+	fi
+}
+trap commit_changes EXIT
+
 gen_docs () (
 	set -e
 	git checkout "$1"
@@ -41,4 +51,4 @@ do
 	)
 done
 rm -r doc versions.html
-git commit -a --amend --no-edit --alow-empty
+git add "${versions[@]}"
