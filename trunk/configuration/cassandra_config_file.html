@@ -216,6 +216,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#tracetype-repair-ttl"><code class="docutils literal"><span class="pre">tracetype_repair_ttl</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enable-user-defined-functions"><code class="docutils literal"><span class="pre">enable_user_defined_functions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enable-scripted-user-defined-functions"><code class="docutils literal"><span class="pre">enable_scripted_user_defined_functions</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-materialized-views"><code class="docutils literal"><span class="pre">enable_materialized_views</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#windows-timer-interval"><code class="docutils literal"><span class="pre">windows_timer_interval</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transparent-data-encryption-options"><code class="docutils literal"><span class="pre">transparent_data_encryption_options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tombstone-warn-threshold"><code class="docutils literal"><span class="pre">tombstone_warn_threshold</span></code></a><ul>
@@ -1553,6 +1554,12 @@ Java UDFs are always enabled, if enable_user_defined_functions is true.
 Enable this option to be able to use UDFs with &#8220;language javascript&#8221; or any custom JSR-223 provider.
 This option has no effect, if enable_user_defined_functions is false.</p>
 <p><em>Default Value:</em> false</p>
+</div>
+<div class="section" id="enable-materialized-views">
+<h2><code class="docutils literal"><span class="pre">enable_materialized_views</span></code><a class="headerlink" href="#enable-materialized-views" title="Permalink to this headline">¶</a></h2>
+<p>Enables materialized view creation on this node.
+Materialized views are considered experimental and are not recommended for production use.</p>
+<p><em>Default Value:</em> true</p>
 </div>
 <div class="section" id="windows-timer-interval">
 <h2><code class="docutils literal"><span class="pre">windows_timer_interval</span></code><a class="headerlink" href="#windows-timer-interval" title="Permalink to this headline">¶</a></h2>

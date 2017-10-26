@@ -1539,6 +1539,14 @@ This option has no effect, if enable_user_defined_functions is false.
 
 *Default Value:* false
 
+``enable_materialized_views``
+-----------------------------
+
+Enables materialized view creation on this node.
+Materialized views are considered experimental and are not recommended for production use.
+
+*Default Value:* true
+
 ``windows_timer_interval``
 --------------------------
 
