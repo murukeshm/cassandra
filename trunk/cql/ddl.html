@@ -595,13 +595,18 @@ more nodes than required by the consistency level)
 belonging to the same data center than the read
 coordinator for the purpose of read repairs.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">gc_grace_seconds</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">speculative_retry</span></code></td>
+<td><em>simple</em></td>
+<td>99PERCENTILE</td>
+<td><a class="reference internal" href="#speculative-retry-options"><span>Speculative retry options</span></a>.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">gc_grace_seconds</span></code></td>
 <td><em>simple</em></td>
 <td>864000</td>
 <td>Time to wait before garbage collecting tombstones
 (deletion markers).</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">bloom_filter_fp_chance</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">bloom_filter_fp_chance</span></code></td>
 <td><em>simple</em></td>
 <td>0.00075</td>
 <td>The target probability of false positive of the sstable
@@ -609,34 +614,79 @@ bloom filters. Said bloom filters will be sized to provide
 the provided probability (thus lowering this value impact
 the size of bloom filters in-memory and on-disk)</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">default_time_to_live</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">default_time_to_live</span></code></td>
 <td><em>simple</em></td>
 <td>0</td>
 <td>The default expiration time (“TTL”) in seconds for a
 table.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">compaction</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">compaction</span></code></td>
 <td><em>map</em></td>
 <td><em>see below</em></td>
 <td><a class="reference internal" href="#cql-compaction-options"><span>Compaction options</span></a>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">compression</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">compression</span></code></td>
 <td><em>map</em></td>
 <td><em>see below</em></td>
 <td><a class="reference internal" href="#cql-compression-options"><span>Compression options</span></a>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">caching</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">caching</span></code></td>
 <td><em>map</em></td>
 <td><em>see below</em></td>
 <td><a class="reference internal" href="#cql-caching-options"><span>Caching options</span></a>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">memtable_flush_period_in_ms</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">memtable_flush_period_in_ms</span></code></td>
 <td><em>simple</em></td>
 <td>0</td>
 <td>Time (in ms) before Cassandra flushes memtables to disk.</td>
 </tr>
 </tbody>
 </table>
+<div class="section" id="speculative-retry-options">
+<span id="id4"></span><h5>Speculative retry options<a class="headerlink" href="#speculative-retry-options" title="Permalink to this headline">¶</a></h5>
+<p>By default, Cassandra read coordinators only query as many replicas as necessary to satisfy
+consistency levels: one for consistency level <code class="docutils literal"><span class="pre">ONE</span></code>, a quorum for <code class="docutils literal"><span class="pre">QUORUM</span></code>, and so on.
+<code class="docutils literal"><span class="pre">speculative_retry</span></code> determines when coordinators may query additional replicas, which is useful
+when replicas are slow or unresponsive.  The following are legal values:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="21%" />
+<col width="14%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Format</th>
+<th class="head">Example</th>
+<th class="head">Description</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">XPERCENTILE</span></code></td>
+<td>90.5PERCENTILE</td>
+<td>Coordinators record average per-table response times for all replicas.
+If a replica takes longer than <code class="docutils literal"><span class="pre">X</span></code> percent of this table&#8217;s average
+response time, the coordinator queries an additional replica.
+<code class="docutils literal"><span class="pre">X</span></code> must be between 0 and 100.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">Yms</span></code></td>
+<td>25ms</td>
+<td>If a replica takes more than <code class="docutils literal"><span class="pre">Y</span></code> milliseconds to respond,
+the coordinator queries an additional replica.</td>
+</tr>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">ALWAYS</span></code></td>
+<td>&nbsp;</td>
+<td>Coordinators always query all replicas.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">NONE</span></code></td>
+<td>&nbsp;</td>
+<td>Coordinators never query additional replicas.</td>
+</tr>
+</tbody>
+</table>
+<p>This setting does not affect reads with consistency level <code class="docutils literal"><span class="pre">ALL</span></code> because they already query all replicas.</p>
+<p>Note that frequently reading from additional replicas can hurt cluster performance.
+When in doubt, keep the default <code class="docutils literal"><span class="pre">99PERCENTILE</span></code>.</p>
+</div>
 <div class="section" id="compaction-options">
 <span id="cql-compaction-options"></span><h5>Compaction options<a class="headerlink" href="#compaction-options" title="Permalink to this headline">¶</a></h5>
 <p>The <code class="docutils literal"><span class="pre">compaction</span></code> options must at least define the <code class="docutils literal"><span class="pre">'class'</span></code> sub-option, that defines the compaction strategy class
