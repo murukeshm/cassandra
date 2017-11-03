@@ -996,9 +996,10 @@ For security reasons, you should not expose this port to the internet.  Firewall
 </div>
 <div class="section" id="ssl-storage-port">
 <h2><code class="docutils literal"><span class="pre">ssl_storage_port</span></code><a class="headerlink" href="#ssl-storage-port" title="Permalink to this headline">¶</a></h2>
-<p>SSL port, for encrypted communication.  Unused unless enabled in
-encryption_options
-For security reasons, you should not expose this port to the internet.  Firewall it if needed.</p>
+<p>SSL port, for legacy encrypted communication. This property is unused unless enabled in
+server_encryption_options (see below). As of cassandra 4.0, this property is deprecated
+as a single port can be used for either/both secure and insecure connections.
+For security reasons, you should not expose this port to the internet. Firewall it if needed.</p>
 <p><em>Default Value:</em> 7001</p>
 </div>
 <div class="section" id="listen-address">
@@ -1455,23 +1456,31 @@ until the pinned host was 20% worse than the fastest.</p>
 <div class="section" id="server-encryption-options">
 <h2><code class="docutils literal"><span class="pre">server_encryption_options</span></code><a class="headerlink" href="#server-encryption-options" title="Permalink to this headline">¶</a></h2>
 <p>Enable or disable inter-node encryption
-JVM defaults for supported SSL socket protocols and cipher suites can
+JVM and netty defaults for supported SSL socket protocols and cipher suites can
 be replaced using custom encryption options. This is not recommended
 unless you have policies in place that dictate certain settings, or
 need to disable vulnerable ciphers or protocols in case the JVM cannot
 be updated.
 FIPS compliant settings can be configured at JVM level and should not
 involve changing encryption settings here:
-<a class="reference external" href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/FIPS.html">https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/FIPS.html</a>
-<em>NOTE</em> No custom encryption options are enabled at the moment
-The available internode options are : all, none, dc, rack</p>
-<p>If set to dc cassandra will encrypt the traffic between the DCs
+<a class="reference external" href="https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/FIPS.html">https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/FIPS.html</a></p>
+<p><em>NOTE</em> No custom encryption options are enabled at the moment
+The available internode options are : all, none, dc, rack
+If set to dc cassandra will encrypt the traffic between the DCs
 If set to rack cassandra will encrypt the traffic between the racks</p>
 <p>The passwords used in these options must match the passwords used when generating
 the keystore and truststore.  For instructions on generating these files, see:
-<a class="reference external" href="http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore">http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore</a></p>
+<a class="reference external" href="http://download.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore">http://download.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore</a></p>
 <p><em>Default Value (complex option)</em>:</p>
-<div class="highlight-python"><div class="highlight"><pre>internode_encryption: none
+<div class="highlight-python"><div class="highlight"><pre># set to true for allowing secure incoming connections
+enabled: false
+# If enabled and optional are both set to true, encrypted and unencrypted connections are handled on the storage_port
+optional: false
+# if enabled, will open up an encrypted listening socket on ssl_storage_port. Should be used
+# during upgrade to 4.0; otherwise, set to false.
+enable_legacy_ssl_storage_port: false
+# on outbound connections, determine which type of peers to securely connect to. &#39;enabled&#39; must be set to true.
+internode_encryption: none
 keystore: conf/.keystore
 keystore_password: cassandra
 truststore: conf/.truststore
@@ -1488,7 +1497,7 @@ truststore_password: cassandra
 </div>
 <div class="section" id="client-encryption-options">
 <h2><code class="docutils literal"><span class="pre">client_encryption_options</span></code><a class="headerlink" href="#client-encryption-options" title="Permalink to this headline">¶</a></h2>
-<p>enable or disable client/server encryption.</p>
+<p>enable or disable client-to-server encryption.</p>
 <p><em>Default Value (complex option)</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre>enabled: false
 # If enabled and optional is set to true encrypted and unencrypted connections are handled.

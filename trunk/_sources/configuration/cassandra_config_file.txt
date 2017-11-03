@@ -865,9 +865,10 @@ For security reasons, you should not expose this port to the internet.  Firewall
 ``ssl_storage_port``
 --------------------
 
-SSL port, for encrypted communication.  Unused unless enabled in
-encryption_options
-For security reasons, you should not expose this port to the internet.  Firewall it if needed.
+SSL port, for legacy encrypted communication. This property is unused unless enabled in
+server_encryption_options (see below). As of cassandra 4.0, this property is deprecated
+as a single port can be used for either/both secure and insecure connections.
+For security reasons, you should not expose this port to the internet. Firewall it if needed.
 
 *Default Value:* 7001
 
@@ -1425,7 +1426,7 @@ until the pinned host was 20% worse than the fastest.
 -----------------------------
 
 Enable or disable inter-node encryption
-JVM defaults for supported SSL socket protocols and cipher suites can
+JVM and netty defaults for supported SSL socket protocols and cipher suites can
 be replaced using custom encryption options. This is not recommended
 unless you have policies in place that dictate certain settings, or
 need to disable vulnerable ciphers or protocols in case the JVM cannot
@@ -1433,19 +1434,27 @@ be updated.
 FIPS compliant settings can be configured at JVM level and should not
 involve changing encryption settings here:
 https://docs.oracle.com/javase/8/docs/technotes/guides/security/jsse/FIPS.html
+
 *NOTE* No custom encryption options are enabled at the moment
 The available internode options are : all, none, dc, rack
-
 If set to dc cassandra will encrypt the traffic between the DCs
 If set to rack cassandra will encrypt the traffic between the racks
 
 The passwords used in these options must match the passwords used when generating
 the keystore and truststore.  For instructions on generating these files, see:
-http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore
+http://download.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore
 
 
 *Default Value (complex option)*::
 
+        # set to true for allowing secure incoming connections
+        enabled: false
+        # If enabled and optional are both set to true, encrypted and unencrypted connections are handled on the storage_port
+        optional: false
+        # if enabled, will open up an encrypted listening socket on ssl_storage_port. Should be used
+        # during upgrade to 4.0; otherwise, set to false.
+        enable_legacy_ssl_storage_port: false
+        # on outbound connections, determine which type of peers to securely connect to. 'enabled' must be set to true.
         internode_encryption: none
         keystore: conf/.keystore
         keystore_password: cassandra
@@ -1461,7 +1470,7 @@ http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefG
 
 ``client_encryption_options``
 -----------------------------
-enable or disable client/server encryption.
+enable or disable client-to-server encryption.
 
 *Default Value (complex option)*::
 
