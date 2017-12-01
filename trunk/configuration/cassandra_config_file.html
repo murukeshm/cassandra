@@ -133,9 +133,9 @@
 <li class="toctree-l3"><a class="reference internal" href="#counter-cache-save-period"><code class="docutils literal"><span class="pre">counter_cache_save_period</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#counter-cache-keys-to-save"><code class="docutils literal"><span class="pre">counter_cache_keys_to_save</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#saved-caches-directory"><code class="docutils literal"><span class="pre">saved_caches_directory</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#commitlog-sync"><code class="docutils literal"><span class="pre">commitlog_sync</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-sync-batch-window-in-ms"><code class="docutils literal"><span class="pre">commitlog_sync_batch_window_in_ms</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id1"><code class="docutils literal"><span class="pre">commitlog_sync</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commitlog-sync-group-window-in-ms"><code class="docutils literal"><span class="pre">commitlog_sync_group_window_in_ms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commitlog-sync"><code class="docutils literal"><span class="pre">commitlog_sync</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-sync-period-in-ms"><code class="docutils literal"><span class="pre">commitlog_sync_period_in_ms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-segment-size-in-mb"><code class="docutils literal"><span class="pre">commitlog_segment_size_in_mb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-compression"><code class="docutils literal"><span class="pre">commitlog_compression</span></code></a></li>
@@ -188,6 +188,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#column-index-cache-size-in-kb"><code class="docutils literal"><span class="pre">column_index_cache_size_in_kb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#concurrent-compactors"><code class="docutils literal"><span class="pre">concurrent_compactors</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#concurrent-validations"><code class="docutils literal"><span class="pre">concurrent_validations</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#concurrent-materialized-view-builders"><code class="docutils literal"><span class="pre">concurrent_materialized_view_builders</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compaction-throughput-mb-per-sec"><code class="docutils literal"><span class="pre">compaction_throughput_mb_per_sec</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sstable-preemptive-open-interval-in-mb"><code class="docutils literal"><span class="pre">sstable_preemptive_open_interval_in_mb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stream-throughput-outbound-megabits-per-sec"><code class="docutils literal"><span class="pre">stream_throughput_outbound_megabits_per_sec</span></code></a></li>
@@ -727,26 +728,27 @@ Disabled by default, meaning all keys are going to be saved</p>
 If not set, the default directory is $CASSANDRA_HOME/data/saved_caches.</p>
 <p><em>Default Value:</em>  /var/lib/cassandra/saved_caches</p>
 </div>
-<div class="section" id="commitlog-sync">
-<h2><code class="docutils literal"><span class="pre">commitlog_sync</span></code><a class="headerlink" href="#commitlog-sync" title="Permalink to this headline">¶</a></h2>
-<p><em>This option is commented out by default.</em></p>
-<p>commitlog_sync may be either &#8220;periodic&#8221; or &#8220;batch.&#8221;</p>
-<p>When in batch mode, Cassandra won&#8217;t ack writes until the commit log
-has been fsynced to disk.  It will wait
-commitlog_sync_batch_window_in_ms milliseconds between fsyncs.
-This window should be kept short because the writer threads will
-be unable to do extra work while waiting.  (You may need to increase
-concurrent_writes for the same reason.)</p>
-<p><em>Default Value:</em> batch</p>
-</div>
 <div class="section" id="commitlog-sync-batch-window-in-ms">
 <h2><code class="docutils literal"><span class="pre">commitlog_sync_batch_window_in_ms</span></code><a class="headerlink" href="#commitlog-sync-batch-window-in-ms" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em></p>
+<p>commitlog_sync may be either &#8220;periodic&#8221;, &#8220;group&#8221;, or &#8220;batch.&#8221;</p>
+<p>When in batch mode, Cassandra won&#8217;t ack writes until the commit log
+has been flushed to disk.  Each incoming write will trigger the flush task.
+commitlog_sync_batch_window_in_ms is a deprecated value. Previously it had
+almost no value, and is being removed.</p>
 <p><em>Default Value:</em> 2</p>
 </div>
-<div class="section" id="id1">
-<h2><code class="docutils literal"><span class="pre">commitlog_sync</span></code><a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>the other option is &#8220;periodic&#8221; where writes may be acked immediately
+<div class="section" id="commitlog-sync-group-window-in-ms">
+<h2><code class="docutils literal"><span class="pre">commitlog_sync_group_window_in_ms</span></code><a class="headerlink" href="#commitlog-sync-group-window-in-ms" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>group mode is similar to batch mode, where Cassandra will not ack writes
+until the commit log has been flushed to disk. The difference is group
+mode will wait up to commitlog_sync_group_window_in_ms between flushes.</p>
+<p><em>Default Value:</em> 1000</p>
+</div>
+<div class="section" id="commitlog-sync">
+<h2><code class="docutils literal"><span class="pre">commitlog_sync</span></code><a class="headerlink" href="#commitlog-sync" title="Permalink to this headline">¶</a></h2>
+<p>the default option is &#8220;periodic&#8221; where writes may be acked immediately
 and the CommitLog is simply synced every commitlog_sync_period_in_ms
 milliseconds.</p>
 <p><em>Default Value:</em> periodic</p>
@@ -1241,6 +1243,11 @@ to the number of cores.</p>
 <p>Number of simultaneous repair validations to allow. Default is unbounded
 Values less than one are interpreted as unbounded (the default)</p>
 <p><em>Default Value:</em> 0</p>
+</div>
+<div class="section" id="concurrent-materialized-view-builders">
+<h2><code class="docutils literal"><span class="pre">concurrent_materialized_view_builders</span></code><a class="headerlink" href="#concurrent-materialized-view-builders" title="Permalink to this headline">¶</a></h2>
+<p>Number of simultaneous materialized view builder tasks to allow.</p>
+<p><em>Default Value:</em> 1</p>
 </div>
 <div class="section" id="compaction-throughput-mb-per-sec">
 <h2><code class="docutils literal"><span class="pre">compaction_throughput_mb_per_sec</span></code><a class="headerlink" href="#compaction-throughput-mb-per-sec" title="Permalink to this headline">¶</a></h2>

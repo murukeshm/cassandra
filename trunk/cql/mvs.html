@@ -207,6 +207,13 @@ view.</p>
 </ul>
 <p>Attempting to create an already existing materialized view will return an error unless the <code class="docutils literal"><span class="pre">IF</span> <span class="pre">NOT</span> <span class="pre">EXISTS</span></code> option is
 used. If it is used, the statement will be a no-op if the materialized view already exists.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">By default, materialized views are built in a single thread. The initial build can be parallelized by
+increasing the number of threads specified by the property <code class="docutils literal"><span class="pre">concurrent_materialized_view_builders</span></code> in
+<code class="docutils literal"><span class="pre">cassandra.yaml</span></code>. This property can also be manipulated at runtime through both JMX and the
+<code class="docutils literal"><span class="pre">setconcurrentviewbuilders</span></code> and <code class="docutils literal"><span class="pre">getconcurrentviewbuilders</span></code> nodetool commands.</p>
+</div>
 <div class="section" id="mv-select-statement">
 <span id="mv-select"></span><h3>MV select statement<a class="headerlink" href="#mv-select-statement" title="Permalink to this headline">¶</a></h3>
 <p>The select statement of a materialized view creation defines which of the base table is included in the view. That

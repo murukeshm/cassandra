@@ -531,32 +531,35 @@ If not set, the default directory is $CASSANDRA_HOME/data/saved_caches.
 
 *Default Value:*  /var/lib/cassandra/saved_caches
 
-``commitlog_sync``
-------------------
-*This option is commented out by default.*
-
-commitlog_sync may be either "periodic" or "batch." 
-
-When in batch mode, Cassandra won't ack writes until the commit log
-has been fsynced to disk.  It will wait
-commitlog_sync_batch_window_in_ms milliseconds between fsyncs.
-This window should be kept short because the writer threads will
-be unable to do extra work while waiting.  (You may need to increase
-concurrent_writes for the same reason.)
-
-
-*Default Value:* batch
-
 ``commitlog_sync_batch_window_in_ms``
 -------------------------------------
 *This option is commented out by default.*
 
+commitlog_sync may be either "periodic", "group", or "batch." 
+
+When in batch mode, Cassandra won't ack writes until the commit log
+has been flushed to disk.  Each incoming write will trigger the flush task.
+commitlog_sync_batch_window_in_ms is a deprecated value. Previously it had
+almost no value, and is being removed.
+
+
 *Default Value:* 2
+
+``commitlog_sync_group_window_in_ms``
+-------------------------------------
+*This option is commented out by default.*
+
+group mode is similar to batch mode, where Cassandra will not ack writes
+until the commit log has been flushed to disk. The difference is group
+mode will wait up to commitlog_sync_group_window_in_ms between flushes.
+
+
+*Default Value:* 1000
 
 ``commitlog_sync``
 ------------------
 
-the other option is "periodic" where writes may be acked immediately
+the default option is "periodic" where writes may be acked immediately
 and the CommitLog is simply synced every commitlog_sync_period_in_ms
 milliseconds. 
 
@@ -1170,6 +1173,13 @@ Number of simultaneous repair validations to allow. Default is unbounded
 Values less than one are interpreted as unbounded (the default)
 
 *Default Value:* 0
+
+``concurrent_materialized_view_builders``
+-----------------------------------------
+
+Number of simultaneous materialized view builder tasks to allow.
+
+*Default Value:* 1
 
 ``compaction_throughput_mb_per_sec``
 ------------------------------------
