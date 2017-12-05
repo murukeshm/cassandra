@@ -137,6 +137,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-sync-group-window-in-ms"><code class="docutils literal"><span class="pre">commitlog_sync_group_window_in_ms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-sync"><code class="docutils literal"><span class="pre">commitlog_sync</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-sync-period-in-ms"><code class="docutils literal"><span class="pre">commitlog_sync_period_in_ms</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#commitlog-marker-period-in-ms"><code class="docutils literal"><span class="pre">commitlog_marker_period_in_ms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-segment-size-in-mb"><code class="docutils literal"><span class="pre">commitlog_segment_size_in_mb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#commitlog-compression"><code class="docutils literal"><span class="pre">commitlog_compression</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#seed-provider"><code class="docutils literal"><span class="pre">seed_provider</span></code></a></li>
@@ -757,6 +758,16 @@ milliseconds.</p>
 <div class="section" id="commitlog-sync-period-in-ms">
 <h2><code class="docutils literal"><span class="pre">commitlog_sync_period_in_ms</span></code><a class="headerlink" href="#commitlog-sync-period-in-ms" title="Permalink to this headline">¶</a></h2>
 <p><em>Default Value:</em> 10000</p>
+</div>
+<div class="section" id="commitlog-marker-period-in-ms">
+<h2><code class="docutils literal"><span class="pre">commitlog_marker_period_in_ms</span></code><a class="headerlink" href="#commitlog-marker-period-in-ms" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>Time interval in millis at which we should update the chained markers in the commitlog.
+This allows more of the commitlog to be replayed from the mmapped file
+if the cassandra process crashes; this does not help in durability for surviving a host fail.
+This value only makes sense if it is significantly less that commitlog_sync_period_in_ms,
+and only applies to periodic mode when not using commitlog compression or encryption.</p>
+<p><em>Default Value:</em> 100</p>
 </div>
 <div class="section" id="commitlog-segment-size-in-mb">
 <h2><code class="docutils literal"><span class="pre">commitlog_segment_size_in_mb</span></code><a class="headerlink" href="#commitlog-segment-size-in-mb" title="Permalink to this headline">¶</a></h2>
