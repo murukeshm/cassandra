@@ -191,6 +191,17 @@
 <li>Client authentication</li>
 <li>Authorization</li>
 </ul>
+<p>By default, these features are disabled as Cassandra is configured to easily find and be found by other members of a
+cluster. In other words, an out-of-the-box Cassandra installation presents a large attack surface for a bad actor.
+Possible attack vectors include:</p>
+<ul class="simple">
+<li>Crafted internode messages to insert users into authentication schema</li>
+<li>Crafted internode messages to truncate or drop schema</li>
+<li>Use of tools such as <code class="docutils literal"><span class="pre">sstableloader</span></code> to overwrite <code class="docutils literal"><span class="pre">system_auth</span></code> tables</li>
+<li>Attaching to the cluster directly to capture write traffic</li>
+</ul>
+<p>Correct configuration of all three security components should negate theses vectors. Therefore, understanding Cassandra&#8217;s
+security features is crucial to configuring your cluster to meet your security needs.</p>
 <div class="section" id="tls-ssl-encryption">
 <h2>TLS/SSL Encryption<a class="headerlink" href="#tls-ssl-encryption" title="Permalink to this headline">¶</a></h2>
 <p>Cassandra provides secure communication between a client machine and a database cluster and between nodes within a
