@@ -570,21 +570,8 @@ milliseconds.
 
 *Default Value:* 10000
 
-``commitlog_marker_period_in_ms``
----------------------------------
-*This option is commented out by default.*
-
-Time interval in millis at which we should update the chained markers in the commitlog.
-This allows more of the commitlog to be replayed from the mmapped file
-if the cassandra process crashes; this does not help in durability for surviving a host fail.
-This value only makes sense if it is significantly less that commitlog_sync_period_in_ms,
-and only applies to periodic mode when not using commitlog compression or encryption.
-
-*Default Value:* 100
-
 ``commitlog_segment_size_in_mb``
 --------------------------------
-
 
 The size of the individual commitlog file segments.  A commitlog
 segment may be archived, deleted, or recycled once all the data
