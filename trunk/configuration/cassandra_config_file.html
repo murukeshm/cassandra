@@ -801,7 +801,7 @@ constructor that takes a Map&lt;String, String&gt; of parameters will do.</p>
   parameters:
       # seeds is actually a comma-delimited list of addresses.
       # Ex: &quot;&lt;ip1&gt;,&lt;ip2&gt;,&lt;ip3&gt;&quot;
-      - seeds: &quot;127.0.0.1&quot;
+      - seeds: &quot;127.0.0.1:7000&quot;
 </pre></div>
 </div>
 </div>
@@ -1479,6 +1479,13 @@ If set to rack cassandra will encrypt the traffic between the racks</p>
 <p>The passwords used in these options must match the passwords used when generating
 the keystore and truststore.  For instructions on generating these files, see:
 <a class="reference external" href="http://download.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore">http://download.oracle.com/javase/8/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore</a></p>
+<p>If you are taking advantage of StartTLS outbound connections will have the issue that they can&#8217;t know
+what encrypted port to connect to in a foolproof way. outgoing_encrypted_port_source deals with this confusion
+by allowing you to specify how you want a node to pick an outgoing port for intra-cluster connections.
+Valid values are &#8220;gossip&#8221; and &#8220;yaml&#8221;. Gossip will always connect to the storage port for a node that is
+published via a gossip which is always going to be the plain storage port. &#8220;yaml&#8221; will always select
+the port configured as ssl_storage_port on THIS node. If you want to use SSL and have different storage
+ports across the cluster you must select &#8220;gossip&#8221; and use StartTLS on storage_port.</p>
 <p><em>Default Value (complex option)</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre># set to true for allowing secure incoming connections
 enabled: false
