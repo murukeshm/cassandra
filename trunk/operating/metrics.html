@@ -1579,9 +1579,9 @@ lower by recycling on and off heap buffers.</p>
 </dl>
 <table border="1" class="docutils">
 <colgroup>
-<col width="26%" />
-<col width="13%" />
-<col width="61%" />
+<col width="24%" />
+<col width="25%" />
+<col width="51%" />
 </colgroup>
 <thead valign="bottom">
 <tr class="row-odd"><th class="head">Name</th>
@@ -1591,8 +1591,16 @@ lower by recycling on and off heap buffers.</p>
 </thead>
 <tbody valign="top">
 <tr class="row-even"><td>connectedNativeClients</td>
-<td>Counter</td>
+<td>Gauge&lt;Integer&gt;</td>
 <td>Number of clients connected to this nodes native protocol server</td>
+</tr>
+<tr class="row-odd"><td>connections</td>
+<td>Gauge&lt;List&lt;Map&lt;String, String&gt;&gt;</td>
+<td>List of all connections and their state information</td>
+</tr>
+<tr class="row-even"><td>connectedNativeClientsByUser</td>
+<td>Gauge&lt;Map&lt;String, Int&gt;</td>
+<td>Number of connnective native clients by username</td>
 </tr>
 </tbody>
 </table>
