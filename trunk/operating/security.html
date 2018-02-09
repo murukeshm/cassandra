@@ -104,7 +104,8 @@
 <li class="toctree-l2"><a class="reference internal" href="bulk_loading.html">Bulk Loading</a></li>
 <li class="toctree-l2"><a class="reference internal" href="metrics.html">Monitoring</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">Security</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#tls-ssl-encryption">TLS/SSL Encryption</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#tls-ssl-encryption">TLS/SSL Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ssl-certificate-hot-reloading">SSL Certificate Hot Reloading</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#inter-node-encryption">Inter-node Encryption</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#client-to-node-encryption">Client to Node Encryption</a></li>
 </ul>
@@ -217,6 +218,15 @@ cassandra.yaml. See <a class="reference external" href="https://docs.oracle.com/
 for more details.</p>
 <p>For information on generating the keystore and truststore files used in SSL communications, see the
 <a class="reference external" href="http://download.oracle.com/javase/6/docs/technotes/guides/security/jsse/JSSERefGuide.html#CreateKeystore">java documentation on creating keystores</a></p>
+</div>
+<div class="section" id="ssl-certificate-hot-reloading">
+<h2>SSL Certificate Hot Reloading<a class="headerlink" href="#ssl-certificate-hot-reloading" title="Permalink to this headline">¶</a></h2>
+<p>Beginning with Cassandra 4, Cassandra supports hot reloading of SSL Certificates. If SSL/TLS support is enabled in Cassandra,
+the node periodically polls the Trust and Key Stores specified in cassandra.yaml. When the files are updated, Cassandra will
+reload them and use them for subsequent connections. Please note that the Trust &amp; Key Store passwords are part of the yaml so
+the updated files should also use the same passwords. The default polling interval is 10 minutes.</p>
+<p>Certificate Hot reloading may also be triggered using the <code class="docutils literal"><span class="pre">nodetool</span> <span class="pre">reloadssl</span></code> command. Use this if you want to Cassandra to
+immediately notice the changed certificates.</p>
 <div class="section" id="inter-node-encryption">
 <h3>Inter-node Encryption<a class="headerlink" href="#inter-node-encryption" title="Permalink to this headline">¶</a></h3>
 <p>The settings for managing inter-node encryption are found in <code class="docutils literal"><span class="pre">cassandra.yaml</span></code> in the <code class="docutils literal"><span class="pre">server_encryption_options</span></code>
