@@ -498,7 +498,7 @@ instance, given:</p>
 <code class="docutils literal"><span class="pre">b</span></code> column (the order they are displayed above). So where the partition key of the table allows to group rows on the
 same replica set, the clustering columns controls how those rows are stored on the replica. That sorting allows the
 retrieval of a range of rows within a partition (for instance, in the example above, <code class="docutils literal"><span class="pre">SELECT</span> <span class="pre">*</span> <span class="pre">FROM</span> <span class="pre">t</span> <span class="pre">WHERE</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">0</span> <span class="pre">AND</span> <span class="pre">b</span>
-<span class="pre">&gt;</span> <span class="pre">1</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">&lt;=</span> <span class="pre">3</span></code>) very efficient.</p>
+<span class="pre">&gt;</span> <span class="pre">1</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">&lt;=</span> <span class="pre">3</span></code>) to be very efficient.</p>
 </div>
 </div>
 <div class="section" id="table-options">
