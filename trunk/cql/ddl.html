@@ -648,45 +648,6 @@ table.</td>
 consistency levels: one for consistency level <code class="docutils literal"><span class="pre">ONE</span></code>, a quorum for <code class="docutils literal"><span class="pre">QUORUM</span></code>, and so on.
 <code class="docutils literal"><span class="pre">speculative_retry</span></code> determines when coordinators may query additional replicas, which is useful
 when replicas are slow or unresponsive.  The following are legal values (case-insensitive):</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="21%" />
-<col width="14%" />
-<col width="65%" />
-</colgroup>
-<thead valign="bottom">
-<tr class="row-odd"><th class="head">Format</th>
-<th class="head">Example</th>
-<th class="head">Description</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">XPERCENTILE</span></code></td>
-<td>90.5PERCENTILE</td>
-<td>Coordinators record average per-table response times for all replicas.
-If a replica takes longer than <code class="docutils literal"><span class="pre">X</span></code> percent of this table&#8217;s average
-response time, the coordinator queries an additional replica.
-<code class="docutils literal"><span class="pre">X</span></code> must be between 0 and 100.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">XP</span></code></td>
-<td>90.5P</td>
-<td>Synonym for <code class="docutils literal"><span class="pre">XPERCENTILE</span></code></td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">Yms</span></code></td>
-<td>25ms</td>
-<td>If a replica takes more than <code class="docutils literal"><span class="pre">Y</span></code> milliseconds to respond,
-the coordinator queries an additional replica.</td>
-</tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">ALWAYS</span></code></td>
-<td>&nbsp;</td>
-<td>Coordinators always query all replicas.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">NONE</span></code></td>
-<td>&nbsp;</td>
-<td>Coordinators never query additional replicas.</td>
-</tr>
-</tbody>
-</table>
 <p>This setting does not affect reads with consistency level <code class="docutils literal"><span class="pre">ALL</span></code> because they already query all replicas.</p>
 <p>Note that frequently reading from additional replicas can hurt cluster performance.
 When in doubt, keep the default <code class="docutils literal"><span class="pre">99PERCENTILE</span></code>.</p>
