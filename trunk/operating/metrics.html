@@ -317,195 +317,199 @@ average throughputs.</dd>
 <td>Timer</td>
 <td>Coordinator read latency for this table.</td>
 </tr>
-<tr class="row-odd"><td>CoordinatorScanLatency</td>
+<tr class="row-odd"><td>CoordinatorWriteLatency</td>
+<td>Timer</td>
+<td>Coordinator write latency for this table.</td>
+</tr>
+<tr class="row-even"><td>CoordinatorScanLatency</td>
 <td>Timer</td>
 <td>Coordinator range scan latency for this table.</td>
 </tr>
-<tr class="row-even"><td>PendingFlushes</td>
+<tr class="row-odd"><td>PendingFlushes</td>
 <td>Counter</td>
 <td>Estimated number of flush tasks pending for this table.</td>
 </tr>
-<tr class="row-odd"><td>BytesFlushed</td>
+<tr class="row-even"><td>BytesFlushed</td>
 <td>Counter</td>
 <td>Total number of bytes flushed since server [re]start.</td>
 </tr>
-<tr class="row-even"><td>CompactionBytesWritten</td>
+<tr class="row-odd"><td>CompactionBytesWritten</td>
 <td>Counter</td>
 <td>Total number of bytes written by compaction since server [re]start.</td>
 </tr>
-<tr class="row-odd"><td>PendingCompactions</td>
+<tr class="row-even"><td>PendingCompactions</td>
 <td>Gauge&lt;Integer&gt;</td>
 <td>Estimate of number of pending compactions for this table.</td>
 </tr>
-<tr class="row-even"><td>LiveSSTableCount</td>
+<tr class="row-odd"><td>LiveSSTableCount</td>
 <td>Gauge&lt;Integer&gt;</td>
 <td>Number of SSTables on disk for this table.</td>
 </tr>
-<tr class="row-odd"><td>LiveDiskSpaceUsed</td>
+<tr class="row-even"><td>LiveDiskSpaceUsed</td>
 <td>Counter</td>
 <td>Disk space used by SSTables belonging to this table (in bytes).</td>
 </tr>
-<tr class="row-even"><td>TotalDiskSpaceUsed</td>
+<tr class="row-odd"><td>TotalDiskSpaceUsed</td>
 <td>Counter</td>
 <td>Total disk space used by SSTables belonging to this table, including obsolete ones waiting to be GC&#8217;d.</td>
 </tr>
-<tr class="row-odd"><td>MinPartitionSize</td>
+<tr class="row-even"><td>MinPartitionSize</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Size of the smallest compacted partition (in bytes).</td>
 </tr>
-<tr class="row-even"><td>MaxPartitionSize</td>
+<tr class="row-odd"><td>MaxPartitionSize</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Size of the largest compacted partition (in bytes).</td>
 </tr>
-<tr class="row-odd"><td>MeanPartitionSize</td>
+<tr class="row-even"><td>MeanPartitionSize</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Size of the average compacted partition (in bytes).</td>
 </tr>
-<tr class="row-even"><td>BloomFilterFalsePositives</td>
+<tr class="row-odd"><td>BloomFilterFalsePositives</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Number of false positives on table&#8217;s bloom filter.</td>
 </tr>
-<tr class="row-odd"><td>BloomFilterFalseRatio</td>
+<tr class="row-even"><td>BloomFilterFalseRatio</td>
 <td>Gauge&lt;Double&gt;</td>
 <td>False positive ratio of table&#8217;s bloom filter.</td>
 </tr>
-<tr class="row-even"><td>BloomFilterDiskSpaceUsed</td>
+<tr class="row-odd"><td>BloomFilterDiskSpaceUsed</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Disk space used by bloom filter (in bytes).</td>
 </tr>
-<tr class="row-odd"><td>BloomFilterOffHeapMemoryUsed</td>
+<tr class="row-even"><td>BloomFilterOffHeapMemoryUsed</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Off-heap memory used by bloom filter.</td>
 </tr>
-<tr class="row-even"><td>IndexSummaryOffHeapMemoryUsed</td>
+<tr class="row-odd"><td>IndexSummaryOffHeapMemoryUsed</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Off-heap memory used by index summary.</td>
 </tr>
-<tr class="row-odd"><td>CompressionMetadataOffHeapMemoryUsed</td>
+<tr class="row-even"><td>CompressionMetadataOffHeapMemoryUsed</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Off-heap memory used by compression meta data.</td>
 </tr>
-<tr class="row-even"><td>KeyCacheHitRate</td>
+<tr class="row-odd"><td>KeyCacheHitRate</td>
 <td>Gauge&lt;Double&gt;</td>
 <td>Key cache hit rate for this table.</td>
 </tr>
-<tr class="row-odd"><td>TombstoneScannedHistogram</td>
+<tr class="row-even"><td>TombstoneScannedHistogram</td>
 <td>Histogram</td>
 <td>Histogram of tombstones scanned in queries on this table.</td>
 </tr>
-<tr class="row-even"><td>LiveScannedHistogram</td>
+<tr class="row-odd"><td>LiveScannedHistogram</td>
 <td>Histogram</td>
 <td>Histogram of live cells scanned in queries on this table.</td>
 </tr>
-<tr class="row-odd"><td>ColUpdateTimeDeltaHistogram</td>
+<tr class="row-even"><td>ColUpdateTimeDeltaHistogram</td>
 <td>Histogram</td>
 <td>Histogram of column update time delta on this table.</td>
 </tr>
-<tr class="row-even"><td>ViewLockAcquireTime</td>
+<tr class="row-odd"><td>ViewLockAcquireTime</td>
 <td>Timer</td>
 <td>Time taken acquiring a partition lock for materialized view updates on this table.</td>
 </tr>
-<tr class="row-odd"><td>ViewReadTime</td>
+<tr class="row-even"><td>ViewReadTime</td>
 <td>Timer</td>
 <td>Time taken during the local read of a materialized view update.</td>
 </tr>
-<tr class="row-even"><td>TrueSnapshotsSize</td>
+<tr class="row-odd"><td>TrueSnapshotsSize</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Disk space used by snapshots of this table including all SSTable components.</td>
 </tr>
-<tr class="row-odd"><td>RowCacheHitOutOfRange</td>
+<tr class="row-even"><td>RowCacheHitOutOfRange</td>
 <td>Counter</td>
 <td>Number of table row cache hits that do not satisfy the query filter, thus went to disk.</td>
 </tr>
-<tr class="row-even"><td>RowCacheHit</td>
+<tr class="row-odd"><td>RowCacheHit</td>
 <td>Counter</td>
 <td>Number of table row cache hits.</td>
 </tr>
-<tr class="row-odd"><td>RowCacheMiss</td>
+<tr class="row-even"><td>RowCacheMiss</td>
 <td>Counter</td>
 <td>Number of table row cache misses.</td>
 </tr>
-<tr class="row-even"><td>CasPrepare</td>
+<tr class="row-odd"><td>CasPrepare</td>
 <td>Latency</td>
 <td>Latency of paxos prepare round.</td>
 </tr>
-<tr class="row-odd"><td>CasPropose</td>
+<tr class="row-even"><td>CasPropose</td>
 <td>Latency</td>
 <td>Latency of paxos propose round.</td>
 </tr>
-<tr class="row-even"><td>CasCommit</td>
+<tr class="row-odd"><td>CasCommit</td>
 <td>Latency</td>
 <td>Latency of paxos commit round.</td>
 </tr>
-<tr class="row-odd"><td>PercentRepaired</td>
+<tr class="row-even"><td>PercentRepaired</td>
 <td>Gauge&lt;Double&gt;</td>
 <td>Percent of table data that is repaired on disk.</td>
 </tr>
-<tr class="row-even"><td>BytesRepaired</td>
+<tr class="row-odd"><td>BytesRepaired</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Size of table data repaired on disk</td>
 </tr>
-<tr class="row-odd"><td>BytesUnrepaired</td>
+<tr class="row-even"><td>BytesUnrepaired</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Size of table data unrepaired on disk</td>
 </tr>
-<tr class="row-even"><td>BytesPendingRepair</td>
+<tr class="row-odd"><td>BytesPendingRepair</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Size of table data isolated for an ongoing incremental repair</td>
 </tr>
-<tr class="row-odd"><td>SpeculativeRetries</td>
+<tr class="row-even"><td>SpeculativeRetries</td>
 <td>Counter</td>
 <td>Number of times speculative retries were sent for this table.</td>
 </tr>
-<tr class="row-even"><td>SpeculativeFailedRetries</td>
+<tr class="row-odd"><td>SpeculativeFailedRetries</td>
 <td>Counter</td>
 <td>Number of speculative retries that failed to prevent a timeout</td>
 </tr>
-<tr class="row-odd"><td>SpeculativeInsufficientReplicas</td>
+<tr class="row-even"><td>SpeculativeInsufficientReplicas</td>
 <td>Counter</td>
 <td>Number of speculative retries that couldn&#8217;t be attempted due to lack of replicas</td>
 </tr>
-<tr class="row-even"><td>SpeculativeSampleLatencyNanos</td>
+<tr class="row-odd"><td>SpeculativeSampleLatencyNanos</td>
 <td>Gauge&lt;Long&gt;</td>
 <td>Number of nanoseconds to wait before speculation is attempted. Value may be statically configured or updated periodically based on coordinator latency.</td>
 </tr>
-<tr class="row-odd"><td>WaitingOnFreeMemtableSpace</td>
+<tr class="row-even"><td>WaitingOnFreeMemtableSpace</td>
 <td>Histogram</td>
 <td>Histogram of time spent waiting for free memtable space, either on- or off-heap.</td>
 </tr>
-<tr class="row-even"><td>DroppedMutations</td>
+<tr class="row-odd"><td>DroppedMutations</td>
 <td>Counter</td>
 <td>Number of dropped mutations on this table.</td>
 </tr>
-<tr class="row-odd"><td>AnticompactionTime</td>
+<tr class="row-even"><td>AnticompactionTime</td>
 <td>Timer</td>
 <td>Time spent anticompacting before a consistent repair.</td>
 </tr>
-<tr class="row-even"><td>ValidationTime</td>
+<tr class="row-odd"><td>ValidationTime</td>
 <td>Timer</td>
 <td>Time spent doing validation compaction during repair.</td>
 </tr>
-<tr class="row-odd"><td>SyncTime</td>
+<tr class="row-even"><td>SyncTime</td>
 <td>Timer</td>
 <td>Time spent doing streaming during repair.</td>
 </tr>
-<tr class="row-even"><td>BytesValidated</td>
+<tr class="row-odd"><td>BytesValidated</td>
 <td>Histogram</td>
 <td>Histogram over the amount of bytes read during validation.</td>
 </tr>
-<tr class="row-odd"><td>PartitionsValidated</td>
+<tr class="row-even"><td>PartitionsValidated</td>
 <td>Histogram</td>
 <td>Histogram over the number of partitions read during validation.</td>
 </tr>
-<tr class="row-even"><td>BytesAnticompacted</td>
+<tr class="row-odd"><td>BytesAnticompacted</td>
 <td>Counter</td>
 <td>How many bytes we anticompacted.</td>
 </tr>
-<tr class="row-odd"><td>BytesMutatedAnticompaction</td>
+<tr class="row-even"><td>BytesMutatedAnticompaction</td>
 <td>Counter</td>
 <td>How many bytes we avoided anticompacting because the sstable was fully contained in the repaired range.</td>
 </tr>
-<tr class="row-even"><td>MutatedAnticompactionGauge</td>
+<tr class="row-odd"><td>MutatedAnticompactionGauge</td>
 <td>Gauge&lt;Double&gt;</td>
 <td>Ratio of bytes mutated vs total bytes repaired.</td>
 </tr>
