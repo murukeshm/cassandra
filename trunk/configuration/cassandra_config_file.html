@@ -536,9 +536,9 @@ OrderPreservingPartitioner.</p>
 <div class="section" id="data-file-directories">
 <h2><code class="docutils literal"><span class="pre">data_file_directories</span></code><a class="headerlink" href="#data-file-directories" title="Permalink to this headline">¶</a></h2>
 <p><em>This option is commented out by default.</em></p>
-<p>Directories where Cassandra should store data on disk.  Cassandra
-will spread data evenly across them, subject to the granularity of
-the configured compaction strategy.
+<p>Directories where Cassandra should store data on disk. If multiple
+directories are specified, Cassandra will spread data evenly across
+them by partitioning the token ranges.
 If not set, the default directory is $CASSANDRA_HOME/data/data.</p>
 <p><em>Default Value (complex option)</em>:</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="c1">#     - /var/lib/cassandra/data</span>
