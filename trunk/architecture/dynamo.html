@@ -248,13 +248,8 @@ write operations.</dd>
 <p>Write operations are always sent to all replicas, regardless of consistency level. The consistency level simply
 controls how many responses the coordinator waits for before responding to the client.</p>
 <p>For read operations, the coordinator generally only issues read commands to enough replicas to satisfy the consistency
-level. There are a couple of exceptions to this:</p>
-<ul class="simple">
-<li>Speculative retry may issue a redundant read request to an extra replica if the other replicas have not responded
-within a specified time window.</li>
-<li>Based on <code class="docutils literal"><span class="pre">read_repair_chance</span></code> and <code class="docutils literal"><span class="pre">dclocal_read_repair_chance</span></code> (part of a table&#8217;s schema), read requests may be
-randomly sent to all replicas in order to repair potentially inconsistent data.</li>
-</ul>
+level, with one exception. Speculative retry may issue a redundant read request to an extra replica if the other replicas
+have not responded within a specified time window.</p>
 <div class="section" id="picking-consistency-levels">
 <h3>Picking Consistency Levels<a class="headerlink" href="#picking-consistency-levels" title="Permalink to this headline">¶</a></h3>
 <p>It is common to pick read and write consistency levels that are high enough to overlap, resulting in &#8220;strong&#8221;

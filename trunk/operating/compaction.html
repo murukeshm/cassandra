@@ -571,8 +571,7 @@ will be comingled and flushed into the same SSTable.</li>
 </ul>
 <p>While TWCS tries to minimize the impact of comingled data, users should attempt to avoid this behavior.  Specifically,
 users should avoid queries that explicitly set the timestamp via CQL <code class="docutils literal"><span class="pre">USING</span> <span class="pre">TIMESTAMP</span></code>. Additionally, users should run
-frequent repairs (which streams data in such a way that it does not become comingled), and disable background read
-repair by setting the table&#8217;s <code class="docutils literal"><span class="pre">read_repair_chance</span></code> and <code class="docutils literal"><span class="pre">dclocal_read_repair_chance</span></code> to 0.</p>
+frequent repairs (which streams data in such a way that it does not become comingled).</p>
 </div>
 <div class="section" id="changing-timewindowcompactionstrategy-options">
 <h3>Changing TimeWindowCompactionStrategy Options<a class="headerlink" href="#changing-timewindowcompactionstrategy-options" title="Permalink to this headline">¶</a></h3>

@@ -335,8 +335,7 @@ operation is a no-op.</p>
     <span class="n">common_name</span> <span class="nb">text</span><span class="p">,</span>
     <span class="n">population</span> <span class="nb">varint</span><span class="p">,</span>
     <span class="n">average_size</span> <span class="nb">int</span>
-<span class="p">)</span> <span class="k">WITH</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;Important biological records&#39;</span>
-   <span class="k">AND</span> <span class="n">read_repair_chance</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="p">)</span> <span class="k">WITH</span> <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;Important biological records&#39;</span><span class="p">;</span>
 
 <span class="k">CREATE</span> <span class="k">TABLE</span> <span class="n">timeline</span> <span class="p">(</span>
     <span class="n">userid</span> <span class="nb">uuid</span><span class="p">,</span>
@@ -580,21 +579,6 @@ it is an optimization to declare a descending clustering order.</dd>
 <td>none</td>
 <td>A free-form, human-readable comment.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">read_repair_chance</span></code></td>
-<td><em>simple</em></td>
-<td>0</td>
-<td>The probability with which to query extra nodes (e.g.
-more nodes than required by the consistency level) for
-the purpose of read repairs.</td>
-</tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">dclocal_read_repair_chance</span></code></td>
-<td><em>simple</em></td>
-<td>0.1</td>
-<td>The probability with which to query extra nodes (e.g.
-more nodes than required by the consistency level)
-belonging to the same data center than the read
-coordinator for the purpose of read repairs.</td>
-</tr>
 <tr class="row-odd"><td><code class="docutils literal"><span class="pre">speculative_retry</span></code></td>
 <td><em>simple</em></td>
 <td>99PERCENTILE</td>
@@ -782,8 +766,7 @@ anticipate future usage when creating a table.</li>
 <div class="highlight-cql"><div class="highlight"><pre><span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">addamsFamily</span> <span class="k">ADD</span> <span class="n">gravesite</span> <span class="nb">varchar</span><span class="p">;</span>
 
 <span class="k">ALTER</span> <span class="k">TABLE</span> <span class="n">addamsFamily</span>
-       <span class="k">WITH</span> <span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;A most excellent and useful table&#39;</span>
-       <span class="k">AND</span> <span class="n">read_repair_chance</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span>
+       <span class="k">WITH</span> <span class="n">comment</span> <span class="o">=</span> <span class="s1">&#39;A most excellent and useful table&#39;</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>The <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">TABLE</span></code> statement can:</p>
