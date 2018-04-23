@@ -190,6 +190,20 @@ actually implements authentication, most of this functionality will be unavailab
 
 *Default Value:* CassandraRoleManager
 
+``network_authorizer``
+----------------------
+
+Network authorization backend, implementing INetworkAuthorizer; used to restrict user
+access to certain DCs
+Out of the box, Cassandra provides org.apache.cassandra.auth.{AllowAllNetworkAuthorizer,
+CassandraNetworkAuthorizer}.
+
+- AllowAllNetworkAuthorizer allows access to any DC to any user - set it to disable authorization.
+- CassandraNetworkAuthorizer stores permissions in system_auth.network_permissions table. Please
+  increase system_auth keyspace replication factor if you use this authorizer.
+
+*Default Value:* AllowAllNetworkAuthorizer
+
 ``roles_validity_in_ms``
 ------------------------
 

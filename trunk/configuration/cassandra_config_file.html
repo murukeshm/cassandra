@@ -108,6 +108,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#authenticator"><code class="docutils literal"><span class="pre">authenticator</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#authorizer"><code class="docutils literal"><span class="pre">authorizer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#role-manager"><code class="docutils literal"><span class="pre">role_manager</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#network-authorizer"><code class="docutils literal"><span class="pre">network_authorizer</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#roles-validity-in-ms"><code class="docutils literal"><span class="pre">roles_validity_in_ms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#roles-update-interval-in-ms"><code class="docutils literal"><span class="pre">roles_update_interval_in_ms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#permissions-validity-in-ms"><code class="docutils literal"><span class="pre">permissions_validity_in_ms</span></code></a></li>
@@ -456,6 +457,19 @@ actually implements authentication, most of this functionality will be unavailab
 increase system_auth keyspace replication factor if you use this role manager.</li>
 </ul>
 <p><em>Default Value:</em> CassandraRoleManager</p>
+</div>
+<div class="section" id="network-authorizer">
+<h2><code class="docutils literal"><span class="pre">network_authorizer</span></code><a class="headerlink" href="#network-authorizer" title="Permalink to this headline">¶</a></h2>
+<p>Network authorization backend, implementing INetworkAuthorizer; used to restrict user
+access to certain DCs
+Out of the box, Cassandra provides org.apache.cassandra.auth.{AllowAllNetworkAuthorizer,
+CassandraNetworkAuthorizer}.</p>
+<ul class="simple">
+<li>AllowAllNetworkAuthorizer allows access to any DC to any user - set it to disable authorization.</li>
+<li>CassandraNetworkAuthorizer stores permissions in system_auth.network_permissions table. Please
+increase system_auth keyspace replication factor if you use this authorizer.</li>
+</ul>
+<p><em>Default Value:</em> AllowAllNetworkAuthorizer</p>
 </div>
 <div class="section" id="roles-validity-in-ms">
 <h2><code class="docutils literal"><span class="pre">roles_validity_in_ms</span></code><a class="headerlink" href="#roles-validity-in-ms" title="Permalink to this headline">¶</a></h2>

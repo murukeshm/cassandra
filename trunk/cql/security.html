@@ -203,12 +203,16 @@
                           | LOGIN '=' <a class="reference internal" href="definitions.html#grammar-token-boolean"><code class="xref docutils literal"><span class="pre">boolean</span></code></a>
                           | SUPERUSER '=' <a class="reference internal" href="definitions.html#grammar-token-boolean"><code class="xref docutils literal"><span class="pre">boolean</span></code></a>
                           | OPTIONS '=' <a class="reference internal" href="types.html#grammar-token-map_literal"><code class="xref docutils literal"><span class="pre">map_literal</span></code></a>
+                          | ACCESS TO DATACENTERS <a class="reference internal" href="types.html#grammar-token-set_literal"><code class="xref docutils literal"><span class="pre">set_literal</span></code></a>
+                          | ACCESS TO ALL DATACENTERS
 </pre>
 <p>For instance:</p>
 <div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">new_role</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">alice</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;password_a&#39;</span> <span class="k">AND</span> <span class="k">LOGIN</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">bob</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;password_b&#39;</span> <span class="k">AND</span> <span class="k">LOGIN</span> <span class="o">=</span> <span class="n">true</span> <span class="k">AND</span> <span class="k">SUPERUSER</span> <span class="o">=</span> <span class="n">true</span><span class="p">;</span>
 <span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">carlos</span> <span class="k">WITH</span> <span class="k">OPTIONS</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;custom_option1&#39;</span> <span class="p">:</span> <span class="s1">&#39;option1_value&#39;</span><span class="p">,</span> <span class="s1">&#39;custom_option2&#39;</span> <span class="p">:</span> <span class="mf">99</span> <span class="p">};</span>
+<span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">alice</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;password_a&#39;</span> <span class="k">AND</span> <span class="k">LOGIN</span> <span class="o">=</span> <span class="n">true</span> <span class="k">AND</span> <span class="n">ACCESS</span> <span class="k">TO</span> <span class="n">DATACENTERS</span> <span class="p">{</span><span class="s1">&#39;DC1&#39;</span><span class="p">,</span> <span class="s1">&#39;DC3&#39;</span><span class="p">};</span>
+<span class="k">CREATE</span> <span class="k">ROLE</span> <span class="n">alice</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;password_a&#39;</span> <span class="k">AND</span> <span class="k">LOGIN</span> <span class="o">=</span> <span class="n">true</span> <span class="k">AND</span> <span class="n">ACCESS</span> <span class="k">TO</span> <span class="k">ALL</span> <span class="n">DATACENTERS</span><span class="p">;</span>
 </pre></div>
 </div>
 <p>By default roles do not possess <code class="docutils literal"><span class="pre">LOGIN</span></code> privileges or <code class="docutils literal"><span class="pre">SUPERUSER</span></code> status.</p>
@@ -228,6 +232,13 @@ is pluggable and custom implementations may support only a subset of the listed 
 quotation marks.</p>
 <p>If internal authentication has not been set up or the role does not have <code class="docutils literal"><span class="pre">LOGIN</span></code> privileges, the <code class="docutils literal"><span class="pre">WITH</span> <span class="pre">PASSWORD</span></code>
 clause is not necessary.</p>
+</div>
+<div class="section" id="restricting-connections-to-specific-datacenters">
+<h4>Restricting connections to specific datacenters<a class="headerlink" href="#restricting-connections-to-specific-datacenters" title="Permalink to this headline">¶</a></h4>
+<p>If a <code class="docutils literal"><span class="pre">network_authorizer</span></code> has been configured, you can restrict login roles to specific datacenters with the
+<code class="docutils literal"><span class="pre">ACCESS</span> <span class="pre">TO</span> <span class="pre">DATACENTERS</span></code> clause followed by a set literal of datacenters the user can access. Not specifiying
+datacenters implicitly grants access to all datacenters. The clause <code class="docutils literal"><span class="pre">ACCESS</span> <span class="pre">TO</span> <span class="pre">ALL</span> <span class="pre">DATACENTERS</span></code> can be used for
+explicitness, but there&#8217;s no functional difference.</p>
 </div>
 <div class="section" id="creating-a-role-conditionally">
 <h4>Creating a role conditionally<a class="headerlink" href="#creating-a-role-conditionally" title="Permalink to this headline">¶</a></h4>
@@ -249,6 +260,11 @@ If the option is used and the role exists, the statement is a no-op:</p>
 <div class="highlight-cql"><div class="highlight"><pre><span class="k">ALTER</span> <span class="k">ROLE</span> <span class="n">bob</span> <span class="k">WITH</span> <span class="k">PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;PASSWORD_B&#39;</span> <span class="k">AND</span> <span class="k">SUPERUSER</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
 </pre></div>
 </div>
+<div class="section" id="id2">
+<h4>Restricting connections to specific datacenters<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<p>If a <code class="docutils literal"><span class="pre">network_authorizer</span></code> has been configured, you can restrict login roles to specific datacenters with the
+<code class="docutils literal"><span class="pre">ACCESS</span> <span class="pre">TO</span> <span class="pre">DATACENTERS</span></code> clause followed by a set literal of datacenters the user can access. To remove any
+data center restrictions, use the <code class="docutils literal"><span class="pre">ACCESS</span> <span class="pre">TO</span> <span class="pre">ALL</span> <span class="pre">DATACENTERS</span></code> clause.</p>
 <p>Conditions on executing <code class="docutils literal"><span class="pre">ALTER</span> <span class="pre">ROLE</span></code> statements:</p>
 <ul class="simple">
 <li>A client must have <code class="docutils literal"><span class="pre">SUPERUSER</span></code> status to alter the <code class="docutils literal"><span class="pre">SUPERUSER</span></code> status of another role</li>
@@ -256,6 +272,7 @@ If the option is used and the role exists, the statement is a no-op:</p>
 <li>A client can only modify certain properties of the role with which it identified at login (e.g. <code class="docutils literal"><span class="pre">PASSWORD</span></code>)</li>
 <li>To modify properties of a role, the client must be granted <code class="docutils literal"><span class="pre">ALTER</span></code> <a class="reference internal" href="#cql-permissions"><span>permission</span></a> on that role</li>
 </ul>
+</div>
 </div>
 <div class="section" id="drop-role">
 <span id="drop-role-statement"></span><h3>DROP ROLE<a class="headerlink" href="#drop-role" title="Permalink to this headline">¶</a></h3>
@@ -716,7 +733,7 @@ which use the function <code class="docutils literal"><span class="pre">keyspace
 <p>This grants any user with the <code class="docutils literal"><span class="pre">role_admin</span></code> role permission to view any and all roles in the system with a <code class="docutils literal"><span class="pre">LIST</span>
 <span class="pre">ROLES</span></code> statement</p>
 <div class="section" id="grant-all">
-<span id="id2"></span><h4>GRANT ALL<a class="headerlink" href="#grant-all" title="Permalink to this headline">¶</a></h4>
+<span id="id3"></span><h4>GRANT ALL<a class="headerlink" href="#grant-all" title="Permalink to this headline">¶</a></h4>
 <p>When the <code class="docutils literal"><span class="pre">GRANT</span> <span class="pre">ALL</span></code> form is used, the appropriate set of permissions is determined automatically based on the target
 resource.</p>
 </div>
