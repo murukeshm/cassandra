@@ -241,6 +241,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#otc-backlog-expiration-interval-ms"><code class="docutils literal"><span class="pre">otc_backlog_expiration_interval_ms</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#ideal-consistency-level"><code class="docutils literal"><span class="pre">ideal_consistency_level</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#full-query-log-dir"><code class="docutils literal"><span class="pre">full_query_log_dir</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#automatic-sstable-upgrade"><code class="docutils literal"><span class="pre">automatic_sstable_upgrade</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#max-concurrent-automatic-sstable-upgrades"><code class="docutils literal"><span class="pre">max_concurrent_automatic_sstable_upgrades</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1774,6 +1776,19 @@ each write which may be lower in order to facilitate availability.</p>
 The full query log will recrusively delete the contents of this path at
 times. Don&#8217;t place links in this directory to other parts of the filesystem.</p>
 <p><em>Default Value:</em>  /tmp/cassandrafullquerylog</p>
+</div>
+<div class="section" id="automatic-sstable-upgrade">
+<h2><code class="docutils literal"><span class="pre">automatic_sstable_upgrade</span></code><a class="headerlink" href="#automatic-sstable-upgrade" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>Automatically upgrade sstables after upgrade - if there is no ordinary compaction to do, the
+oldest non-upgraded sstable will get upgraded to the latest version</p>
+<p><em>Default Value:</em> false</p>
+</div>
+<div class="section" id="max-concurrent-automatic-sstable-upgrades">
+<h2><code class="docutils literal"><span class="pre">max_concurrent_automatic_sstable_upgrades</span></code><a class="headerlink" href="#max-concurrent-automatic-sstable-upgrades" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em>
+Limit the number of concurrent sstable upgrades</p>
+<p><em>Default Value:</em> 1</p>
 </div>
 </div>
 

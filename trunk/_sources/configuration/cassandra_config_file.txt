@@ -1802,3 +1802,19 @@ The full query log will recrusively delete the contents of this path at
 times. Don't place links in this directory to other parts of the filesystem.
 
 *Default Value:*  /tmp/cassandrafullquerylog
+
+``automatic_sstable_upgrade``
+-----------------------------
+*This option is commented out by default.*
+
+Automatically upgrade sstables after upgrade - if there is no ordinary compaction to do, the
+oldest non-upgraded sstable will get upgraded to the latest version
+
+*Default Value:* false
+
+``max_concurrent_automatic_sstable_upgrades``
+---------------------------------------------
+*This option is commented out by default.*
+Limit the number of concurrent sstable upgrades
+
+*Default Value:* 1
