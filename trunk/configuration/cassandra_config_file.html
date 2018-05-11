@@ -243,6 +243,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#full-query-log-dir"><code class="docutils literal"><span class="pre">full_query_log_dir</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#automatic-sstable-upgrade"><code class="docutils literal"><span class="pre">automatic_sstable_upgrade</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#max-concurrent-automatic-sstable-upgrades"><code class="docutils literal"><span class="pre">max_concurrent_automatic_sstable_upgrades</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#audit-logging-options"><code class="docutils literal"><span class="pre">audit_logging_options</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1789,6 +1790,11 @@ oldest non-upgraded sstable will get upgraded to the latest version</p>
 <p><em>This option is commented out by default.</em>
 Limit the number of concurrent sstable upgrades</p>
 <p><em>Default Value:</em> 1</p>
+</div>
+<div class="section" id="audit-logging-options">
+<h2><code class="docutils literal"><span class="pre">audit_logging_options</span></code><a class="headerlink" href="#audit-logging-options" title="Permalink to this headline">¶</a></h2>
+<p>Audit logging - Logs every incoming CQL command request, authentication to a node. See the docs
+on audit_logging for full details about the various configuration options.</p>
 </div>
 </div>
 

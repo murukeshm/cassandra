@@ -1818,3 +1818,9 @@ oldest non-upgraded sstable will get upgraded to the latest version
 Limit the number of concurrent sstable upgrades
 
 *Default Value:* 1
+
+``audit_logging_options``
+-------------------------
+
+Audit logging - Logs every incoming CQL command request, authentication to a node. See the docs
+on audit_logging for full details about the various configuration options.
