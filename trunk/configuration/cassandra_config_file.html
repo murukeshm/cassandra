@@ -244,6 +244,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#automatic-sstable-upgrade"><code class="docutils literal"><span class="pre">automatic_sstable_upgrade</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#max-concurrent-automatic-sstable-upgrades"><code class="docutils literal"><span class="pre">max_concurrent_automatic_sstable_upgrades</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#audit-logging-options"><code class="docutils literal"><span class="pre">audit_logging_options</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#corrupted-tombstone-strategy"><code class="docutils literal"><span class="pre">corrupted_tombstone_strategy</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1795,6 +1796,13 @@ Limit the number of concurrent sstable upgrades</p>
 <h2><code class="docutils literal"><span class="pre">audit_logging_options</span></code><a class="headerlink" href="#audit-logging-options" title="Permalink to this headline">¶</a></h2>
 <p>Audit logging - Logs every incoming CQL command request, authentication to a node. See the docs
 on audit_logging for full details about the various configuration options.</p>
+</div>
+<div class="section" id="corrupted-tombstone-strategy">
+<h2><code class="docutils literal"><span class="pre">corrupted_tombstone_strategy</span></code><a class="headerlink" href="#corrupted-tombstone-strategy" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>validate tombstones on reads and compaction
+can be either &#8220;disabled&#8221;, &#8220;warn&#8221; or &#8220;exception&#8221;</p>
+<p><em>Default Value:</em> disabled</p>
 </div>
 </div>
 

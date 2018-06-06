@@ -1824,3 +1824,12 @@ Limit the number of concurrent sstable upgrades
 
 Audit logging - Logs every incoming CQL command request, authentication to a node. See the docs
 on audit_logging for full details about the various configuration options.
+
+``corrupted_tombstone_strategy``
+--------------------------------
+*This option is commented out by default.*
+
+validate tombstones on reads and compaction
+can be either "disabled", "warn" or "exception"
+
+*Default Value:* disabled
