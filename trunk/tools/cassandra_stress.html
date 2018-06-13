@@ -99,6 +99,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#usage">Usage</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#user-mode">User mode</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#profile">Profile</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lightweight-transaction-support">Lightweight transaction support</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#graphing">Graphing</a></li>
@@ -352,6 +353,22 @@ queries. Additionally the table will be truncated once before the test.</p>
 <dt>This will run operations as specified in both the example.yaml and example2.yaml files. example.yaml and example2.yaml can reference the same table</dt>
 <dd>although care must be taken that the table definition is identical (data generation specs can be different).</dd>
 </dl>
+</div>
+<div class="section" id="lightweight-transaction-support">
+<h3>Lightweight transaction support<a class="headerlink" href="#lightweight-transaction-support" title="Permalink to this headline">¶</a></h3>
+<p>cassandra-stress supports lightweight transactions. In this it will first read current data from Cassandra and then uses read value(s)
+to fulfill lightweight transaction condition(s).</p>
+<p>Lightweight transaction update query:</p>
+<div class="highlight-yaml"><div class="highlight"><pre><span class="l l-Scalar l-Scalar-Plain">queries</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">regularupdate</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">cql</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">update blogposts set author = ? where domain = ? and published_date = ?</span>
+      <span class="l l-Scalar l-Scalar-Plain">fields</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">samerow</span>
+  <span class="l l-Scalar l-Scalar-Plain">updatewithlwt</span><span class="p p-Indicator">:</span>
+      <span class="l l-Scalar l-Scalar-Plain">cql</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">update blogposts set author = ? where domain = ? and published_date = ? IF body = ? AND url = ?</span>
+      <span class="l l-Scalar l-Scalar-Plain">fields</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">samerow</span>
+</pre></div>
+</div>
+<p>The full example can be found here <a class="reference download internal" href="../_downloads/stress-lwt-example.yaml" download=""><code class="xref download docutils literal"><span class="pre">yaml</span></code></a></p>
 </div>
 </div>
 <div class="section" id="graphing">
