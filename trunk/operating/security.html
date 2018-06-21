@@ -478,6 +478,10 @@ GRANT DESCRIBE ON ALL MBEANS TO jmx;
 GRANT EXECUTE ON MBEAN &#39;java.lang:type=Threading&#39; TO jmx;
 GRANT EXECUTE ON MBEAN &#39;com.sun.management:type=HotSpotDiagnostic&#39; TO jmx;
 
+# Grant the role with necessary permissions to use nodetool commands (including nodetool status) in read-only mode
+GRANT EXECUTE ON MBEAN &#39;org.apache.cassandra.db:type=EndpointSnitchInfo&#39; TO jmx;
+GRANT EXECUTE ON MBEAN &#39;org.apache.cassandra.db:type=StorageService&#39; TO jmx;
+
 # Grant the jmx role to one with login permissions so that it can access the JMX tooling
 CREATE ROLE ks_user WITH PASSWORD = &#39;password&#39; AND LOGIN = true AND SUPERUSER = false;
 GRANT jmx TO ks_user;
