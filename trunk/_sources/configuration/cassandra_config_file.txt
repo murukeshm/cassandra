@@ -584,6 +584,13 @@ milliseconds.
 
 *Default Value:* 10000
 
+``periodic_commitlog_sync_lag_block_in_ms``
+-------------------------------------------
+*This option is commented out by default.*
+
+When in periodic commitlog mode, the number of milliseconds to block writes
+while waiting for a slow disk flush to complete.
+
 ``commitlog_segment_size_in_mb``
 --------------------------------
 
