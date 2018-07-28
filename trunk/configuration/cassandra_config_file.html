@@ -193,6 +193,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#concurrent-materialized-view-builders"><code class="docutils literal"><span class="pre">concurrent_materialized_view_builders</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#compaction-throughput-mb-per-sec"><code class="docutils literal"><span class="pre">compaction_throughput_mb_per_sec</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#sstable-preemptive-open-interval-in-mb"><code class="docutils literal"><span class="pre">sstable_preemptive_open_interval_in_mb</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#stream-entire-sstables"><code class="docutils literal"><span class="pre">stream_entire_sstables</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#stream-throughput-outbound-megabits-per-sec"><code class="docutils literal"><span class="pre">stream_throughput_outbound_megabits_per_sec</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#inter-dc-stream-throughput-outbound-megabits-per-sec"><code class="docutils literal"><span class="pre">inter_dc_stream_throughput_outbound_megabits_per_sec</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#read-request-timeout-in-ms"><code class="docutils literal"><span class="pre">read_request_timeout_in_ms</span></code></a></li>
@@ -1292,6 +1293,21 @@ are completely written, and used in place of the prior sstables for
 any range that has been written. This helps to smoothly transfer reads
 between the sstables, reducing page cache churn and keeping hot rows hot</p>
 <p><em>Default Value:</em> 50</p>
+</div>
+<div class="section" id="stream-entire-sstables">
+<h2><code class="docutils literal"><span class="pre">stream_entire_sstables</span></code><a class="headerlink" href="#stream-entire-sstables" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>When enabled, permits Cassandra to zero-copy stream entire eligible
+SSTables between nodes, including every component.
+This speeds up the network transfer significantly subject to
+throttling specified by stream_throughput_outbound_megabits_per_sec.
+Enabling this will reduce the GC pressure on sending and receiving node.
+When unset, the default is enabled. While this feature tries to keep the
+disks balanced, it cannot guarantee it. This feature will be automatically
+disabled if internode encryption is enabled. Currently this can be used with
+Leveled Compaction. Once CASSANDRA-14586 is fixed other compaction strategies
+will benefit as well when used in combination with CASSANDRA-6696.</p>
+<p><em>Default Value:</em> true</p>
 </div>
 <div class="section" id="stream-throughput-outbound-megabits-per-sec">
 <h2><code class="docutils literal"><span class="pre">stream_throughput_outbound_megabits_per_sec</span></code><a class="headerlink" href="#stream-throughput-outbound-megabits-per-sec" title="Permalink to this headline">¶</a></h2>
