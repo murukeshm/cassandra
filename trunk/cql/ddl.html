@@ -624,6 +624,11 @@ table.</td>
 <td>0</td>
 <td>Time (in ms) before Cassandra flushes memtables to disk.</td>
 </tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">read_repair</span></code></td>
+<td><em>simple</em></td>
+<td>BLOCKING</td>
+<td>Sets read repair behavior (see below)</td>
+</tr>
 </tbody>
 </table>
 <div class="section" id="speculative-retry-options">
@@ -743,6 +748,33 @@ to disable row caching.</td>
 </pre></div>
 </div>
 </div>
+<div class="section" id="read-repair-options">
+<h5>Read Repair options<a class="headerlink" href="#read-repair-options" title="Permalink to this headline">¶</a></h5>
+<p>The <code class="docutils literal"><span class="pre">read_repair</span></code> options configures the read repair behavior to allow tuning for various performance and
+consistency behaviors. Two consistency properties are affected by read repair behavior.</p>
+<ul class="simple">
+<li>Monotonic Quorum Reads: Provided by <code class="docutils literal"><span class="pre">BLOCKING</span></code>. Monotonic quorum reads prevents reads from appearing to go back
+in time in some circumstances. When monotonic quorum reads are not provided and a write fails to reach a quorum of
+replicas, it may be visible in one read, and then disappear in a subsequent read.</li>
+<li>Write Atomicity: Provided by <code class="docutils literal"><span class="pre">NONE</span></code>. Write atomicity prevents reads from returning partially applied writes.
+Cassandra attempts to provide partition level write atomicity, but since only the data covered by a SELECT statement
+is repaired by a read repair, read repair can break write atomicity when data is read at a more granular level than it
+is written. For example read repair can break write atomicity if you write multiple rows to a clustered partition in a
+batch, but then select a single row by specifying the clustering column in a SELECT statement.</li>
+</ul>
+<p>The available read repair settings are:</p>
+</div>
+</div>
+<div class="section" id="blocking">
+<h4>Blocking<a class="headerlink" href="#blocking" title="Permalink to this headline">¶</a></h4>
+<p>The default setting. When <code class="docutils literal"><span class="pre">read_repair</span></code> is set to <code class="docutils literal"><span class="pre">BLOCKING</span></code>, and a read repair is triggered, the read will block
+on writes sent to other replicas until the CL is reached by the writes. Provides monotonic quorum reads, but not partition
+level write atomicity</p>
+</div>
+<div class="section" id="none">
+<h4>None<a class="headerlink" href="#none" title="Permalink to this headline">¶</a></h4>
+<p>When <code class="docutils literal"><span class="pre">read_repair</span></code> is set to <code class="docutils literal"><span class="pre">NONE</span></code>, the coordinator will reconcile any differences between replicas, but will not
+attempt to repair them. Provides partition level write atomicity, but not monotonic quorum reads.</p>
 <div class="section" id="other-considerations">
 <h5>Other considerations:<a class="headerlink" href="#other-considerations" title="Permalink to this headline">¶</a></h5>
 <ul class="simple">

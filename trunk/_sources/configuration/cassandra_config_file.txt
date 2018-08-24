@@ -1866,3 +1866,12 @@ If enabled, diagnostic events can be helpful for troubleshooting operational iss
 on internal state and temporal relationships across events, accessible by clients via JMX.
 
 *Default Value:* false
+
+``native_transport_flush_in_batches_legacy``
+--------------------------------------------
+*This option is commented out by default.*
+
+Define use of legacy delayed flusher for replies to TCP connections. This will increase latency, but might be beneficial for
+legacy use-cases where only a single connection is used for each Cassandra node. Default is false.
+
+*Default Value:* false

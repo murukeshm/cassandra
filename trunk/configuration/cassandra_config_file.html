@@ -248,6 +248,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#audit-logging-options"><code class="docutils literal"><span class="pre">audit_logging_options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#corrupted-tombstone-strategy"><code class="docutils literal"><span class="pre">corrupted_tombstone_strategy</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostic-events-enabled"><code class="docutils literal"><span class="pre">diagnostic_events_enabled</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#native-transport-flush-in-batches-legacy"><code class="docutils literal"><span class="pre">native_transport_flush_in_batches_legacy</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -1833,6 +1834,13 @@ can be either &#8220;disabled&#8221;, &#8220;warn&#8221; or &#8220;exception&#82
 <p>Diagnostic Events #
 If enabled, diagnostic events can be helpful for troubleshooting operational issues. Emitted events contain details
 on internal state and temporal relationships across events, accessible by clients via JMX.</p>
+<p><em>Default Value:</em> false</p>
+</div>
+<div class="section" id="native-transport-flush-in-batches-legacy">
+<h2><code class="docutils literal"><span class="pre">native_transport_flush_in_batches_legacy</span></code><a class="headerlink" href="#native-transport-flush-in-batches-legacy" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>Define use of legacy delayed flusher for replies to TCP connections. This will increase latency, but might be beneficial for
+legacy use-cases where only a single connection is used for each Cassandra node. Default is false.</p>
 <p><em>Default Value:</em> false</p>
 </div>
 </div>
