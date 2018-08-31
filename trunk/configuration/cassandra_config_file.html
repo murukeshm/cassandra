@@ -176,6 +176,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#native-transport-max-frame-size-in-mb"><code class="docutils literal"><span class="pre">native_transport_max_frame_size_in_mb</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#native-transport-max-concurrent-connections"><code class="docutils literal"><span class="pre">native_transport_max_concurrent_connections</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#native-transport-max-concurrent-connections-per-ip"><code class="docutils literal"><span class="pre">native_transport_max_concurrent_connections_per_ip</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#native-transport-allow-older-protocols"><code class="docutils literal"><span class="pre">native_transport_allow_older_protocols</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rpc-address"><code class="docutils literal"><span class="pre">rpc_address</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rpc-interface"><code class="docutils literal"><span class="pre">rpc_interface</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#rpc-interface-prefer-ipv6"><code class="docutils literal"><span class="pre">rpc_interface_prefer_ipv6</span></code></a></li>
@@ -1138,6 +1139,12 @@ The default is -1, which means unlimited.</p>
 <p>The maximum number of concurrent client connections per source ip.
 The default is -1, which means unlimited.</p>
 <p><em>Default Value:</em> -1</p>
+</div>
+<div class="section" id="native-transport-allow-older-protocols">
+<h2><code class="docutils literal"><span class="pre">native_transport_allow_older_protocols</span></code><a class="headerlink" href="#native-transport-allow-older-protocols" title="Permalink to this headline">¶</a></h2>
+<p>Controls whether Cassandra honors older, yet currently supported, protocol versions.
+The default is true, which means all supported protocols will be honored.</p>
+<p><em>Default Value:</em> true</p>
 </div>
 <div class="section" id="rpc-address">
 <h2><code class="docutils literal"><span class="pre">rpc_address</span></code><a class="headerlink" href="#rpc-address" title="Permalink to this headline">¶</a></h2>
