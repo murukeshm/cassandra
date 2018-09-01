@@ -1610,6 +1610,15 @@ Materialized views are considered experimental and are not recommended for produ
 
 *Default Value:* true
 
+``enable_transient_replication``
+--------------------------------
+*This option is commented out by default.*
+
+Enables creation of transiently replicated keyspaces on this node.
+Transient replication is experimental and is not recommended for production use.
+
+*Default Value:* true
+
 ``windows_timer_interval``
 --------------------------
 

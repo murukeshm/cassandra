@@ -95,6 +95,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#replication">Replication</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#simplestrategy">SimpleStrategy</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#networktopologystrategy">NetworkTopologyStrategy</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transient-replication">Transient Replication</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#tunable-consistency">Tunable Consistency</a><ul>
@@ -214,6 +215,27 @@ implications</a>.  For example, if there are not an even number of
 nodes in each rack, the data load on the smallest rack may be much higher.  Similarly, if a single node is bootstrapped
 into a new rack, it will be considered a replica for the entire ring.  For this reason, many operators choose to
 configure all nodes on a single &#8220;rack&#8221;.</p>
+</div>
+<div class="section" id="transient-replication">
+<span id="id2"></span><h3>Transient Replication<a class="headerlink" href="#transient-replication" title="Permalink to this headline">¶</a></h3>
+<p>Transient replication allows you to configure a subset of replicas to only replicate data that hasn&#8217;t been incrementally
+repaired. This allows you to decouple data redundancy from availability. For instance, if you have a keyspace replicated
+at rf 3, and alter it to rf 5 with 2 transient replicas, you go from being able to tolerate one failed replica to being
+able to tolerate two, without corresponding increase in storage usage. This is because 3 nodes will replicate all the data
+for a given token range, and the other 2 will only replicate data that hasn&#8217;t been incrementally repaired.</p>
+<p>To use transient replication, you first need to enable it in <code class="docutils literal"><span class="pre">cassandra.yaml</span></code>. Once enabled, both SimpleStrategy and
+NetworkTopologyStrategy can be configured to transiently replicate data. You configure it by specifying replication factor
+as <code class="docutils literal"><span class="pre">&lt;total_replicas&gt;/&lt;transient_replicas</span></code> Both SimpleStrategy and NetworkTopologyStrategy support configuring transient
+replication.</p>
+<p>Transiently replicated keyspaces only support tables created with read_repair set to NONE and monotonic reads are not currently supported.
+You also can&#8217;t use LWT, logged batches, and counters in 4.0. You will possibly never be able to use materialized views
+with transiently replicated keyspaces and probably never be able to use 2i with them.</p>
+<p>Transient replication is an experimental feature that may not be ready for production use. The expected audienced is experienced
+users of Cassandra capable of fully validating a deployment of their particular application. That means being able check
+that operations like reads, writes, decommission, remove, rebuild, repair, and replace all work with your queries, data,
+configuration, operational practices, and availability requirements.</p>
+<p>It is anticipated that 4.next will support monotonic reads with transient replication as well as LWT, logged batches, and
+counters.</p>
 </div>
 </div>
 <div class="section" id="tunable-consistency">

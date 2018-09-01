@@ -222,6 +222,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#enable-user-defined-functions"><code class="docutils literal"><span class="pre">enable_user_defined_functions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enable-scripted-user-defined-functions"><code class="docutils literal"><span class="pre">enable_scripted_user_defined_functions</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#enable-materialized-views"><code class="docutils literal"><span class="pre">enable_materialized_views</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#enable-transient-replication"><code class="docutils literal"><span class="pre">enable_transient_replication</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#windows-timer-interval"><code class="docutils literal"><span class="pre">windows_timer_interval</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transparent-data-encryption-options"><code class="docutils literal"><span class="pre">transparent_data_encryption_options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#tombstone-warn-threshold"><code class="docutils literal"><span class="pre">tombstone_warn_threshold</span></code></a><ul>
@@ -1624,6 +1625,13 @@ This option has no effect, if enable_user_defined_functions is false.</p>
 <h2><code class="docutils literal"><span class="pre">enable_materialized_views</span></code><a class="headerlink" href="#enable-materialized-views" title="Permalink to this headline">¶</a></h2>
 <p>Enables materialized view creation on this node.
 Materialized views are considered experimental and are not recommended for production use.</p>
+<p><em>Default Value:</em> true</p>
+</div>
+<div class="section" id="enable-transient-replication">
+<h2><code class="docutils literal"><span class="pre">enable_transient_replication</span></code><a class="headerlink" href="#enable-transient-replication" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>Enables creation of transiently replicated keyspaces on this node.
+Transient replication is experimental and is not recommended for production use.</p>
 <p><em>Default Value:</em> true</p>
 </div>
 <div class="section" id="windows-timer-interval">

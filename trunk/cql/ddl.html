@@ -270,6 +270,13 @@ the associated replication factor.</li>
 </ul>
 <p>Attempting to create a keyspace that already exists will return an error unless the <code class="docutils literal"><span class="pre">IF</span> <span class="pre">NOT</span> <span class="pre">EXISTS</span></code> option is used. If
 it is used, the statement will be a no-op if the keyspace already exists.</p>
+<p>If <a class="reference internal" href="../architecture/dynamo.html#transient-replication"><span>transient replication</span></a> has been enabled, transient replicas can be configured for both
+SimpleStrategy and NetworkTopologyStrategy by defining replication factors in the format <code class="docutils literal"><span class="pre">'&lt;total_replicas&gt;/&lt;transient_replicas&gt;'</span></code></p>
+<p>For instance, this keyspace will have 3 replicas in DC1, 1 of which is transient, and 5 replicas in DC2, 2 of which are transient:</p>
+<div class="highlight-cql"><div class="highlight"><pre><span class="k">CREATE</span> <span class="k">KEYSPACE</span> <span class="n">some_keysopace</span>
+           <span class="k">WITH</span> <span class="n">replication</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="s1">&#39;NetworkTopologyStrategy&#39;</span><span class="p">,</span> <span class="s1">&#39;DC1&#39;</span> <span class="p">:</span> <span class="s1">&#39;3/1&#39;&#39;, &#39;</span><span class="n">DC2</span><span class="s1">&#39; : &#39;</span><span class="mf">5</span><span class="o">/</span><span class="mf">2</span><span class="s1">&#39;};</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="use">
 <span id="use-statement"></span><h2>USE<a class="headerlink" href="#use" title="Permalink to this headline">¶</a></h2>
@@ -584,13 +591,18 @@ it is an optimization to declare a descending clustering order.</dd>
 <td>99PERCENTILE</td>
 <td><a class="reference internal" href="#speculative-retry-options"><span>Speculative retry options</span></a>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">gc_grace_seconds</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">speculative_write_threshold</span></code></td>
+<td><em>simple</em></td>
+<td>99PERCENTILE</td>
+<td><a class="reference internal" href="#speculative-retry-options"><span>Speculative retry options</span></a>.</td>
+</tr>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">gc_grace_seconds</span></code></td>
 <td><em>simple</em></td>
 <td>864000</td>
 <td>Time to wait before garbage collecting tombstones
 (deletion markers).</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">bloom_filter_fp_chance</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">bloom_filter_fp_chance</span></code></td>
 <td><em>simple</em></td>
 <td>0.00075</td>
 <td>The target probability of false positive of the sstable
@@ -598,33 +610,33 @@ bloom filters. Said bloom filters will be sized to provide
 the provided probability (thus lowering this value impact
 the size of bloom filters in-memory and on-disk)</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">default_time_to_live</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">default_time_to_live</span></code></td>
 <td><em>simple</em></td>
 <td>0</td>
 <td>The default expiration time (“TTL”) in seconds for a
 table.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">compaction</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">compaction</span></code></td>
 <td><em>map</em></td>
 <td><em>see below</em></td>
 <td><a class="reference internal" href="#cql-compaction-options"><span>Compaction options</span></a>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">compression</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">compression</span></code></td>
 <td><em>map</em></td>
 <td><em>see below</em></td>
 <td><a class="reference internal" href="#cql-compression-options"><span>Compression options</span></a>.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">caching</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">caching</span></code></td>
 <td><em>map</em></td>
 <td><em>see below</em></td>
 <td><a class="reference internal" href="#cql-caching-options"><span>Caching options</span></a>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">memtable_flush_period_in_ms</span></code></td>
+<tr class="row-odd"><td><code class="docutils literal"><span class="pre">memtable_flush_period_in_ms</span></code></td>
 <td><em>simple</em></td>
 <td>0</td>
 <td>Time (in ms) before Cassandra flushes memtables to disk.</td>
 </tr>
-<tr class="row-odd"><td><code class="docutils literal"><span class="pre">read_repair</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">read_repair</span></code></td>
 <td><em>simple</em></td>
 <td>BLOCKING</td>
 <td>Sets read repair behavior (see below)</td>
@@ -636,7 +648,8 @@ table.</td>
 <p>By default, Cassandra read coordinators only query as many replicas as necessary to satisfy
 consistency levels: one for consistency level <code class="docutils literal"><span class="pre">ONE</span></code>, a quorum for <code class="docutils literal"><span class="pre">QUORUM</span></code>, and so on.
 <code class="docutils literal"><span class="pre">speculative_retry</span></code> determines when coordinators may query additional replicas, which is useful
-when replicas are slow or unresponsive.  The following are legal values (case-insensitive):</p>
+when replicas are slow or unresponsive.  <code class="docutils literal"><span class="pre">speculative_write_threshold</span></code> specifies the threshold at which
+a cheap quorum write will be upgraded to include transient replicas.  The following are legal values (case-insensitive):</p>
 <p>This setting does not affect reads with consistency level <code class="docutils literal"><span class="pre">ALL</span></code> because they already query all replicas.</p>
 <p>Note that frequently reading from additional replicas can hurt cluster performance.
 When in doubt, keep the default <code class="docutils literal"><span class="pre">99PERCENTILE</span></code>.</p>
