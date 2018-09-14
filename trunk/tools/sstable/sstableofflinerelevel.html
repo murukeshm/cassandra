@@ -1,0 +1,321 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sstableofflinerelevel &mdash; Apache Cassandra Documentation v4.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/extra.css" type="text/css" />
+  
+    <link rel="top" title="Apache Cassandra Documentation v4.0" href="../../index.html"/>
+        <link rel="up" title="SSTable Tools" href="index.html"/>
+        <link rel="next" title="sstablerepairedset" href="sstablerepairedset.html"/>
+        <link rel="prev" title="sstablemetadata" href="sstablemetadata.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Apache Cassandra
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_modeling/index.html">Data Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cql/index.html">The Cassandra Query Language (CQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuring Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operating/index.html">Operating Cassandra</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cassandra Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cqlsh.html">cqlsh: the CQL shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html">Nodetool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html#usage">Usage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">SSTable Tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sstabledump.html">sstabledump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableexpiredblockers.html">sstableexpiredblockers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablelevelreset.html">sstablelevelreset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableloader.html">sstableloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablemetadata.html">sstablemetadata</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">sstableofflinerelevel</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#doing-a-dry-run">Doing a dry run</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#running-a-relevel">Running a relevel</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#keyspace-or-table-not-found">Keyspace or table not found</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sstablerepairedset.html">sstablerepairedset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablescrub.html">sstablescrub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablesplit.html">sstablesplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableupgrade.html">sstableupgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableutil.html">sstableutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableverify.html">sstableverify</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cassandra_stress.html">Cassandra Stress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/index.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Contributing to Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Third-Party Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contactus.html">Contact us</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Apache Cassandra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Cassandra Tools</a> &raquo;</li>
+      
+          <li><a href="index.html">SSTable Tools</a> &raquo;</li>
+      
+    <li>sstableofflinerelevel</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tools/sstable/sstableofflinerelevel.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sstableofflinerelevel">
+<h1>sstableofflinerelevel<a class="headerlink" href="#sstableofflinerelevel" title="Permalink to this headline">¶</a></h1>
+<p>When using LeveledCompactionStrategy, sstables can get stuck at L0 on a recently bootstrapped node, and compactions may never catch up. This tool is used to bump sstables into the highest level possible.</p>
+<p>ref: <a class="reference external" href="https://issues.apache.org/jira/browse/CASSANDRA-8301">https://issues.apache.org/jira/browse/CASSANDRA-8301</a></p>
+<p>The way this is done is: sstables are storted by their last token. Given an original leveling like this (note that [ ] indicates token boundaries, not sstable size on disk; all sstables are the same size):</p>
+<div class="highlight-python"><div class="highlight"><pre>L3 [][][][][][][][][][][]
+L2 [    ][    ][    ][  ]
+L1 [          ][        ]
+L0 [                    ]
+</pre></div>
+</div>
+<p>Will look like this after being dropped to L0 and sorted by last token (and, to illustrate overlap, the overlapping ones are put on a new line):</p>
+<div class="highlight-python"><div class="highlight"><pre>[][][]
+[    ][][][]
+    [    ]
+[          ]
+...
+</pre></div>
+</div>
+<p>Then, we start iterating from the smallest last-token and adding all sstables that do not cause an overlap to a level. We will reconstruct the original leveling top-down. Whenever we add an sstable to the level, we remove it from the sorted list. Once we reach the end of the sorted list, we have a full level, and can start over with the level below.</p>
+<p>If we end up with more levels than expected, we put all levels exceeding the expected in L0, for example, original L0 files will most likely be put in a level of its own since they most often overlap many other sstables.</p>
+<p>Cassandra must be stopped before this tool is executed, or unexpected results will occur. Note: the script does not verify that Cassandra is stopped.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>sstableofflinerelevel [&#8211;dry-run] &lt;keyspace&gt; &lt;table&gt;</p>
+</div>
+<div class="section" id="doing-a-dry-run">
+<h2>Doing a dry run<a class="headerlink" href="#doing-a-dry-run" title="Permalink to this headline">¶</a></h2>
+<p>Use the &#8211;dry-run option to see the current level distribution and predicted level after the change.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableofflinerelevel --dry-run keyspace eventlog
+For sstables in /var/lib/cassandra/data/keyspace/eventlog-6365332094dd11e88f324f9c503e4753:
+Current leveling:
+L0=2
+Potential leveling:
+L0=1
+L1=1
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-a-relevel">
+<h2>Running a relevel<a class="headerlink" href="#running-a-relevel" title="Permalink to this headline">¶</a></h2>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableofflinerelevel keyspace eventlog
+For sstables in /var/lib/cassandra/data/keyspace/eventlog-6365332094dd11e88f324f9c503e4753:
+Current leveling:
+L0=2
+New leveling:
+L0=1
+L1=1
+</pre></div>
+</div>
+</div>
+<div class="section" id="keyspace-or-table-not-found">
+<h2>Keyspace or table not found<a class="headerlink" href="#keyspace-or-table-not-found" title="Permalink to this headline">¶</a></h2>
+<p>If an invalid keyspace and/or table is provided, an exception will be thrown.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableofflinerelevel --dry-run keyspace evenlog
+
+Exception in thread &quot;main&quot; java.lang.IllegalArgumentException: Unknown keyspace/columnFamily keyspace1.evenlog
+    at org.apache.cassandra.tools.SSTableOfflineRelevel.main(SSTableOfflineRelevel.java:96)
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sstablerepairedset.html" class="btn btn-neutral float-right" title="sstablerepairedset" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sstablemetadata.html" class="btn btn-neutral" title="sstablemetadata" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, The Apache Cassandra team.
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option selected='selected' value="trunk">trunk</option>
+    <option value="3.11.3">3.11.3</option>
+    <option value="3.11.2">3.11.2</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

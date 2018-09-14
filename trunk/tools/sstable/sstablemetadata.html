@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sstablemetadata &mdash; Apache Cassandra Documentation v4.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/extra.css" type="text/css" />
+  
+    <link rel="top" title="Apache Cassandra Documentation v4.0" href="../../index.html"/>
+        <link rel="up" title="SSTable Tools" href="index.html"/>
+        <link rel="next" title="sstableofflinerelevel" href="sstableofflinerelevel.html"/>
+        <link rel="prev" title="sstableloader" href="sstableloader.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Apache Cassandra
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_modeling/index.html">Data Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cql/index.html">The Cassandra Query Language (CQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuring Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operating/index.html">Operating Cassandra</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cassandra Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cqlsh.html">cqlsh: the CQL shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html">Nodetool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html#usage">Usage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">SSTable Tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sstabledump.html">sstabledump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableexpiredblockers.html">sstableexpiredblockers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablelevelreset.html">sstablelevelreset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableloader.html">sstableloader</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">sstablemetadata</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#print-all-the-metadata">Print all the metadata</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#specify-gc-grace-seconds">Specify gc grace seconds</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#explanation-of-each-value-printed-above">Explanation of each value printed above</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sstableofflinerelevel.html">sstableofflinerelevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablerepairedset.html">sstablerepairedset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablescrub.html">sstablescrub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablesplit.html">sstablesplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableupgrade.html">sstableupgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableutil.html">sstableutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableverify.html">sstableverify</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cassandra_stress.html">Cassandra Stress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/index.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Contributing to Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Third-Party Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contactus.html">Contact us</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Apache Cassandra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Cassandra Tools</a> &raquo;</li>
+      
+          <li><a href="index.html">SSTable Tools</a> &raquo;</li>
+      
+    <li>sstablemetadata</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tools/sstable/sstablemetadata.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sstablemetadata">
+<h1>sstablemetadata<a class="headerlink" href="#sstablemetadata" title="Permalink to this headline">¶</a></h1>
+<p>Print information about an sstable from the related Statistics.db and Summary.db files to standard output.</p>
+<p>ref: <a class="reference external" href="https://issues.apache.org/jira/browse/CASSANDRA-7159">https://issues.apache.org/jira/browse/CASSANDRA-7159</a> and <a class="reference external" href="https://issues.apache.org/jira/browse/CASSANDRA-10838">https://issues.apache.org/jira/browse/CASSANDRA-10838</a></p>
+<p>Cassandra must be stopped before this tool is executed, or unexpected results will occur. Note: the script does not verify that Cassandra is stopped.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>sstablemetadata &lt;options&gt; &lt;sstable filename(s)&gt;</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="76%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#8211;gc_grace_seconds &lt;arg&gt;</td>
+<td>The gc_grace_seconds to use when calculating droppable tombstones</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="print-all-the-metadata">
+<h2>Print all the metadata<a class="headerlink" href="#print-all-the-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Run sstablemetadata against the <a href="#id1"><span class="problematic" id="id2">*</span></a>Data.db file(s) related to a table. If necessary, find the <a href="#id3"><span class="problematic" id="id4">*</span></a>Data.db file(s) using sstableutil.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableutil keyspace1 standard1 | grep Data
+/var/lib/cassandra/data/keyspace1/standard1-f6845640a6cb11e8b6836d2c86545d91/mc-1-big-Data.db
+
+sstablemetadata /var/lib/cassandra/data/keyspace1/standard1-f6845640a6cb11e8b6836d2c86545d91/mc-1-big-Data.db
+
+SSTable: /var/lib/cassandra/data/keyspace1/standard1-f6845640a6cb11e8b6836d2c86545d91/mc-1-big
+Partitioner: org.apache.cassandra.dht.Murmur3Partitioner
+Bloom Filter FP chance: 0.010000
+Minimum timestamp: 1535025576141000
+Maximum timestamp: 1535025604309000
+SSTable min local deletion time: 2147483647
+SSTable max local deletion time: 2147483647
+Compressor: org.apache.cassandra.io.compress.LZ4Compressor
+TTL min: 86400
+TTL max: 86400
+First token: -9223004712949498654 (key=39373333373831303130)
+Last token: 9222554117157811897 (key=4f3438394e39374d3730)
+Estimated droppable tombstones: 0.9188263888888889
+SSTable Level: 0
+Repaired at: 0
+Replay positions covered: {CommitLogPosition(segmentId=1535025390651, position=226400)=CommitLogPosition(segmentId=1535025390651, position=6849139)}
+totalColumnsSet: 100000
+totalRows: 20000
+Estimated tombstone drop times:
+1535039100:     80390
+1535039160:      5645
+1535039220:     13965
+Count               Row Size        Cell Count
+1                          0                 0
+2                          0                 0
+3                          0                 0
+4                          0                 0
+5                          0             20000
+6                          0                 0
+7                          0                 0
+8                          0                 0
+10                         0                 0
+12                         0                 0
+14                         0                 0
+17                         0                 0
+20                         0                 0
+24                         0                 0
+29                         0                 0
+35                         0                 0
+42                         0                 0
+50                         0                 0
+60                         0                 0
+72                         0                 0
+86                         0                 0
+103                        0                 0
+124                        0                 0
+149                        0                 0
+179                        0                 0
+215                        0                 0
+258                    20000                 0
+310                        0                 0
+372                        0                 0
+446                        0                 0
+535                        0                 0
+642                        0                 0
+770                        0                 0
+924                        0                 0
+1109                       0                 0
+1331                       0                 0
+1597                       0                 0
+1916                       0                 0
+2299                       0                 0
+2759                       0                 0
+3311                       0                 0
+3973                       0                 0
+4768                       0                 0
+5722                       0                 0
+6866                       0                 0
+8239                       0                 0
+9887                       0                 0
+11864                      0                 0
+14237                      0                 0
+17084                      0                 0
+20501                      0                 0
+24601                      0                 0
+29521                      0                 0
+35425                      0                 0
+42510                      0                 0
+51012                      0                 0
+61214                      0                 0
+73457                      0                 0
+88148                      0                 0
+105778                     0                 0
+126934                     0                 0
+152321                     0                 0
+182785                     0                 0
+219342                     0                 0
+263210                     0                 0
+315852                     0                 0
+379022                     0                 0
+454826                     0                 0
+545791                     0                 0
+654949                     0                 0
+785939                     0                 0
+943127                     0                 0
+1131752                    0                 0
+1358102                    0                 0
+1629722                    0                 0
+1955666                    0                 0
+2346799                    0                 0
+2816159                    0                 0
+3379391                    0                 0
+4055269                    0                 0
+4866323                    0                 0
+5839588                    0                 0
+7007506                    0                 0
+8409007                    0                 0
+10090808                   0                 0
+12108970                   0                 0
+14530764                   0                 0
+17436917                   0                 0
+20924300                   0                 0
+25109160                   0                 0
+30130992                   0                 0
+36157190                   0                 0
+43388628                   0                 0
+52066354                   0                 0
+62479625                   0                 0
+74975550                   0                 0
+89970660                   0                 0
+107964792                  0                 0
+129557750                  0                 0
+155469300                  0                 0
+186563160                  0                 0
+223875792                  0                 0
+268650950                  0                 0
+322381140                  0                 0
+386857368                  0                 0
+464228842                  0                 0
+557074610                  0                 0
+668489532                  0                 0
+802187438                  0                 0
+962624926                  0                 0
+1155149911                 0                 0
+1386179893                 0                 0
+1663415872                 0                 0
+1996099046                 0                 0
+2395318855                 0                 0
+2874382626                 0
+3449259151                 0
+4139110981                 0
+4966933177                 0
+5960319812                 0
+7152383774                 0
+8582860529                 0
+10299432635                 0
+12359319162                 0
+14831182994                 0
+17797419593                 0
+21356903512                 0
+25628284214                 0
+30753941057                 0
+36904729268                 0
+44285675122                 0
+53142810146                 0
+63771372175                 0
+76525646610                 0
+91830775932                 0
+110196931118                 0
+132236317342                 0
+158683580810                 0
+190420296972                 0
+228504356366                 0
+274205227639                 0
+329046273167                 0
+394855527800                 0
+473826633360                 0
+568591960032                 0
+682310352038                 0
+818772422446                 0
+982526906935                 0
+1179032288322                 0
+1414838745986                 0
+Estimated cardinality: 20196
+EncodingStats minTTL: 0
+EncodingStats minLocalDeletionTime: 1442880000
+EncodingStats minTimestamp: 1535025565275000
+KeyType: org.apache.cassandra.db.marshal.BytesType
+ClusteringTypes: [org.apache.cassandra.db.marshal.UTF8Type]
+StaticColumns: {C3:org.apache.cassandra.db.marshal.BytesType, C4:org.apache.cassandra.db.marshal.BytesType, C0:org.apache.cassandra.db.marshal.BytesType, C1:org.apache.cassandra.db.marshal.BytesType, C2:org.apache.cassandra.db.marshal.BytesType}
+RegularColumns: {}
+</pre></div>
+</div>
+</div>
+<div class="section" id="specify-gc-grace-seconds">
+<h2>Specify gc grace seconds<a class="headerlink" href="#specify-gc-grace-seconds" title="Permalink to this headline">¶</a></h2>
+<p>To see the ratio of droppable tombstones given a configured gc grace seconds, use the gc_grace_seconds option. Because the sstablemetadata tool doesn&#8217;t access the schema directly, this is a way to more accurately estimate droppable tombstones &#8211; for example, if you pass in gc_grace_seconds matching what is configured in the schema. The gc_grace_seconds value provided is subtracted from the curent machine time (in seconds).</p>
+<p>ref: <a class="reference external" href="https://issues.apache.org/jira/browse/CASSANDRA-12208">https://issues.apache.org/jira/browse/CASSANDRA-12208</a></p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstablemetadata /var/lib/cassandra/data/keyspace1/standard1-41b52700b4ed11e896476d2c86545d91/mc-12-big-Data.db | grep &quot;Estimated tombstone drop times&quot; -A4
+Estimated tombstone drop times:
+1536599100:         1
+1536599640:         1
+1536599700:         2
+
+echo $(date +%s)
+1536602005
+
+# if gc_grace_seconds was configured at 100, all of the tombstones would be currently droppable
+sstablemetadata --gc_grace_seconds 100 /var/lib/cassandra/data/keyspace1/standard1-41b52700b4ed11e896476d2c86545d91/mc-12-big-Data.db | grep &quot;Estimated droppable tombstones&quot;
+Estimated droppable tombstones: 4.0E-5
+
+# if gc_grace_seconds was configured at 4700, some of the tombstones would be currently droppable
+sstablemetadata --gc_grace_seconds 4700 /var/lib/cassandra/data/keyspace1/standard1-41b52700b4ed11e896476d2c86545d91/mc-12-big-Data.db | grep &quot;Estimated droppable tombstones&quot;
+Estimated droppable tombstones: 9.61111111111111E-6
+
+# if gc_grace_seconds was configured at 100, none of the tombstones would be currently droppable
+sstablemetadata --gc_grace_seconds 5000 /var/lib/cassandra/data/keyspace1/standard1-41b52700b4ed11e896476d2c86545d91/mc-12-big-Data.db | grep &quot;Estimated droppable tombstones&quot;
+Estimated droppable tombstones: 0.0
+</pre></div>
+</div>
+</div>
+<div class="section" id="explanation-of-each-value-printed-above">
+<h2>Explanation of each value printed above<a class="headerlink" href="#explanation-of-each-value-printed-above" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="docutils">
+<colgroup>
+<col width="27%" />
+<col width="73%" />
+</colgroup>
+<thead valign="bottom">
+<tr class="row-odd"><th class="head">Value</th>
+<th class="head">Explanation</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr class="row-even"><td>SSTable</td>
+<td>prefix of the sstable filenames related to this sstable</td>
+</tr>
+<tr class="row-odd"><td>Partitioner</td>
+<td>partitioner type used to distribute data across nodes; defined in cassandra.yaml</td>
+</tr>
+<tr class="row-even"><td>Bloom Filter FP</td>
+<td>precision of Bloom filter used in reads; defined in the table definition</td>
+</tr>
+<tr class="row-odd"><td>Minimum timestamp</td>
+<td>minimum timestamp of any entry in this sstable, in epoch microseconds</td>
+</tr>
+<tr class="row-even"><td>Maximum timestamp</td>
+<td>maximum timestamp of any entry in this sstable, in epoch microseconds</td>
+</tr>
+<tr class="row-odd"><td>SSTable min local deletion time</td>
+<td>minimum timestamp of deletion date, based on TTL, in epoch seconds</td>
+</tr>
+<tr class="row-even"><td>SSTable max local deletion time</td>
+<td>maximum timestamp of deletion date, based on TTL, in epoch seconds</td>
+</tr>
+<tr class="row-odd"><td>Compressor</td>
+<td>blank (-) by default; if not blank, indicates type of compression enabled on the table</td>
+</tr>
+<tr class="row-even"><td>TTL min</td>
+<td>time-to-live in seconds; default 0 unless defined in the table definition</td>
+</tr>
+<tr class="row-odd"><td>TTL max</td>
+<td>time-to-live in seconds; default 0 unless defined in the table definition</td>
+</tr>
+<tr class="row-even"><td>First token</td>
+<td>lowest token and related key found in the sstable summary</td>
+</tr>
+<tr class="row-odd"><td>Last token</td>
+<td>highest token and related key found in the sstable summary</td>
+</tr>
+<tr class="row-even"><td>Estimated droppable tombstones</td>
+<td>ratio of tombstones to columns, using configured gc grace seconds if relevant</td>
+</tr>
+<tr class="row-odd"><td>SSTable level</td>
+<td>compaction level of this sstable, if leveled compaction (LCS) is used</td>
+</tr>
+<tr class="row-even"><td>Repaired at</td>
+<td>the timestamp this sstable was marked as repaired via sstablerepairedset, in epoch milliseconds</td>
+</tr>
+<tr class="row-odd"><td>Replay positions covered</td>
+<td>the interval of time and commitlog positions related to this sstable</td>
+</tr>
+<tr class="row-even"><td>totalColumnsSet</td>
+<td>number of cells in the table</td>
+</tr>
+<tr class="row-odd"><td>totalRows</td>
+<td>number of rows in the table</td>
+</tr>
+<tr class="row-even"><td>Estimated tombstone drop times</td>
+<td>approximate number of rows that will expire, ordered by epoch seconds</td>
+</tr>
+<tr class="row-odd"><td>Count  Row Size  Cell Count</td>
+<td>two histograms in two columns; one represents distribution of Row Size
+and the other represents distribution of Cell Count</td>
+</tr>
+<tr class="row-even"><td>Estimated cardinality</td>
+<td>an estimate of unique values, used for compaction</td>
+</tr>
+<tr class="row-odd"><td>EncodingStats* minTTL</td>
+<td>in epoch milliseconds</td>
+</tr>
+<tr class="row-even"><td>EncodingStats* minLocalDeletionTime</td>
+<td>in epoch seconds</td>
+</tr>
+<tr class="row-odd"><td>EncodingStats* minTimestamp</td>
+<td>in epoch microseconds</td>
+</tr>
+<tr class="row-even"><td>KeyType</td>
+<td>the type of partition key, useful in reading and writing data
+from/to storage; defined in the table definition</td>
+</tr>
+<tr class="row-odd"><td>ClusteringTypes</td>
+<td>the type of clustering key, useful in reading and writing data
+from/to storage; defined in the table definition</td>
+</tr>
+<tr class="row-even"><td>StaticColumns</td>
+<td>a list of the shared columns in the table</td>
+</tr>
+<tr class="row-odd"><td>RegularColumns</td>
+<td>a list of non-static, non-key columns in the table</td>
+</tr>
+</tbody>
+</table>
+<ul class="simple">
+<li>For the encoding stats values, the delta of this and the current epoch time is used when encoding and storing data in the most optimal way.</li>
+</ul>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sstableofflinerelevel.html" class="btn btn-neutral float-right" title="sstableofflinerelevel" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sstableloader.html" class="btn btn-neutral" title="sstableloader" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, The Apache Cassandra team.
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option selected='selected' value="trunk">trunk</option>
+    <option value="3.11.3">3.11.3</option>
+    <option value="3.11.2">3.11.2</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

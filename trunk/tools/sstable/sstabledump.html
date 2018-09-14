@@ -1,0 +1,539 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sstabledump &mdash; Apache Cassandra Documentation v4.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/extra.css" type="text/css" />
+  
+    <link rel="top" title="Apache Cassandra Documentation v4.0" href="../../index.html"/>
+        <link rel="up" title="SSTable Tools" href="index.html"/>
+        <link rel="next" title="sstableexpiredblockers" href="sstableexpiredblockers.html"/>
+        <link rel="prev" title="SSTable Tools" href="index.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Apache Cassandra
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_modeling/index.html">Data Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cql/index.html">The Cassandra Query Language (CQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuring Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operating/index.html">Operating Cassandra</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cassandra Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cqlsh.html">cqlsh: the CQL shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html">Nodetool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html#usage">Usage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">SSTable Tools</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="">sstabledump</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dump-entire-table">Dump entire table</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dump-table-in-a-more-manageable-format">Dump table in a more manageable format</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dump-only-keys">Dump only keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#dump-row-for-a-single-key">Dump row for a single key</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#exclude-a-key-or-keys-in-dump-of-rows">Exclude a key or keys in dump of rows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#display-raw-timestamps">Display raw timestamps</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#display-internal-structure-in-output">Display internal structure in output</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sstableexpiredblockers.html">sstableexpiredblockers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablelevelreset.html">sstablelevelreset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableloader.html">sstableloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablemetadata.html">sstablemetadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableofflinerelevel.html">sstableofflinerelevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablerepairedset.html">sstablerepairedset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablescrub.html">sstablescrub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablesplit.html">sstablesplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableupgrade.html">sstableupgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableutil.html">sstableutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableverify.html">sstableverify</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cassandra_stress.html">Cassandra Stress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/index.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Contributing to Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Third-Party Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contactus.html">Contact us</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Apache Cassandra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Cassandra Tools</a> &raquo;</li>
+      
+          <li><a href="index.html">SSTable Tools</a> &raquo;</li>
+      
+    <li>sstabledump</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tools/sstable/sstabledump.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sstabledump">
+<h1>sstabledump<a class="headerlink" href="#sstabledump" title="Permalink to this headline">¶</a></h1>
+<p>Dump contents of a given SSTable to standard output in JSON format.</p>
+<p>You must supply exactly one sstable.</p>
+<p>Cassandra must be stopped before this tool is executed, or unexpected results will occur. Note: the script does not verify that Cassandra is stopped.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>sstabledump &lt;options&gt; &lt;sstable file path&gt;</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>-d</td>
+<td>CQL row per line internal representation</td>
+</tr>
+<tr class="row-even"><td>-e</td>
+<td>Enumerate partition keys only</td>
+</tr>
+<tr class="row-odd"><td>-k &lt;arg&gt;</td>
+<td>Partition key</td>
+</tr>
+<tr class="row-even"><td>-x &lt;arg&gt;</td>
+<td>Excluded partition key(s)</td>
+</tr>
+<tr class="row-odd"><td>-t</td>
+<td>Print raw timestamps instead of iso8601 date strings</td>
+</tr>
+<tr class="row-even"><td>-l</td>
+<td>Output each row as a separate JSON object</td>
+</tr>
+</tbody>
+</table>
+<p>If necessary, use sstableutil first to find out the sstables used by a table.</p>
+</div>
+<div class="section" id="dump-entire-table">
+<h2>Dump entire table<a class="headerlink" href="#dump-entire-table" title="Permalink to this headline">¶</a></h2>
+<p>Dump the entire table without any options.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db &gt; eventlog_dump_2018Jul26
+
+cat eventlog_dump_2018Jul26
+[
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;3578d7de-c60d-4599-aefb-3f22a07b2bc6&quot; ],
+      &quot;position&quot; : 0
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 61,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:23:08.378711Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:23:08.384Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;d18250c0-84fc-4d40-b957-4248dc9d790e&quot; ],
+      &quot;position&quot; : 62
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 123,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:23:07.783522Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:23:07.789Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;cf188983-d85b-48d6-9365-25005289beb2&quot; ],
+      &quot;position&quot; : 124
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 182,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:22:27.028809Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:22:27.055Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  }
+]
+</pre></div>
+</div>
+</div>
+<div class="section" id="dump-table-in-a-more-manageable-format">
+<h2>Dump table in a more manageable format<a class="headerlink" href="#dump-table-in-a-more-manageable-format" title="Permalink to this headline">¶</a></h2>
+<p>Use the -l option to dump each row as a separate JSON object. This will make the output easier to manipulate for large data sets. ref: <a class="reference external" href="https://issues.apache.org/jira/browse/CASSANDRA-13848">https://issues.apache.org/jira/browse/CASSANDRA-13848</a></p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db -l &gt; eventlog_dump_2018Jul26_justlines
+
+cat eventlog_dump_2018Jul26_justlines
+[
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;3578d7de-c60d-4599-aefb-3f22a07b2bc6&quot; ],
+      &quot;position&quot; : 0
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 61,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:23:08.378711Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:23:08.384Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;d18250c0-84fc-4d40-b957-4248dc9d790e&quot; ],
+      &quot;position&quot; : 62
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 123,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:23:07.783522Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:23:07.789Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  },
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;cf188983-d85b-48d6-9365-25005289beb2&quot; ],
+      &quot;position&quot; : 124
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 182,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:22:27.028809Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:22:27.055Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  }
+</pre></div>
+</div>
+</div>
+<div class="section" id="dump-only-keys">
+<h2>Dump only keys<a class="headerlink" href="#dump-only-keys" title="Permalink to this headline">¶</a></h2>
+<p>Dump only the keys by using the -e option.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db -e &gt; eventlog_dump_2018Jul26_justkeys
+
+cat eventlog_dump_2018Jul26b
+[ [ &quot;3578d7de-c60d-4599-aefb-3f22a07b2bc6&quot; ], [ &quot;d18250c0-84fc-4d40-b957-4248dc9d790e&quot; ], [ &quot;cf188983-d85b-48d6-9365-25005289beb2&quot; ]
+</pre></div>
+</div>
+</div>
+<div class="section" id="dump-row-for-a-single-key">
+<h2>Dump row for a single key<a class="headerlink" href="#dump-row-for-a-single-key" title="Permalink to this headline">¶</a></h2>
+<p>Dump a single key using the -k option.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db -k 3578d7de-c60d-4599-aefb-3f22a07b2bc6 &gt; eventlog_dump_2018Jul26_singlekey
+
+cat eventlog_dump_2018Jul26_singlekey
+[
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;3578d7de-c60d-4599-aefb-3f22a07b2bc6&quot; ],
+      &quot;position&quot; : 0
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 61,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:23:08.378711Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:23:08.384Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  }
+</pre></div>
+</div>
+</div>
+<div class="section" id="exclude-a-key-or-keys-in-dump-of-rows">
+<h2>Exclude a key or keys in dump of rows<a class="headerlink" href="#exclude-a-key-or-keys-in-dump-of-rows" title="Permalink to this headline">¶</a></h2>
+<p>Dump a table except for the rows excluded with the -x option. Multiple keys can be used.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db -x 3578d7de-c60d-4599-aefb-3f22a07b2bc6 d18250c0-84fc-4d40-b957-4248dc9d790e  &gt; eventlog_dump_2018Jul26_excludekeys
+
+cat eventlog_dump_2018Jul26_excludekeys
+[
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;cf188983-d85b-48d6-9365-25005289beb2&quot; ],
+      &quot;position&quot; : 0
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 182,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;2018-07-20T20:22:27.028809Z&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:22:27.055Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  }
+</pre></div>
+</div>
+</div>
+<div class="section" id="display-raw-timestamps">
+<h2>Display raw timestamps<a class="headerlink" href="#display-raw-timestamps" title="Permalink to this headline">¶</a></h2>
+<p>By default, dates are displayed in iso8601 date format. Using the -t option will dump the data with the raw timestamp.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db -t -k cf188983-d85b-48d6-9365-25005289beb2 &gt; eventlog_dump_2018Jul26_times
+
+cat eventlog_dump_2018Jul26_times
+[
+  {
+    &quot;partition&quot; : {
+      &quot;key&quot; : [ &quot;cf188983-d85b-48d6-9365-25005289beb2&quot; ],
+      &quot;position&quot; : 124
+    },
+    &quot;rows&quot; : [
+      {
+        &quot;type&quot; : &quot;row&quot;,
+        &quot;position&quot; : 182,
+        &quot;liveness_info&quot; : { &quot;tstamp&quot; : &quot;1532118147028809&quot; },
+        &quot;cells&quot; : [
+          { &quot;name&quot; : &quot;event&quot;, &quot;value&quot; : &quot;party&quot; },
+          { &quot;name&quot; : &quot;insertedtimestamp&quot;, &quot;value&quot; : &quot;2018-07-20 20:22:27.055Z&quot; },
+          { &quot;name&quot; : &quot;source&quot;, &quot;value&quot; : &quot;asdf&quot; }
+        ]
+      }
+    ]
+  }
+</pre></div>
+</div>
+</div>
+<div class="section" id="display-internal-structure-in-output">
+<h2>Display internal structure in output<a class="headerlink" href="#display-internal-structure-in-output" title="Permalink to this headline">¶</a></h2>
+<p>Dump the table in a format that reflects the internal structure.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstabledump /var/lib/cassandra/data/keyspace/eventlog-65c429e08c5a11e8939edf4f403979ef/mc-1-big-Data.db -d &gt; eventlog_dump_2018Jul26_d
+
+cat eventlog_dump_2018Jul26_d
+[3578d7de-c60d-4599-aefb-3f22a07b2bc6]@0 Row[info=[ts=1532118188378711] ]:  | [event=party ts=1532118188378711], [insertedtimestamp=2018-07-20 20:23Z ts=1532118188378711], [source=asdf ts=1532118188378711]
+[d18250c0-84fc-4d40-b957-4248dc9d790e]@62 Row[info=[ts=1532118187783522] ]:  | [event=party ts=1532118187783522], [insertedtimestamp=2018-07-20 20:23Z ts=1532118187783522], [source=asdf ts=1532118187783522]
+[cf188983-d85b-48d6-9365-25005289beb2]@124 Row[info=[ts=1532118147028809] ]:  | [event=party ts=1532118147028809], [insertedtimestamp=2018-07-20 20:22Z ts=1532118147028809], [source=asdf ts=1532118147028809]
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sstableexpiredblockers.html" class="btn btn-neutral float-right" title="sstableexpiredblockers" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral" title="SSTable Tools" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, The Apache Cassandra team.
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option selected='selected' value="trunk">trunk</option>
+    <option value="3.11.3">3.11.3</option>
+    <option value="3.11.2">3.11.2</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

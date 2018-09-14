@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Nodetool &mdash; Apache Cassandra Documentation v4.0</title>
+  <title>sstableexpiredblockers &mdash; Apache Cassandra Documentation v4.0</title>
   
 
   
@@ -33,9 +33,9 @@
     <link rel="stylesheet" href="../../_static/extra.css" type="text/css" />
   
     <link rel="top" title="Apache Cassandra Documentation v4.0" href="../../index.html"/>
-        <link rel="up" title="Cassandra Tools" href="../index.html"/>
-        <link rel="next" title="SSTable Tools" href="../sstable/index.html"/>
-        <link rel="prev" title="cqlsh: the CQL shell" href="../cqlsh.html"/> 
+        <link rel="up" title="SSTable Tools" href="index.html"/>
+        <link rel="next" title="sstablelevelreset" href="sstablelevelreset.html"/>
+        <link rel="prev" title="sstabledump" href="sstabledump.html"/> 
 
   
   <script src="../../_static/js/modernizr.min.js"></script>
@@ -93,9 +93,27 @@
 <li class="toctree-l1"><a class="reference internal" href="../../operating/index.html">Operating Cassandra</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cassandra Tools</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../cqlsh.html">cqlsh: the CQL shell</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="">Nodetool</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#usage">Usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../sstable/index.html">SSTable Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html">Nodetool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html#usage">Usage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">SSTable Tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sstabledump.html">sstabledump</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">sstableexpiredblockers</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#output-blocked-sstables">Output blocked sstables</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sstablelevelreset.html">sstablelevelreset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableloader.html">sstableloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablemetadata.html">sstablemetadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableofflinerelevel.html">sstableofflinerelevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablerepairedset.html">sstablerepairedset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablescrub.html">sstablescrub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablesplit.html">sstablesplit</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableupgrade.html">sstableupgrade</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableutil.html">sstableutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableverify.html">sstableverify</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../cassandra_stress.html">Cassandra Stress</a></li>
 </ul>
 </li>
@@ -137,11 +155,13 @@
       
           <li><a href="../index.html">Cassandra Tools</a> &raquo;</li>
       
-    <li>Nodetool</li>
+          <li><a href="index.html">SSTable Tools</a> &raquo;</li>
+      
+    <li>sstableexpiredblockers</li>
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../../_sources/tools/nodetool/nodetool.txt" rel="nofollow"> View page source</a>
+            <a href="../../_sources/tools/sstable/sstableexpiredblockers.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -151,12 +171,29 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="nodetool">
-<h1>Nodetool<a class="headerlink" href="#nodetool" title="Permalink to this headline">¶</a></h1>
-</div>
+  <div class="section" id="sstableexpiredblockers">
+<h1>sstableexpiredblockers<a class="headerlink" href="#sstableexpiredblockers" title="Permalink to this headline">¶</a></h1>
+<p>During compaction, entire sstables can be dropped if they contain only expired tombstones, and if it is guaranteed that the data is not newer than the data in other sstables. An expired sstable can be blocked from getting dropped if its newest timestamp is newer than the oldest data in another sstable.</p>
+<p>This tool is used to list all sstables that are blocking other sstables from getting dropped (by having older data than the newest tombstone in an expired sstable) so a user can figure out why certain sstables are still on disk.</p>
+<p>ref: <a class="reference external" href="https://issues.apache.org/jira/browse/CASSANDRA-10015">https://issues.apache.org/jira/browse/CASSANDRA-10015</a></p>
+<p>Cassandra must be stopped before this tool is executed, or unexpected results will occur. Note: the script does not verify that Cassandra is stopped.</p>
 <div class="section" id="usage">
-<h1>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
-<p>Cassandra 4.0 requires either Java 8 (update 151 or newer) or Java 11 (or newer).</p>
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>sstableexpiredblockers &lt;keyspace&gt; &lt;table&gt;</p>
+</div>
+<div class="section" id="output-blocked-sstables">
+<h2>Output blocked sstables<a class="headerlink" href="#output-blocked-sstables" title="Permalink to this headline">¶</a></h2>
+<p>If the sstables exist for the table, but no tables have older data than the newest tombstone in an expired sstable, the script will return nothing.</p>
+<p>Otherwise, the script will return <cite>&lt;sstable&gt; blocks &lt;#&gt; expired sstables from getting dropped</cite> followed by a list of the blocked sstables.</p>
+<p>Example:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableexpiredblockers keyspace1 standard1
+
+[BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-0665ae80b2d711e886c66d2c86545d91/mc-2-big-Data.db&#39;) (minTS = 5, maxTS = 5, maxLDT = 2147483647)],  blocks 1 expired sstables from getting dropped: [BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-0665ae80b2d711e886c66d2c86545d91/mc-3-big-Data.db&#39;) (minTS = 1536349775157606, maxTS = 1536349780311159, maxLDT = 1536349780)],
+
+[BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-0665ae80b2d711e886c66d2c86545d91/mc-1-big-Data.db&#39;) (minTS = 1, maxTS = 10, maxLDT = 2147483647)],  blocks 1 expired sstables from getting dropped: [BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-0665ae80b2d711e886c66d2c86545d91/mc-3-big-Data.db&#39;) (minTS = 1536349775157606, maxTS = 1536349780311159, maxLDT = 1536349780)],
+</pre></div>
+</div>
+</div>
 </div>
 
 
@@ -166,10 +203,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../sstable/index.html" class="btn btn-neutral float-right" title="SSTable Tools" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="sstablelevelreset.html" class="btn btn-neutral float-right" title="sstablelevelreset" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../cqlsh.html" class="btn btn-neutral" title="cqlsh: the CQL shell" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="sstabledump.html" class="btn btn-neutral" title="sstabledump" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

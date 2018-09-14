@@ -1,0 +1,380 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>sstableupgrade &mdash; Apache Cassandra Documentation v4.0</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="stylesheet" href="../../_static/extra.css" type="text/css" />
+  
+    <link rel="top" title="Apache Cassandra Documentation v4.0" href="../../index.html"/>
+        <link rel="up" title="SSTable Tools" href="index.html"/>
+        <link rel="next" title="sstableutil" href="sstableutil.html"/>
+        <link rel="prev" title="sstablesplit" href="sstablesplit.html"/> 
+
+  
+  <script src="../../_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="../../index.html" class="icon icon-home"> Apache Cassandra
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                4.0
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../getting_started/index.html">Getting Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../architecture/index.html">Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../data_modeling/index.html">Data Modeling</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cql/index.html">The Cassandra Query Language (CQL)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../configuration/index.html">Configuring Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../operating/index.html">Operating Cassandra</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Cassandra Tools</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../cqlsh.html">cqlsh: the CQL shell</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html">Nodetool</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../nodetool/nodetool.html#usage">Usage</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">SSTable Tools</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="sstabledump.html">sstabledump</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableexpiredblockers.html">sstableexpiredblockers</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablelevelreset.html">sstablelevelreset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableloader.html">sstableloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablemetadata.html">sstablemetadata</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableofflinerelevel.html">sstableofflinerelevel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablerepairedset.html">sstablerepairedset</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablescrub.html">sstablescrub</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstablesplit.html">sstablesplit</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">sstableupgrade</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usage">Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rewrite-tables-to-the-current-cassandra-version">Rewrite tables to the current Cassandra version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rewrite-tables-to-the-current-cassandra-version-and-keep-tables-in-old-version">Rewrite tables to the current Cassandra version, and keep tables in old version</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#rewrite-a-snapshot-to-the-current-cassandra-version">Rewrite a snapshot to the current Cassandra version</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="sstableutil.html">sstableutil</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sstableverify.html">sstableverify</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../cassandra_stress.html">Cassandra Stress</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../troubleshooting/index.html">Troubleshooting</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../development/index.html">Contributing to Cassandra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../faq/index.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../plugins/index.html">Third-Party Plugins</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../bugs.html">Reporting Bugs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contactus.html">Contact us</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../index.html">Apache Cassandra</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../index.html">Cassandra Tools</a> &raquo;</li>
+      
+          <li><a href="index.html">SSTable Tools</a> &raquo;</li>
+      
+    <li>sstableupgrade</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../../_sources/tools/sstable/sstableupgrade.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="sstableupgrade">
+<h1>sstableupgrade<a class="headerlink" href="#sstableupgrade" title="Permalink to this headline">¶</a></h1>
+<p>Upgrade the sstables in the given table (or snapshot) to the current version of Cassandra. This process is typically done after a Cassandra version upgrade. This operation will rewrite the sstables in the specified table to match the currently installed version of Cassandra. The sstableupgrade command can also be used to downgrade sstables to a previous version.</p>
+<p>The snapshot option will only upgrade the specified snapshot. Upgrading snapshots is required before attempting to restore a snapshot taken in a major version older than the major version Cassandra is currently running. This will replace the files in the given snapshot as well as break any hard links to live sstables.</p>
+<p>Cassandra must be stopped before this tool is executed, or unexpected results will occur. Note: the script does not verify that Cassandra is stopped.</p>
+<div class="section" id="usage">
+<h2>Usage<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h2>
+<p>sstableupgrade &lt;options&gt; &lt;keyspace&gt; &lt;table&gt; [snapshot_name]</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="30%" />
+<col width="70%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td>&#8211;debug</td>
+<td>display stack traces</td>
+</tr>
+<tr class="row-even"><td>-h,&#8211;help</td>
+<td>display this help message</td>
+</tr>
+<tr class="row-odd"><td>-k,&#8211;keep-source</td>
+<td>do not delete the source sstables</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rewrite-tables-to-the-current-cassandra-version">
+<h2>Rewrite tables to the current Cassandra version<a class="headerlink" href="#rewrite-tables-to-the-current-cassandra-version" title="Permalink to this headline">¶</a></h2>
+<p>Start with a set of sstables in one version of Cassandra:</p>
+<div class="highlight-python"><div class="highlight"><pre>ls -al /tmp/cassandra/data/keyspace1/standard1-9695b790a63211e8a6fb091830ac5256/
+...
+-rw-r--r--   1 user  wheel      348 Aug 22 13:45 keyspace1-standard1-ka-1-CRC.db
+-rw-r--r--   1 user  wheel  5620000 Aug 22 13:45 keyspace1-standard1-ka-1-Data.db
+-rw-r--r--   1 user  wheel       10 Aug 22 13:45 keyspace1-standard1-ka-1-Digest.sha1
+-rw-r--r--   1 user  wheel    25016 Aug 22 13:45 keyspace1-standard1-ka-1-Filter.db
+-rw-r--r--   1 user  wheel   480000 Aug 22 13:45 keyspace1-standard1-ka-1-Index.db
+-rw-r--r--   1 user  wheel     9895 Aug 22 13:45 keyspace1-standard1-ka-1-Statistics.db
+-rw-r--r--   1 user  wheel     3562 Aug 22 13:45 keyspace1-standard1-ka-1-Summary.db
+-rw-r--r--   1 user  wheel       79 Aug 22 13:45 keyspace1-standard1-ka-1-TOC.txt
+</pre></div>
+</div>
+<p>After upgrading the Cassandra version, upgrade the sstables:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableupgrade keyspace1 standard1
+Found 1 sstables that need upgrading.
+Upgrading BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-9695b790a63211e8a6fb091830ac5256/keyspace1-standard1-ka-1-Data.db&#39;)
+Upgrade of BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-9695b790a63211e8a6fb091830ac5256/keyspace1-standard1-ka-1-Data.db&#39;) complete.
+
+ls -al /tmp/cassandra/data/keyspace1/standard1-9695b790a63211e8a6fb091830ac5256/
+...
+drwxr-xr-x   2 user  wheel       64 Aug 22 13:48 backups
+-rw-r--r--   1 user  wheel      292 Aug 22 13:48 mc-2-big-CRC.db
+-rw-r--r--   1 user  wheel  4599475 Aug 22 13:48 mc-2-big-Data.db
+-rw-r--r--   1 user  wheel       10 Aug 22 13:48 mc-2-big-Digest.crc32
+-rw-r--r--   1 user  wheel    25256 Aug 22 13:48 mc-2-big-Filter.db
+-rw-r--r--   1 user  wheel   330807 Aug 22 13:48 mc-2-big-Index.db
+-rw-r--r--   1 user  wheel    10312 Aug 22 13:48 mc-2-big-Statistics.db
+-rw-r--r--   1 user  wheel     3506 Aug 22 13:48 mc-2-big-Summary.db
+-rw-r--r--   1 user  wheel       80 Aug 22 13:48 mc-2-big-TOC.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="rewrite-tables-to-the-current-cassandra-version-and-keep-tables-in-old-version">
+<h2>Rewrite tables to the current Cassandra version, and keep tables in old version<a class="headerlink" href="#rewrite-tables-to-the-current-cassandra-version-and-keep-tables-in-old-version" title="Permalink to this headline">¶</a></h2>
+<p>Again, starting with a set of sstables in one version:</p>
+<div class="highlight-python"><div class="highlight"><pre>ls -al /tmp/cassandra/data/keyspace1/standard1-db532690a63411e8b4ae091830ac5256/
+...
+-rw-r--r--   1 user  wheel      348 Aug 22 13:58 keyspace1-standard1-ka-1-CRC.db
+-rw-r--r--   1 user  wheel  5620000 Aug 22 13:58 keyspace1-standard1-ka-1-Data.db
+-rw-r--r--   1 user  wheel       10 Aug 22 13:58 keyspace1-standard1-ka-1-Digest.sha1
+-rw-r--r--   1 user  wheel    25016 Aug 22 13:58 keyspace1-standard1-ka-1-Filter.db
+-rw-r--r--   1 user  wheel   480000 Aug 22 13:58 keyspace1-standard1-ka-1-Index.db
+-rw-r--r--   1 user  wheel     9895 Aug 22 13:58 keyspace1-standard1-ka-1-Statistics.db
+-rw-r--r--   1 user  wheel     3562 Aug 22 13:58 keyspace1-standard1-ka-1-Summary.db
+-rw-r--r--   1 user  wheel       79 Aug 22 13:58 keyspace1-standard1-ka-1-TOC.txt
+</pre></div>
+</div>
+<p>After upgrading the Cassandra version, upgrade the sstables, retaining the original sstables:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableupgrade keyspace1 standard1 -k
+Found 1 sstables that need upgrading.
+Upgrading BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-db532690a63411e8b4ae091830ac5256/keyspace1-standard1-ka-1-Data.db&#39;)
+Upgrade of BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-db532690a63411e8b4ae091830ac5256/keyspace1-standard1-ka-1-Data.db&#39;) complete.
+
+ls -al /tmp/cassandra/data/keyspace1/standard1-db532690a63411e8b4ae091830ac5256/
+...
+drwxr-xr-x   2 user  wheel       64 Aug 22 14:00 backups
+-rw-r--r--@  1 user  wheel      348 Aug 22 13:58 keyspace1-standard1-ka-1-CRC.db
+-rw-r--r--@  1 user  wheel  5620000 Aug 22 13:58 keyspace1-standard1-ka-1-Data.db
+-rw-r--r--@  1 user  wheel       10 Aug 22 13:58 keyspace1-standard1-ka-1-Digest.sha1
+-rw-r--r--@  1 user  wheel    25016 Aug 22 13:58 keyspace1-standard1-ka-1-Filter.db
+-rw-r--r--@  1 user  wheel   480000 Aug 22 13:58 keyspace1-standard1-ka-1-Index.db
+-rw-r--r--@  1 user  wheel     9895 Aug 22 13:58 keyspace1-standard1-ka-1-Statistics.db
+-rw-r--r--@  1 user  wheel     3562 Aug 22 13:58 keyspace1-standard1-ka-1-Summary.db
+-rw-r--r--@  1 user  wheel       79 Aug 22 13:58 keyspace1-standard1-ka-1-TOC.txt
+-rw-r--r--   1 user  wheel      292 Aug 22 14:01 mc-2-big-CRC.db
+-rw-r--r--   1 user  wheel  4596370 Aug 22 14:01 mc-2-big-Data.db
+-rw-r--r--   1 user  wheel       10 Aug 22 14:01 mc-2-big-Digest.crc32
+-rw-r--r--   1 user  wheel    25256 Aug 22 14:01 mc-2-big-Filter.db
+-rw-r--r--   1 user  wheel   330801 Aug 22 14:01 mc-2-big-Index.db
+-rw-r--r--   1 user  wheel    10312 Aug 22 14:01 mc-2-big-Statistics.db
+-rw-r--r--   1 user  wheel     3506 Aug 22 14:01 mc-2-big-Summary.db
+-rw-r--r--   1 user  wheel       80 Aug 22 14:01 mc-2-big-TOC.txt
+</pre></div>
+</div>
+</div>
+<div class="section" id="rewrite-a-snapshot-to-the-current-cassandra-version">
+<h2>Rewrite a snapshot to the current Cassandra version<a class="headerlink" href="#rewrite-a-snapshot-to-the-current-cassandra-version" title="Permalink to this headline">¶</a></h2>
+<p>Find the snapshot name:</p>
+<div class="highlight-python"><div class="highlight"><pre>nodetool listsnapshots
+
+Snapshot Details:
+Snapshot name       Keyspace name                Column family name           True size          Size on disk
+...
+1534962986979       keyspace1                    standard1                    5.85 MB            5.85 MB
+</pre></div>
+</div>
+<p>Then rewrite the snapshot:</p>
+<div class="highlight-python"><div class="highlight"><pre>sstableupgrade keyspace1 standard1 1534962986979
+Found 1 sstables that need upgrading.
+Upgrading BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-5850e9f0a63711e8a5c5091830ac5256/snapshots/1534962986979/keyspace1-standard1-ka-1-Data.db&#39;)
+Upgrade of BigTableReader(path=&#39;/var/lib/cassandra/data/keyspace1/standard1-5850e9f0a63711e8a5c5091830ac5256/snapshots/1534962986979/keyspace1-standard1-ka-1-Data.db&#39;) complete.
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="sstableutil.html" class="btn btn-neutral float-right" title="sstableutil" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="sstablesplit.html" class="btn btn-neutral" title="sstablesplit" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, The Apache Cassandra team.
+<select onChange="window.location.pathname=window.location.pathname.replace(/[0-9.]+|trunk/,this.value)">
+    <option selected='selected' value="trunk">trunk</option>
+    <option value="3.11.3">3.11.3</option>
+    <option value="3.11.2">3.11.2</option>
+    <option value="3.11.1">3.11.1</option>
+    <option value="3.11.0">3.11.0</option>
+    <option value="3.10">3.10</option>
+    <option value="3.9">3.9</option>
+    <option value="3.8">3.8</option>
+</select>
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../../',
+            VERSION:'',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../../_static/jquery.js"></script>
+      <script type="text/javascript" src="../../_static/underscore.js"></script>
+      <script type="text/javascript" src="../../_static/doctools.js"></script>
+      <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
