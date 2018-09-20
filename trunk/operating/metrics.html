@@ -191,7 +191,7 @@
            <div itemprop="articleBody">
             
   <div class="section" id="monitoring">
-<h1>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h1>
+<span id="monitoring-metrics"></span><h1>Monitoring<a class="headerlink" href="#monitoring" title="Permalink to this headline">¶</a></h1>
 <p>Metrics in Cassandra are managed using the <a class="reference external" href="http://metrics.dropwizard.io">Dropwizard Metrics</a> library. These metrics
 can be queried via JMX or pushed to external monitoring systems using a number of <a class="reference external" href="http://metrics.dropwizard.io/3.1.0/getting-started/#other-reporting">built in</a> and <a class="reference external" href="http://metrics.dropwizard.io/3.1.0/manual/third-party/">third party</a> reporter plugins.</p>
 <p>Metrics are collected for a single node. It&#8217;s up to the operator to use an external monitoring system to aggregate them.</p>
@@ -221,7 +221,7 @@ average throughputs.</dd>
 </dl>
 </div>
 <div class="section" id="table-metrics">
-<h2>Table Metrics<a class="headerlink" href="#table-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="id1"></span><h2>Table Metrics<a class="headerlink" href="#table-metrics" title="Permalink to this headline">¶</a></h2>
 <p>Each table in Cassandra has metrics responsible for tracking its state and performance.</p>
 <p>The metric names are all appended with the specific <code class="docutils literal"><span class="pre">Keyspace</span></code> and <code class="docutils literal"><span class="pre">Table</span></code> name.</p>
 <p>Reported name format:</p>
@@ -1162,7 +1162,7 @@ specific type.</p>
 </table>
 </div>
 <div class="section" id="droppedmessage-metrics">
-<h2>DroppedMessage Metrics<a class="headerlink" href="#droppedmessage-metrics" title="Permalink to this headline">¶</a></h2>
+<span id="dropped-metrics"></span><h2>DroppedMessage Metrics<a class="headerlink" href="#droppedmessage-metrics" title="Permalink to this headline">¶</a></h2>
 <p>Metrics specific to tracking dropped messages for different types of requests.
 Dropped writes are stored and retried by <code class="docutils literal"><span class="pre">Hinted</span> <span class="pre">Handoff</span></code></p>
 <p>Reported name format:</p>
