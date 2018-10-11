@@ -1875,6 +1875,14 @@ Limit the number of concurrent sstable upgrades
 Audit logging - Logs every incoming CQL command request, authentication to a node. See the docs
 on audit_logging for full details about the various configuration options.
 
+``full_query_logging_options``
+------------------------------
+*This option is commented out by default.*
+
+
+default options for full query logging - these can be overridden from command line when executing
+nodetool enablefullquerylog
+
 ``corrupted_tombstone_strategy``
 --------------------------------
 *This option is commented out by default.*

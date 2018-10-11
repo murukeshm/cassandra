@@ -249,6 +249,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#automatic-sstable-upgrade"><code class="docutils literal"><span class="pre">automatic_sstable_upgrade</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#max-concurrent-automatic-sstable-upgrades"><code class="docutils literal"><span class="pre">max_concurrent_automatic_sstable_upgrades</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#audit-logging-options"><code class="docutils literal"><span class="pre">audit_logging_options</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#full-query-logging-options"><code class="docutils literal"><span class="pre">full_query_logging_options</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#corrupted-tombstone-strategy"><code class="docutils literal"><span class="pre">corrupted_tombstone_strategy</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#diagnostic-events-enabled"><code class="docutils literal"><span class="pre">diagnostic_events_enabled</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#native-transport-flush-in-batches-legacy"><code class="docutils literal"><span class="pre">native_transport_flush_in_batches_legacy</span></code></a></li>
@@ -1847,6 +1848,12 @@ Limit the number of concurrent sstable upgrades</p>
 <h2><code class="docutils literal"><span class="pre">audit_logging_options</span></code><a class="headerlink" href="#audit-logging-options" title="Permalink to this headline">¶</a></h2>
 <p>Audit logging - Logs every incoming CQL command request, authentication to a node. See the docs
 on audit_logging for full details about the various configuration options.</p>
+</div>
+<div class="section" id="full-query-logging-options">
+<h2><code class="docutils literal"><span class="pre">full_query_logging_options</span></code><a class="headerlink" href="#full-query-logging-options" title="Permalink to this headline">¶</a></h2>
+<p><em>This option is commented out by default.</em></p>
+<p>default options for full query logging - these can be overridden from command line when executing
+nodetool enablefullquerylog</p>
 </div>
 <div class="section" id="corrupted-tombstone-strategy">
 <h2><code class="docutils literal"><span class="pre">corrupted_tombstone_strategy</span></code><a class="headerlink" href="#corrupted-tombstone-strategy" title="Permalink to this headline">¶</a></h2>
