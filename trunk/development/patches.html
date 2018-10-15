@@ -222,24 +222,37 @@
 </tr>
 </thead>
 <tbody valign="top">
-<tr class="row-even"><td>3.x</td>
-<td>Tick-tock (see below)</td>
+<tr class="row-even"><td>4.0</td>
+<td>Code freeze (see below)</td>
 </tr>
-<tr class="row-odd"><td>3.0</td>
-<td>Bug fixes only</td>
+<tr class="row-odd"><td>3.11</td>
+<td>Critical bug fixes only</td>
 </tr>
-<tr class="row-even"><td>2.2</td>
-<td>Bug fixes only</td>
+<tr class="row-even"><td>3.0</td>
+<td>Critical bug fixes only</td>
 </tr>
-<tr class="row-odd"><td>2.1</td>
+<tr class="row-odd"><td>2.2</td>
+<td>Critical bug fixes only</td>
+</tr>
+<tr class="row-even"><td>2.1</td>
 <td>Critical bug fixes only</td>
 </tr>
 </tbody>
 </table>
 <p>Corresponding branches in git are easy to recognize as they are named <code class="docutils literal"><span class="pre">cassandra-&lt;release&gt;</span></code> (e.g. <code class="docutils literal"><span class="pre">cassandra-3.0</span></code>). The <code class="docutils literal"><span class="pre">trunk</span></code> branch is an exception, as it contains the most recent commits from all other branches and is used for creating new branches for future tick-tock releases.</p>
-<div class="section" id="tick-tock-releases">
-<h4>Tick-Tock Releases<a class="headerlink" href="#tick-tock-releases" title="Permalink to this headline">¶</a></h4>
-<p>New releases created as part of the <a class="reference external" href="http://www.planetcassandra.org/blog/cassandra-2-2-3-0-and-beyond/">tick-tock release process</a> will either focus on stability (odd version numbers) or introduce new features (even version numbers). Any code for new Cassandra features you should be based on the latest, unreleased 3.x branch with even version number or based on trunk.</p>
+<div class="section" id="code-freeze">
+<h4>4.0 Code Freeze<a class="headerlink" href="#code-freeze" title="Permalink to this headline">¶</a></h4>
+<p>Patches for new features are currently not accepted for 4.0 or any earlier versions. Starting with the code freeze in September, all efforts should focus on stabilizing the 4.0 branch before the first official release. During that time, only the following patches will be considered for acceptance:</p>
+<blockquote>
+<div><ul class="simple">
+<li>Bug fixes</li>
+<li>Measurable performance improvements</li>
+<li>Changes not distributed as part of the release such as:</li>
+<li>Testing related improvements and fixes</li>
+<li>Build and infrastructure related changes</li>
+<li>Documentation</li>
+</ul>
+</div></blockquote>
 </div>
 <div class="section" id="bug-fixes">
 <h4>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Permalink to this headline">¶</a></h4>
