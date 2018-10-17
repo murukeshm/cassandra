@@ -591,7 +591,7 @@ it is an optimization to declare a descending clustering order.</dd>
 <td>99PERCENTILE</td>
 <td><a class="reference internal" href="#speculative-retry-options"><span>Speculative retry options</span></a>.</td>
 </tr>
-<tr class="row-even"><td><code class="docutils literal"><span class="pre">speculative_write_threshold</span></code></td>
+<tr class="row-even"><td><code class="docutils literal"><span class="pre">additional_write_policy</span></code></td>
 <td><em>simple</em></td>
 <td>99PERCENTILE</td>
 <td><a class="reference internal" href="#speculative-retry-options"><span>Speculative retry options</span></a>.</td>
@@ -648,7 +648,7 @@ table.</td>
 <p>By default, Cassandra read coordinators only query as many replicas as necessary to satisfy
 consistency levels: one for consistency level <code class="docutils literal"><span class="pre">ONE</span></code>, a quorum for <code class="docutils literal"><span class="pre">QUORUM</span></code>, and so on.
 <code class="docutils literal"><span class="pre">speculative_retry</span></code> determines when coordinators may query additional replicas, which is useful
-when replicas are slow or unresponsive.  <code class="docutils literal"><span class="pre">speculative_write_threshold</span></code> specifies the threshold at which
+when replicas are slow or unresponsive.  <code class="docutils literal"><span class="pre">additional_write_policy</span></code> specifies the threshold at which
 a cheap quorum write will be upgraded to include transient replicas.  The following are legal values (case-insensitive):</p>
 <p>This setting does not affect reads with consistency level <code class="docutils literal"><span class="pre">ALL</span></code> because they already query all replicas.</p>
 <p>Note that frequently reading from additional replicas can hurt cluster performance.
