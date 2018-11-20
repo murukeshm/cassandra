@@ -190,7 +190,7 @@ class name as a parameter in cassandra.yaml.</p>
 <li><code class="docutils literal"><span class="pre">logger</span></code>: Class name of the logger/ custom logger.</li>
 <li><code class="docutils literal"><span class="pre">audit_logs_dir</span></code>: Auditlogs directory location, if not set, default to <cite>cassandra.logdir.audit</cite> or <cite>cassandra.logdir</cite> + /audit/</li>
 <li><code class="docutils literal"><span class="pre">included_keyspaces</span></code>: Comma separated list of keyspaces to be included in audit log, default - includes all keyspaces</li>
-<li><code class="docutils literal"><span class="pre">excluded_keyspaces</span></code>: Comma separated list of keyspaces to be excluded from audit log, default - excludes no keyspace</li>
+<li><code class="docutils literal"><span class="pre">excluded_keyspaces</span></code>: Comma separated list of keyspaces to be excluded from audit log, default - excludes no keyspace except <cite>system</cite>,  <cite>system_schema</cite> and <cite>system_virtual_schema</cite></li>
 <li><code class="docutils literal"><span class="pre">included_categories</span></code>: Comma separated list of Audit Log Categories to be included in audit log, default - includes all categories</li>
 <li><code class="docutils literal"><span class="pre">excluded_categories</span></code>: Comma separated list of Audit Log Categories to be excluded from audit log, default - excludes no category</li>
 <li><code class="docutils literal"><span class="pre">included_users</span></code>: Comma separated list of users to be included in audit log, default - includes all users</li>
@@ -213,7 +213,10 @@ class name as a parameter in cassandra.yaml.</p>
 audit log. If not set the value from cassandra.yaml will be used</dd>
 <dt><code class="docutils literal"><span class="pre">--excluded-keyspaces</span></code></dt>
 <dd>Comma separated list of keyspaces to be excluded for audit log. If
-not set the value from cassandra.yaml will be used</dd>
+not set the value from cassandra.yaml will be used.
+Please remeber that <cite>system</cite>, <cite>system_schema</cite> and <cite>system_virtual_schema</cite> are excluded by default,
+if you are overwriting this option via nodetool,
+remember to add these keyspaces back if you dont want them in audit logs</dd>
 <dt><code class="docutils literal"><span class="pre">--excluded-users</span></code></dt>
 <dd>Comma separated list of users to be excluded for audit log. If not
 set the value from cassandra.yaml will be used</dd>
