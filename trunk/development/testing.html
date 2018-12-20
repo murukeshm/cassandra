@@ -199,6 +199,13 @@
 <div class="highlight-none"><div class="highlight"><pre>ant testsome -Dtest.name=org.apache.cassandra.cql3.SimpleQueryTest -Dtest.methods=testStaticCompactTables
 </pre></div>
 </div>
+<p>If you see an error like this:</p>
+<div class="highlight-none"><div class="highlight"><pre>Throws: cassandra-trunk/build.xml:1134: taskdef A class needed by class org.krummas.junit.JStackJUnitTask cannot be found:
+org/apache/tools/ant/taskdefs/optional/junit/JUnitTask  using the classloader
+AntClassLoader[/.../cassandra-trunk/lib/jstackjunit-0.0.1.jar]
+</pre></div>
+</div>
+<p>You will need to install the ant-optional package since it contains the <code class="docutils literal"><span class="pre">JUnitTask</span></code> class.</p>
 <div class="section" id="long-running-tests">
 <h3>Long running tests<a class="headerlink" href="#long-running-tests" title="Permalink to this headline">¶</a></h3>
 <p>Test that consume a significant amount of time during execution can be found in the <code class="docutils literal"><span class="pre">test/long</span></code> directory and executed as a regular JUnit test or standalone program. Except for the execution time, there’s nothing really special about them. However, ant will execute tests under <code class="docutils literal"><span class="pre">test/long</span></code> only when using the <code class="docutils literal"><span class="pre">ant</span> <span class="pre">long-test</span></code> target.</p>
