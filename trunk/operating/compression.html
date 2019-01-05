@@ -181,7 +181,7 @@ on).</p>
 default, three options are relevant:</p>
 <ul class="simple">
 <li><code class="docutils literal"><span class="pre">class</span></code> specifies the compression class - Cassandra provides three classes (<code class="docutils literal"><span class="pre">LZ4Compressor</span></code>,
-<code class="docutils literal"><span class="pre">SnappyCompressor</span></code>, and <code class="docutils literal"><span class="pre">DeflateCompressor</span></code> ). The default is <code class="docutils literal"><span class="pre">SnappyCompressor</span></code>.</li>
+<code class="docutils literal"><span class="pre">SnappyCompressor</span></code>, and <code class="docutils literal"><span class="pre">DeflateCompressor</span></code> ). The default is <code class="docutils literal"><span class="pre">LZ4Compressor</span></code>.</li>
 <li><code class="docutils literal"><span class="pre">chunk_length_in_kb</span></code> specifies the number of kilobytes of data per compression chunk. The default is 64KB.</li>
 <li><code class="docutils literal"><span class="pre">crc_check_chance</span></code> determines how likely Cassandra is to verify the checksum on each compression chunk during
 reads. The default is 1.0.</li>
